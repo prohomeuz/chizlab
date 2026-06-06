@@ -87,6 +87,8 @@ export default function Home() {
   const scene4Ref = useRef(null)
   const endSvgRef = useRef(null)
   const s4CharsRef = useRef([])
+  // Scroll indicator
+  const scrollIndicatorRef = useRef(null)
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -199,6 +201,16 @@ export default function Home() {
       clearFadeOut(true)
 
       const forward = next > current
+
+      // Scroll indicator: 3-scenega o'tayotganda yo'qoladi, qaytganda paydo bo'ladi
+      const scrollEl = scrollIndicatorRef.current
+      if (scrollEl) {
+        if (next === 2) {
+          gsap.to(scrollEl, { opacity: 0, duration: 0.5, ease: 'power1.out' })
+        } else if (next === 1 && current === 2) {
+          gsap.to(scrollEl, { opacity: 1, duration: 0.5, ease: 'power1.in' })
+        }
+      }
 
       if (current === 1) gsap.killTweensOf(handProxy)
       if (current === 2) gsap.killTweensOf(s3Proxy)
@@ -366,7 +378,7 @@ export default function Home() {
       <div className="fixed inset-0 bg-[#fffff6]">
 
         {/* Persistent nav */}
-        <nav className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-10">
+        <nav className="absolute left-0 right-0 z-10 flex items-center justify-between p-10" style={{ top: '42px' }}>
           <Image src="/logo.svg" alt="Chizlab" width={210} height={48} priority />
           <div className="flex items-center">
             {navItems.map((item) => (
@@ -482,6 +494,50 @@ export default function Home() {
         </div>
 
       </div>
+
+      {/* Scroll indicator */}
+      <div
+        ref={scrollIndicatorRef}
+        style={{
+          position: 'fixed', bottom: '48px', right: '48px',
+          zIndex: 100, width: '32px', height: '76px',
+          animation: 'scroll-bounce 1.6s ease-in-out infinite',
+        }}
+      >
+        <Image src="/scroll.svg" alt="" width={32} height={76} />
+      </div>
+
+      {/* Marquee banner — fixed to bottom */}
+      <style>{`
+        @keyframes marquee-scroll {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .marquee-track {
+          display: flex;
+          white-space: nowrap;
+          animation: marquee-scroll 28s linear infinite;
+        }
+        @keyframes scroll-bounce {
+          0%, 100% { transform: translateY(0); }
+          50%       { transform: translateY(10px); }
+        }
+      `}</style>
+      <div style={{
+        position: 'fixed', top: 0, left: 0, right: 0,
+        zIndex: 200, background: '#003837', overflow: 'hidden',
+        height: '42px', display: 'flex', alignItems: 'center',
+      }}>
+        <div className="marquee-track">
+          {Array(16).fill(null).map((_, i) => (
+            <span key={i} style={{ display: 'inline-flex', alignItems: 'center' }}>
+              <span style={{ color: '#FFFFF6', fontSize: '14px', letterSpacing: '0.04em', fontFamily: 'var(--font-sf)', padding: '0 22px' }}>Platformamiz tez orada ishga tushadi</span>
+              <span style={{ color: '#FFFFF6', fontSize: '18px', display: 'inline-flex', alignItems: 'center', lineHeight: '1' }}>*</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
     </main>
   )
 }

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 76" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+<path d="M0 16C0 7.16344 7.16344 0 16 0C24.8366 0 32 7.16344 32 16V32C32 40.8366 24.8366 48 16 48C7.16344 48 0 40.8366 0 32V16Z" fill="#003837"></path>
+<path d="M20 13C20 15.2091 18.2091 17 16 17C13.7909 17 12 15.2091 12 13C12 10.7909 13.7909 9 16 9C18.2091 9 20 10.7909 20 13Z" fill="white"></path>
+<path d="M0 48L16 56L32 48V56L16 64L0 56V48Z" fill="#003837"></path>
+<path d="M0 60L16 68L32 60V68L16 76L0 68V60Z" fill="#003837"></path>
+</svg>
