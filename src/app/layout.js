@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -33,8 +34,12 @@ export default function RootLayout({ children }) {
     <html
       lang="uz"
       className={`${ppe.variable} ${sfPro.variable} ${inter.variable} h-full antialiased`}
+      style={{ cursor: 'none' }}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }

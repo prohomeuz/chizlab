@@ -89,6 +89,7 @@ export default function Home() {
   const s4CharsRef = useRef([])
   // Scroll indicator
   const scrollIndicatorRef = useRef(null)
+  const indicatorClickRef = useRef(null)
   // Loader
   const [loaderDone, setLoaderDone] = useState(false)
   const loaderRef = useRef(null)
@@ -211,8 +212,9 @@ export default function Home() {
       const scrollEl = scrollIndicatorRef.current
       if (scrollEl) {
         if (next === 2) {
-          gsap.to(scrollEl, { opacity: 0, duration: 0.5, ease: 'power1.out' })
+          gsap.to(scrollEl, { opacity: 0, duration: 0.5, ease: 'power1.out', onComplete: () => { scrollEl.style.pointerEvents = 'none' } })
         } else if (next === 1 && current === 2) {
+          scrollEl.style.pointerEvents = 'auto'
           gsap.to(scrollEl, { opacity: 1, duration: 0.5, ease: 'power1.in' })
         }
       }
@@ -347,6 +349,27 @@ export default function Home() {
       if (current === 3) { driveScene4(dir, absDelta); return }
       if (dir > 0) transitionTo(current + 1)
       else transitionTo(current - 1)
+    }
+
+    indicatorClickRef.current = function handleIndicatorClick() {
+      if (current === 0) {
+        transitionTo(1)
+        setTimeout(() => {
+          for (let i = 0; i < 5; i++) driveScene2(1, 90)
+        }, 250)
+      } else if (current === 1) {
+        const stepsLeft = Math.ceil((1 - handTarget) / 0.1) + 1
+        for (let i = 0; i < stepsLeft; i++) driveScene2(1, 90)
+        setTimeout(() => {
+          for (let i = 0; i < 5; i++) driveScene3(1, 90)
+        }, 300)
+      } else if (current === 2) {
+        const stepsLeft = Math.ceil((1 - s3Target) / 0.1) + 1
+        for (let i = 0; i < stepsLeft; i++) driveScene3(1, 90)
+        setTimeout(() => {
+          for (let i = 0; i < 5; i++) driveScene4(1, 90)
+        }, 300)
+      }
     }
 
     // --- Scene 1 animation ---
@@ -606,10 +629,14 @@ export default function Home() {
       {/* Scroll indicator */}
       <div
         ref={scrollIndicatorRef}
+        onClick={() => indicatorClickRef.current?.()}
+        className="scroll-indicator"
         style={{
           position: 'fixed', bottom: '48px', right: '48px',
           zIndex: 100, width: '32px', height: '76px',
           animation: 'scroll-bounce 1.6s ease-in-out infinite',
+          cursor: 'pointer',
+          transition: 'opacity 0.2s, transform 0.2s',
         }}
       >
         <Image src="/scroll.svg" alt="" width={32} height={76} />
@@ -629,6 +656,10 @@ export default function Home() {
         @keyframes scroll-bounce {
           0%, 100% { transform: translateY(0); }
           50%       { transform: translateY(10px); }
+        }
+        .scroll-indicator:hover {
+          opacity: 0.6;
+          transform: scale(1.12);
         }
       `}</style>
       <div style={{

@@ -1,5 +1,21 @@
 @import 'tailwindcss';
 
+/* Default kursorni o'chirish — barcha brauzerlarda ishlaydi */
+html,
+body,
+* {
+  cursor: none !important;
+}
+
+/* Touch qurilmalar uchun odatiy kursorni qaytarish */
+@media (pointer: coarse) {
+  html,
+  body,
+  * {
+    cursor: auto !important;
+  }
+}
+
 body {
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
