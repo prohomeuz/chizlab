@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 
 const navItems = ['Ovoz', 'Chizmachilik', 'Dizayn', 'AI', 'Ijodkorlar', 'Kirish']
@@ -89,6 +89,11 @@ export default function Home() {
   const s4CharsRef = useRef([])
   // Scroll indicator
   const scrollIndicatorRef = useRef(null)
+  // Loader
+  const [loaderDone, setLoaderDone] = useState(false)
+  const loaderRef = useRef(null)
+  const loaderImgRef = useRef(null)
+  const loaderCountRef = useRef(null)
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -355,14 +360,74 @@ export default function Home() {
 
     const stagger = (TOTAL_DURATION - CHAR_FADE) / (chars.length - 1)
 
-    const tl = gsap.timeline({
-      onComplete: () => window.addEventListener('wheel', onWheel),
+    let tl = null
+
+    const loaderProxy = { angle: 0 }
+
+    const updateLoader = () => {
+      const el = loaderImgRef.current
+      if (!el) return
+      const mask = `conic-gradient(from -90deg, #000 ${loaderProxy.angle}deg, transparent ${loaderProxy.angle}deg)`
+      el.style.webkitMaskImage = mask
+      el.style.maskImage = mask
+      const pct = Math.round((loaderProxy.angle / 360) * 100)
+      if (loaderCountRef.current) loaderCountRef.current.textContent = pct + '%'
+    }
+
+    // Har safar turli breakpoint va davomiyliklar — tabiiy loading effekti
+    const rnd = (min, max) => min + Math.random() * (max - min)
+    const totalTime = rnd(2.4, 3.2)
+
+    // 2 yoki 3 ta tasodifiy oraliq nuqta (20%–75% oralig'ida)
+    const numMid = Math.random() < 0.5 ? 1 : 2
+    const midAngles = Array.from({ length: numMid }, () => Math.round(rnd(72, 270)))
+      .sort((a, b) => a - b)
+    const targets = [...midAngles, 360]
+
+    // Og'irliklar: boshida o'rtacha, o'rtada sekin, oxirida tez
+    const weights = targets.map((_, i) => {
+      if (i === 0)                  return rnd(0.6, 1.0)
+      if (i === targets.length - 1) return rnd(0.2, 0.4)
+      return rnd(0.9, 1.6)
     })
-    tl.to(arc, { strokeDashoffset: 0, duration: TOTAL_DURATION, ease: 'none' }, 0)
-    tl.to(chars, { opacity: 1, duration: CHAR_FADE, stagger, ease: 'none' }, 0)
+    const wSum = weights.reduce((a, b) => a + b, 0)
+    const durations = weights.map(w => (w / wSum) * totalTime)
+
+    const startEases = ['power2.out', 'power1.out', 'power3.out']
+    const midEases   = ['power1.inOut', 'none', 'power1.in', 'sine.inOut']
+    const endEases   = ['power3.in', 'power2.in', 'expo.in']
+    const pick = arr => arr[Math.floor(Math.random() * arr.length)]
+
+    const loaderTween = gsap.timeline({
+      onComplete: () => {
+        const loaderEl = loaderRef.current
+        if (!loaderEl) return
+        gsap.to(loaderEl, {
+          y: '-100%',
+          duration: 1.4,
+          ease: 'expo.inOut',
+          onComplete: () => {
+            setLoaderDone(true)
+            tl = gsap.timeline({ onComplete: () => window.addEventListener('wheel', onWheel) })
+            tl.to(arc, { strokeDashoffset: 0, duration: TOTAL_DURATION, ease: 'none' }, 0)
+            tl.to(chars, { opacity: 1, duration: CHAR_FADE, stagger, ease: 'none' }, 0)
+          },
+        })
+      },
+    })
+
+    targets.forEach((angle, i) => {
+      const ease = i === 0
+        ? pick(startEases)
+        : i === targets.length - 1
+          ? pick(endEases)
+          : pick(midEases)
+      loaderTween.to(loaderProxy, { angle, duration: durations[i], ease, onUpdate: updateLoader })
+    })
 
     return () => {
-      tl.kill()
+      loaderTween.kill()
+      tl?.kill()
       handTl?.kill()
       s3Tl?.kill()
       s4Tl?.kill()
@@ -375,6 +440,49 @@ export default function Home() {
 
   return (
     <main className="bg-[#fffff6]">
+
+      {/* Loader */}
+      {!loaderDone && (
+        <div
+          ref={loaderRef}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: '#003837',
+          }}
+        >
+          <div style={{ position: 'absolute', bottom: '48px', left: '48px' }}>
+            <div style={{ position: 'relative', width: 600, height: 600 }}>
+              <img
+                ref={loaderImgRef}
+                src="/loader.png"
+                alt=""
+                width={600}
+                height={600}
+                style={{
+                  display: 'block',
+                  WebkitMaskImage: 'conic-gradient(from -90deg, #000 0deg, transparent 0deg)',
+                  maskImage: 'conic-gradient(from -90deg, #000 0deg, transparent 0deg)',
+                }}
+              />
+              <span
+                ref={loaderCountRef}
+                style={{
+                  position: 'absolute', top: '50%', left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  color: '#fffff6',
+                  fontSize: '52px',
+                  fontFamily: 'var(--font-sf)',
+                  fontWeight: 700,
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1,
+                  pointerEvents: 'none',
+                  userSelect: 'none',
+                }}
+              >1%</span>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="fixed inset-0 bg-[#fffff6]">
 
         {/* Persistent nav */}
