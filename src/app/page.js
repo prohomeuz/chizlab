@@ -80,6 +80,7 @@ export default function Home() {
   const scene2Ref = useRef(null)
   const handStrokeRef = useRef(null)
   const handFillRef = useRef(null)
+  const handOverlayRef = useRef(null)
   // Scene 3
   const scene3Ref = useRef(null)
   const laptopStrokeRef = useRef(null)
@@ -311,9 +312,11 @@ export default function Home() {
       }
       if (!fadeOutEl) return
       const el = fadeOutEl
+      const wasScene2 = el === scene2Ref.current
       fadeOutEl = null
       if (instant) {
         gsap.set(el, { opacity: 0, zIndex: 0 })
+        if (wasScene2) gsap.set(handOverlayRef.current, { opacity: 0 })
       } else {
         gsap.to(el, {
           opacity: 0,
@@ -321,6 +324,7 @@ export default function Home() {
           overwrite: true,
           onComplete: () => gsap.set(el, { zIndex: 0 }),
         })
+        if (wasScene2) gsap.to(handOverlayRef.current, { opacity: 0, duration: 0.4, overwrite: true })
       }
     }
 
@@ -331,6 +335,7 @@ export default function Home() {
         clearFadeOut(true)
       } else {
         gsap.set(fadeOutEl, { opacity: 1 - t })
+        if (fadeOutEl === scene2Ref.current) gsap.set(handOverlayRef.current, { opacity: 1 - t })
       }
     }
 
@@ -384,18 +389,18 @@ export default function Home() {
       const to = sceneEls[next]
 
       if (forward) {
-        // Yangi scene orqada darhol ko'rinadi, eski scene scroll bilan so'nadi
         gsap.set(to, { opacity: 1, zIndex: 1 })
         gsap.set(from, { zIndex: 2 })
+        if (next === 1) gsap.set(handOverlayRef.current, { opacity: 1 })
         fadeOutEl = from
         fadeOutTimer = setTimeout(() => clearFadeOut(false), 500)
         current = next
         busy = false
         cooldownUntil = Date.now() + 200
       } else {
-        // Backward: forward kabi — yangi scene orqada darhol, eski scene ustida so'nadi
         gsap.set(to, { opacity: 1, zIndex: 1 })
         gsap.set(from, { zIndex: 2 })
+        if (next === 1) gsap.set(handOverlayRef.current, { opacity: 1 })
         gsap.to(from, {
           opacity: 0,
           duration: 0.35,
@@ -898,7 +903,38 @@ export default function Home() {
           </div>
         </div>
       )}
-      {/* Persistent nav — hero va content section ustida doim ko'rinadi */}
+
+      {/* Sound hint — cursor chapida ohista yuradi */}
+      {loaderDone && !hintDismissed && (
+        <div
+          ref={soundHintRef}
+          aria-hidden="true"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            pointerEvents: 'none',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            background: '#0a0a0a',
+            color: '#ffffff',
+            fontFamily: 'var(--font-inter)',
+            fontSize: '13px',
+            fontWeight: 500,
+            letterSpacing: '0.06em',
+            padding: '11px 22px',
+            borderRadius: '999px',
+            whiteSpace: 'nowrap',
+            userSelect: 'none',
+            willChange: 'transform',
+          }}
+        >
+          [ bosing va sadoni yoqing ]
+        </div>
+      )}
+
+      {/* Persistent nav */}
       <nav
         className="fixed left-0 right-0 flex items-center justify-between p-10"
         style={{ top: '42px', zIndex: 100, background: '#fffff6' }}
@@ -937,36 +973,6 @@ export default function Home() {
           <Image src="/naqsh.svg" alt="" width={22} height={22} className="opacity-60 mx-3.75" />
         </div>
       </nav>
-
-      {/* Sound hint — cursor chapida ohista yuradi */}
-      {loaderDone && !hintDismissed && (
-        <div
-          ref={soundHintRef}
-          aria-hidden="true"
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            pointerEvents: 'none',
-            zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            background: '#0a0a0a',
-            color: '#ffffff',
-            fontFamily: 'var(--font-inter)',
-            fontSize: '13px',
-            fontWeight: 500,
-            letterSpacing: '0.06em',
-            padding: '11px 22px',
-            borderRadius: '999px',
-            whiteSpace: 'nowrap',
-            userSelect: 'none',
-            willChange: 'transform',
-          }}
-        >
-          [ bosing va sadoni yoqing ]
-        </div>
-      )}
 
       <div ref={heroContainerRef} className="fixed inset-0 bg-[#fffff6]">
         {/* Scene 1 */}
@@ -1015,22 +1021,12 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scene 2 */}
+        {/* Scene 2 — faqat fon (hand SVG alohida overlay'da, nav ustida) */}
         <div
           ref={scene2Ref}
-          className="absolute inset-0 flex items-center justify-center bg-[#fffff6]"
+          className="absolute inset-0 bg-[#fffff6]"
           style={{ opacity: 0 }}
-        >
-          <svg
-            viewBox="0 0 1446 704"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ width: '90vw', height: 'auto', marginTop: '18vh' }}
-          >
-            <path ref={handStrokeRef} d={HAND_PATH} stroke="#B8926A" strokeWidth="2" fill="none" />
-            <path ref={handFillRef} d={HAND_PATH} fill="#B8926A" opacity="0" />
-          </svg>
-        </div>
+        />
 
         {/* Scene 3 */}
         <div ref={scene3Ref} className="absolute inset-0 bg-[#fffff6]" style={{ opacity: 0 }}>
@@ -1158,6 +1154,32 @@ export default function Home() {
             </svg>
           </div>
         </div>
+
+      </div>
+
+      {/* Hand SVG overlay — nav (z:100) dan yuqori (z:101), fon yo'q */}
+      <div
+        ref={handOverlayRef}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 101,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          opacity: 0,
+          pointerEvents: 'none',
+        }}
+      >
+        <svg
+          viewBox="0 0 1446 704"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: '90vw', height: 'auto', marginTop: '18vh' }}
+        >
+          <path ref={handStrokeRef} d={HAND_PATH} stroke="#B8926A" strokeWidth="2" fill="none" />
+          <path ref={handFillRef} d={HAND_PATH} fill="#B8926A" opacity="0" />
+        </svg>
       </div>
 
       {/* Content section — fixed overlay, fades in over hero after scene 4 */}
