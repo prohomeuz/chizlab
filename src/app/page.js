@@ -87,6 +87,9 @@ export default function Home() {
   const scene4Ref = useRef(null)
   const endSvgRef = useRef(null)
   const s4CharsRef = useRef([])
+  // Hero container + content section (crossfade)
+  const heroContainerRef = useRef(null)
+  const contentSectionRef = useRef(null)
   // Scroll indicator
   const scrollIndicatorRef = useRef(null)
   const indicatorClickRef = useRef(null)
@@ -96,7 +99,116 @@ export default function Home() {
   const loaderImgRef = useRef(null)
   const loaderCountRef = useRef(null)
 
+  const audioRef = useRef(null)
+  const audioCtxRef = useRef(null)
+  const gainNodeRef = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const soundHintRef = useRef(null)
+  const [hintDismissed, setHintDismissed] = useState(false)
+
+  const initAudio = () => {
+    if (audioRef.current) return
+    const AudioCtx = window.AudioContext || window['webkitAudioContext']
+    const audio = new Audio('/sound.mp3')
+    audio.loop = true
+    audio.preload = 'none'
+    audioRef.current = audio
+
+    const ctx = new AudioCtx()
+    audioCtxRef.current = ctx
+
+    const gain = ctx.createGain()
+    gain.gain.value = 0
+    gainNodeRef.current = gain
+
+    const source = ctx.createMediaElementSource(audio)
+    source.connect(gain)
+    gain.connect(ctx.destination)
+  }
+
+
+  const fadeIn = () => {
+    const audio = audioRef.current
+    const ctx = audioCtxRef.current
+    const gain = gainNodeRef.current
+    if (!audio || !ctx || !gain) return
+    ctx.resume().then(() => {
+      gain.gain.cancelScheduledValues(ctx.currentTime)
+      gain.gain.setValueAtTime(gain.gain.value, ctx.currentTime)
+      gain.gain.linearRampToValueAtTime(0.5, ctx.currentTime + 1.6)
+      audio.play().then(() => setIsPlaying(true)).catch(() => {})
+    })
+  }
+
+  const fadeOut = () => {
+    const audio = audioRef.current
+    const ctx = audioCtxRef.current
+    const gain = gainNodeRef.current
+    if (!audio || !ctx || !gain) return
+    gain.gain.cancelScheduledValues(ctx.currentTime)
+    gain.gain.setValueAtTime(gain.gain.value, ctx.currentTime)
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.4)
+    setIsPlaying(false)
+    setTimeout(() => {
+      audio.pause()
+      gain.gain.value = 0
+    }, 1500)
+  }
+
+  const toggleAudio = () => {
+    initAudio()
+    if (isPlaying) {
+      fadeOut()
+    } else {
+      fadeIn()
+    }
+  }
+
+  // Sound hint: cursor chapida ohista yuradi, click da yo'qoladi va audio fade in boshlanadi
   useEffect(() => {
+    if (!loaderDone || hintDismissed) return
+    const hint = soundHintRef.current
+    if (!hint) return
+
+    let tx = window.innerWidth / 2
+    let ty = window.innerHeight / 2
+    let cx = tx, cy = ty
+    let rafId = null
+    const LERP = 0.07
+
+    const animate = () => {
+      cx += (tx - cx) * LERP
+      cy += (ty - cy) * LERP
+      hint.style.transform = `translate(calc(${cx}px - 100% - 14px), calc(${cy}px - 50%))`
+      rafId = requestAnimationFrame(animate)
+    }
+    rafId = requestAnimationFrame(animate)
+
+    const handleMove = (e) => {
+      tx = e.clientX
+      ty = e.clientY
+    }
+
+    const handleClick = () => {
+      setHintDismissed(true)
+      initAudio()
+      fadeIn()
+    }
+
+    window.addEventListener('mousemove', handleMove)
+    window.addEventListener('click', handleClick, { once: true })
+
+    return () => {
+      window.removeEventListener('mousemove', handleMove)
+      window.removeEventListener('click', handleClick)
+      cancelAnimationFrame(rafId)
+    }
+  }, [loaderDone, hintDismissed])
+
+  useEffect(() => {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+    window.scrollTo(0, 0)
     document.body.style.overflow = 'hidden'
 
     // --- Pre-init Scene 2 ---
@@ -174,6 +286,7 @@ export default function Home() {
     let cooldownUntil = 0
     let fadeOutEl = null
     let fadeOutTimer = null
+    let bodyScrollOpen = false
 
     gsap.set(sceneEls[0], { zIndex: 1 })
 
@@ -324,6 +437,7 @@ export default function Home() {
         gsap.killTweensOf(s4Proxy)
         s4Proxy.p = 1
         s4Tl?.progress(1)
+        openBodyScroll()
         return
       }
       if (dir < 0 && s4Target <= 0) {
@@ -338,6 +452,63 @@ export default function Home() {
         p: s4Target, duration: SCRUB, ease: 'power1.out', overwrite: true,
         onUpdate: () => s4Tl?.progress(s4Proxy.p),
       })
+    }
+
+    const FADE_DUR = 0.7
+
+    function openBodyScroll() {
+      if (bodyScrollOpen) return
+      bodyScrollOpen = true
+      window.removeEventListener('wheel', onWheel)
+
+      const heroEl = heroContainerRef.current
+      const contentEl = contentSectionRef.current
+
+      if (contentEl) {
+        contentEl.style.pointerEvents = 'auto'
+        contentEl.scrollTop = 0
+        gsap.to(contentEl, { opacity: 1, duration: FADE_DUR, ease: 'power2.inOut' })
+        contentEl.addEventListener('wheel', onContentScrollRewindCheck)
+      }
+      if (heroEl) {
+        gsap.to(heroEl, { opacity: 0, duration: FADE_DUR, ease: 'power2.inOut' })
+      }
+
+      const scrollEl = scrollIndicatorRef.current
+      if (scrollEl) {
+        gsap.to(scrollEl, { opacity: 0, duration: 0.4, overwrite: true, onComplete: () => { scrollEl.style.pointerEvents = 'none' } })
+      }
+    }
+
+    function onContentScrollRewindCheck(e) {
+      if (!bodyScrollOpen) return
+      const contentEl = contentSectionRef.current
+      if ((contentEl?.scrollTop ?? 0) <= 0 && e.deltaY < 0) {
+        closeBodyScroll(Math.abs(e.deltaY))
+      }
+    }
+
+    function closeBodyScroll(firstDelta) {
+      if (!bodyScrollOpen) return
+      bodyScrollOpen = false
+
+      const heroEl = heroContainerRef.current
+      const contentEl = contentSectionRef.current
+
+      if (contentEl) {
+        contentEl.removeEventListener('wheel', onContentScrollRewindCheck)
+        contentEl.style.pointerEvents = 'none'
+        gsap.to(contentEl, { opacity: 0, duration: FADE_DUR, ease: 'power2.inOut', onComplete: () => { contentEl.scrollTop = 0 } })
+      }
+      if (heroEl) {
+        gsap.to(heroEl, {
+          opacity: 1, duration: FADE_DUR, ease: 'power2.inOut',
+          onComplete: () => {
+            window.addEventListener('wheel', onWheel)
+            if (firstDelta) driveScene4(-1, firstDelta)
+          },
+        })
+      }
     }
 
     function onWheel(e) {
@@ -457,6 +628,7 @@ export default function Home() {
       clearFadeOut(true)
       document.body.style.overflow = ''
       window.removeEventListener('wheel', onWheel)
+      contentSectionRef.current?.removeEventListener('wheel', onContentScrollRewindCheck)
       gsap.killTweensOf([handProxy, s3Proxy, s4Proxy])
     }
   }, [])
@@ -506,21 +678,64 @@ export default function Home() {
           </div>
         </div>
       )}
-      <div className="fixed inset-0 bg-[#fffff6]">
-
-        {/* Persistent nav */}
-        <nav className="absolute left-0 right-0 z-10 flex items-center justify-between p-10" style={{ top: '42px' }}>
-          <Image src="/logo.svg" alt="Chizlab" width={210} height={48} priority />
-          <div className="flex items-center">
-            {navItems.map((item) => (
-              <div key={item} className="flex items-center">
-                <Image src="/naqsh.svg" alt="" width={22} height={22} className="opacity-60 mx-3.75" />
+      {/* Persistent nav — hero va content section ustida doim ko'rinadi */}
+      <nav className="fixed left-0 right-0 flex items-center justify-between p-10" style={{ top: '42px', zIndex: 100, background: '#fffff6' }}>
+        <Image src="/logo.svg" alt="Chizlab" width={210} height={48} priority />
+        <div className="flex items-center">
+          {navItems.map((item) => (
+            <div key={item} className="flex items-center">
+              <Image src="/naqsh.svg" alt="" width={22} height={22} className="opacity-60 mx-3.75" />
+              {item === 'Ovoz' ? (
+                <button
+                  onClick={toggleAudio}
+                  className="text-[20px] transition-colors px-2 py-0.5 rounded-sm"
+                  style={isPlaying
+                    ? { background: '#003837', color: '#FFFFF6' }
+                    : { color: '#003837' }
+                  }
+                >
+                  {item}
+                </button>
+              ) : (
                 <a href="#" className="text-[20px] text-[#003837] hover:opacity-70 transition-opacity">{item}</a>
-              </div>
-            ))}
-            <Image src="/naqsh.svg" alt="" width={22} height={22} className="opacity-60 mx-3.75" />
-          </div>
-        </nav>
+              )}
+            </div>
+          ))}
+          <Image src="/naqsh.svg" alt="" width={22} height={22} className="opacity-60 mx-3.75" />
+        </div>
+      </nav>
+
+      {/* Sound hint — cursor chapida ohista yuradi */}
+      {loaderDone && !hintDismissed && (
+        <div
+          ref={soundHintRef}
+          aria-hidden="true"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            pointerEvents: 'none',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            background: '#0a0a0a',
+            color: '#ffffff',
+            fontFamily: 'var(--font-inter)',
+            fontSize: '13px',
+            fontWeight: 500,
+            letterSpacing: '0.06em',
+            padding: '11px 22px',
+            borderRadius: '999px',
+            whiteSpace: 'nowrap',
+            userSelect: 'none',
+            willChange: 'transform',
+          }}
+        >
+          [ bosing va sadoni yoqing ]
+        </div>
+      )}
+
+      <div ref={heroContainerRef} className="fixed inset-0 bg-[#fffff6]">
 
         {/* Scene 1 */}
         <div ref={scene1Ref} className="absolute inset-0 flex flex-col bg-[#fffff6]">
@@ -624,6 +839,58 @@ export default function Home() {
           </div>
         </div>
 
+      </div>
+
+      {/* Content section — fixed overlay, fades in over hero after scene 4 */}
+      <div
+        ref={contentSectionRef}
+        className="content-section"
+        style={{
+          position: 'fixed', inset: 0, zIndex: 10,
+          background: '#fffff6', overflowY: 'auto',
+          opacity: 0, pointerEvents: 'none',
+          scrollbarGutter: 'stable',
+        }}
+      >
+      <section style={{ padding: '220px 20px 80px' }}>
+        <h2 style={{
+          fontFamily: 'var(--font-sf)',
+          fontSize: '80px',
+          fontWeight: 400,
+          color: '#003837',
+          lineHeight: 1,
+          marginBottom: '80px',
+        }}>
+          Chizmachilik va dizayn materiallari<br/>bir joyda. Topilmadimi?<br/>AI yordam beradi.
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
+          {[
+            { title: 'Chizmachilik', img: '/chizmachilik.jpg' },
+            { title: 'Dizayn', img: '/dizayn.jpg' },
+            { title: 'AI', img: '/ai.jpg' },
+          ].map(({ title, img }) => (
+            <div key={title}>
+              <h3 style={{
+                fontFamily: 'var(--font-ppe)',
+                fontStyle: 'normal',
+                fontSize: '50px',
+                fontWeight: 400,
+                color: '#003837',
+                lineHeight: 1.2,
+                letterSpacing: '-0.02em',
+                marginBottom: '20px',
+              }}>{title}</h3>
+              <div data-cursor-hover="" style={{ position: 'relative' }}>
+                <img
+                  src={img}
+                  alt={title}
+                  style={{ width: '100%', display: 'block', height: '270px', objectFit: 'cover' }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
       </div>
 
       {/* Scroll indicator */}

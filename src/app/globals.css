@@ -19,3 +19,12 @@ body,
 body {
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
+
+.content-section {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.content-section::-webkit-scrollbar {
+  display: none;
+}
+

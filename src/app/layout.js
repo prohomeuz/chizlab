@@ -7,12 +7,14 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const ppe = localFont({
   src: [
-    { path: "../../public/fonts/PPEditorialNew-UltralightItalic.woff2", format: "woff2" },
-    { path: "../../public/fonts/PPEditorialNew-UltralightItalic.woff", format: "woff" },
+    { path: "../../public/fonts/PPEditorialNew-Regular.woff2", format: "woff2", style: "normal", weight: "400" },
+    { path: "../../public/fonts/PPEditorialNew-Regular.woff", format: "woff", style: "normal", weight: "400" },
+    { path: "../../public/fonts/PPEditorialNew-UltralightItalic.woff2", format: "woff2", style: "normal", weight: "200" },
+    { path: "../../public/fonts/PPEditorialNew-UltralightItalic.woff", format: "woff", style: "normal", weight: "200" },
+    { path: "../../public/fonts/PPEditorialNew-UltralightItalic.woff2", format: "woff2", style: "italic", weight: "200" },
+    { path: "../../public/fonts/PPEditorialNew-UltralightItalic.woff", format: "woff", style: "italic", weight: "200" },
   ],
   variable: "--font-ppe",
-  style: "italic",
-  weight: "200",
 });
 
 const sfPro = localFont({
