@@ -1498,7 +1498,7 @@ export default function Home() {
             },
             {
               title: 'Hikoyamiz',
-              desc: "Oddiy g'oyadan boshlangan loyiha. Bugun esa ijodkorlar uchun platforma.",
+              desc: 'Oddiy g‘oyadan boshlangan loyiha. Bugun esa ijodkorlar uchun platforma.',
             },
             {
               title: 'Nega Chizlab?',
@@ -1510,14 +1510,14 @@ export default function Home() {
             },
             {
               title: 'Missiyamiz',
-              desc: "O'zbekiston ijodkorlik madaniyatini yuksaltirish va yangi imkoniyatlar yaratish.",
+              desc: 'O‘zbekiston ijodkorlik madaniyatini yuksaltirish va yangi imkoniyatlar yaratish.',
             },
             {
-              title: "Ta'riflar",
+              title: 'Ta’riflar',
               desc: (
                 <>
                   Bepul bazadan foydalaning yoki <strong style={{ fontWeight: 700 }}>Pro</strong>{' '}
-                  bilan barcha resurslarga cheksiz yo&apos;l oching.
+                  bilan barcha resurslarga cheksiz yo‘l oching.
                 </>
               ),
             },
