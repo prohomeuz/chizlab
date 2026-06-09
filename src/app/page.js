@@ -324,7 +324,8 @@ export default function Home() {
           overwrite: true,
           onComplete: () => gsap.set(el, { zIndex: 0 }),
         })
-        if (wasScene2) gsap.to(handOverlayRef.current, { opacity: 0, duration: 0.4, overwrite: true })
+        if (wasScene2)
+          gsap.to(handOverlayRef.current, { opacity: 0, duration: 0.4, overwrite: true })
       }
     }
 
@@ -1022,11 +1023,7 @@ export default function Home() {
         </div>
 
         {/* Scene 2 — faqat fon (hand SVG alohida overlay'da, nav ustida) */}
-        <div
-          ref={scene2Ref}
-          className="absolute inset-0 bg-[#fffff6]"
-          style={{ opacity: 0 }}
-        />
+        <div ref={scene2Ref} className="absolute inset-0 bg-[#fffff6]" style={{ opacity: 0 }} />
 
         {/* Scene 3 */}
         <div ref={scene3Ref} className="absolute inset-0 bg-[#fffff6]" style={{ opacity: 0 }}>
@@ -1154,7 +1151,6 @@ export default function Home() {
             </svg>
           </div>
         </div>
-
       </div>
 
       {/* Hand SVG overlay — nav (z:100) dan yuqori (z:101), fon yo'q */}
@@ -1502,7 +1498,7 @@ export default function Home() {
             },
             {
               title: 'Hikoyamiz',
-              desc: 'Oddiy g‘oyadan boshlangan loyiha. Bugun esa ijodkorlar uchun platforma.',
+              desc: "Oddiy g'oyadan boshlangan loyiha. Bugun esa ijodkorlar uchun platforma.",
             },
             {
               title: 'Nega Chizlab?',
@@ -1514,10 +1510,10 @@ export default function Home() {
             },
             {
               title: 'Missiyamiz',
-              desc: 'O‘zbekiston ijodkorlik madaniyatini yuksaltirish va yangi imkoniyatlar yaratish.',
+              desc: "O'zbekiston ijodkorlik madaniyatini yuksaltirish va yangi imkoniyatlar yaratish.",
             },
             {
-              title: 'Ta’riflar',
+              title: "Ta'riflar",
               desc: (
                 <>
                   Bepul bazadan foydalaning yoki <strong style={{ fontWeight: 700 }}>Pro</strong>{' '}
@@ -1572,7 +1568,7 @@ export default function Home() {
         </section>
 
         {/* Jamoamiz section */}
-        <section style={{ padding: '100px 20px 80px', display: 'none' }}>
+        <section style={{ padding: '100px 20px 80px' }}>
           {/* Header */}
           <div
             style={{
@@ -1609,26 +1605,39 @@ export default function Home() {
           {/* Team member rows */}
           {[
             {
-              name: "Mo'tabarxon\nTurdaliyeva",
-              role: "G'oya muallifi &\ndizayner",
-              credentials: 'Magistr, MRDI\nVeb&grafik dizayner',
-              links: '{Telegram}   {Instagram}\n{Behance}   {Elektron pochta}',
+              name: 'Mo‘tabarxon\nTurdaliyeva',
+              role: 'G‘oya muallifi &\ndizayner',
+              credentials: 'Magistr, MRDI\nVeb&Grafik dizayner',
+              links: [
+                { label: 'Telegram', href: 'https://t.me/turdaliyeva_mm' },
+                { label: 'Instagram', href: 'https://instagram.com/motabarxon_muhammadyusuf/' },
+                { label: 'Elektron pochta', href: 'mailto:turdaliyevamm@gmail.com' },
+              ],
               photo: '/mutabarxon.jpg',
               dark: false,
             },
             {
-              name: "Mirzo Ulug'bek\nXudoyberdiyev",
+              name: 'Mirzo Ulug‘bek\nXudoyberdiyev',
               role: 'Bosh\ndasturchi',
-              credentials: 'Team leader, Zamon agency\nFrontent arxitektor',
-              links: '{Telegram}   {Veb sayt}\n{Git Hub}  {Elektron pochta}',
+              credentials: 'Frontend arxitektor',
+              links: [
+                { label: 'Telegram', href: 'https://t.me/mu_xudoyberdiyev' },
+                { label: 'Veb sayt', href: 'https://ilhomlandim.uz' },
+                { label: 'Github', href: 'https://github.com/prohomeuz' },
+                { label: 'Elektron pochta', href: 'mailto:mu.xudoyberdiyev@gmail.com' },
+              ],
               photo: '/mirzo-ulugbek.jpg',
               dark: false,
             },
             {
               name: 'Ismoilov\nIslom',
               role: 'Art\ndirektor',
-              credentials: 'Grafik dizayner, Cambridge LC\nGrafik dizayner',
-              links: '{Telegram}\n{Behance}   {Elektron pochta}',
+              credentials: 'Grafik dizayner,\nCambridge LC',
+              links: [
+                { label: 'Telegram', href: 'https://t.me/islamismailov' },
+                { label: 'Behance', href: 'https://www.behance.net/ismailovislam' },
+                { label: 'Elektron pochta', href: 'mailto:ismailovislam.wide@gmail.com' },
+              ],
               photo: '/ismailov.jpg',
               dark: true,
             },
@@ -1636,73 +1645,51 @@ export default function Home() {
             <div key={i}>
               <div
                 style={{
-                  display: 'flex',
+                  display: 'grid',
+                  gridTemplateColumns: '33.33% 41.67% 25%',
+                  gridTemplateRows: 'auto auto',
                   padding: '60px 0',
-                  alignItems: 'flex-start',
+                  alignItems: 'start',
                 }}
               >
-                {/* Chap: Ism + Credentials */}
-                <div style={{ flex: '0 0 33.33%' }}>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-ppe)',
-                      fontSize: '70px',
-                      color: '#003837',
-                      margin: 0,
-                      fontWeight: 400,
-                      lineHeight: 1.1,
-                      whiteSpace: 'pre-line',
-                    }}
-                  >
-                    {member.name}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-sf)',
-                      fontSize: '44px',
-                      color: '#b8926a',
-                      margin: '32px 0 0',
-                      fontWeight: 400,
-                      lineHeight: 1.1,
-                      whiteSpace: 'pre-line',
-                    }}
-                  >
-                    {member.credentials}
-                  </p>
-                </div>
-                {/* O'rta: Lavozim + Social linklar */}
-                <div style={{ flex: '0 0 41.67%', paddingLeft: '32px' }}>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-ppe)',
-                      fontSize: '70px',
-                      color: '#003837',
-                      margin: 0,
-                      fontWeight: 400,
-                      lineHeight: 1.1,
-                      whiteSpace: 'pre-line',
-                    }}
-                  >
-                    {member.role}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-sf)',
-                      fontSize: '28px',
-                      color: '#b8926a',
-                      margin: '32px 0 0',
-                      fontWeight: 275,
-                      lineHeight: 1.1,
-                      whiteSpace: 'pre-line',
-                    }}
-                  >
-                    {member.links}
-                  </p>
-                </div>
-                {/* Rasm */}
+                {/* Ism — ustun 1, qator 1 */}
+                <p
+                  style={{
+                    gridColumn: '1',
+                    gridRow: '1',
+                    fontFamily: 'var(--font-ppe)',
+                    fontSize: '60px',
+                    color: '#003837',
+                    margin: 0,
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    whiteSpace: 'pre-line',
+                  }}
+                >
+                  {member.name}
+                </p>
+                {/* Lavozim — ustun 2, qator 1 */}
+                <p
+                  style={{
+                    gridColumn: '2',
+                    gridRow: '1',
+                    fontFamily: 'var(--font-ppe)',
+                    fontSize: '60px',
+                    color: '#003837',
+                    margin: 0,
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    whiteSpace: 'pre-line',
+                    paddingLeft: '32px',
+                  }}
+                >
+                  {member.role}
+                </p>
+                {/* Rasm — ustun 3, qator 1-2 */}
                 <div
                   style={{
-                    flex: '0 0 25%',
+                    gridColumn: '3',
+                    gridRow: '1 / 3',
                     display: 'flex',
                     justifyContent: 'flex-end',
                     alignItems: 'flex-start',
@@ -1727,6 +1714,53 @@ export default function Home() {
                       }}
                     />
                   </div>
+                </div>
+                {/* Credentials — ustun 1, qator 2 */}
+                <p
+                  style={{
+                    gridColumn: '1',
+                    gridRow: '2',
+                    fontFamily: 'var(--font-sf)',
+                    fontSize: '39px',
+                    color: '#b8926a',
+                    margin: '32px 0 0',
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    whiteSpace: 'pre-line',
+                  }}
+                >
+                  {member.credentials}
+                </p>
+                {/* Linklar — ustun 2, qator 2 */}
+                <div
+                  style={{
+                    gridColumn: '2',
+                    gridRow: '2',
+                    display: 'grid',
+                    gridTemplateColumns: 'max-content max-content',
+                    gap: '16px 16px',
+                    margin: '32px 0 0',
+                    paddingLeft: '32px',
+                  }}
+                >
+                  {member.links.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+                      rel="noopener noreferrer"
+                      style={{
+                        fontFamily: 'var(--font-sf)',
+                        fontSize: '25px',
+                        color: '#b8926a',
+                        fontWeight: 275,
+                        lineHeight: 1.1,
+                        textDecoration: 'none',
+                      }}
+                    >
+                      {'{' + link.label + '}'}
+                    </a>
+                  ))}
                 </div>
               </div>
               {i < arr.length - 1 && (
