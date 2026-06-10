@@ -1769,6 +1769,124 @@ export default function Home() {
             </div>
           ))}
         </section>
+
+        {/* Footer */}
+        <footer
+          style={{
+            background: '#003837',
+            padding: '48px 64px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '48px',
+          }}
+        >
+          {/* Yuqori qator: Bog'lanish, Bo'limlar, Logo */}
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0' }}>
+            {/* Bog'lanish */}
+            <div style={{ flex: '0 0 auto', minWidth: '200px', marginRight: '48px' }}>
+              <div
+                style={{
+                  fontFamily: 'var(--font-ppe)',
+                  fontSize: '36px',
+                  color: '#FFFFF6',
+                  marginBottom: '20px',
+                  lineHeight: '1.2',
+                }}
+              >
+                Bog‘lanish
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-sf)',
+                  fontSize: '24px',
+                  color: '#FFFFF6',
+                  marginBottom: '8px',
+                }}
+              >
+                Telefon
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-sf)',
+                  fontSize: '24px',
+                  color: '#FFFFF6',
+                }}
+              >
+                Email
+              </div>
+            </div>
+
+            {/* Bo'limlar */}
+            <div style={{ flex: '0 0 auto', minWidth: '220px', marginRight: '64px' }}>
+              <div
+                style={{
+                  fontFamily: 'var(--font-ppe)',
+                  fontSize: '36px',
+                  color: '#FFFFF6',
+                  marginBottom: '20px',
+                  lineHeight: '1.2',
+                }}
+              >
+                Bo‘limlar
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-sf)',
+                  fontSize: '24px',
+                  color: '#FFFFF6',
+                  marginBottom: '8px',
+                }}
+              >
+                Chizmachilik
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-sf)',
+                  fontSize: '24px',
+                  color: '#FFFFF6',
+                }}
+              >
+                Dizayn
+              </div>
+            </div>
+
+            {/* Logo + Tavsif */}
+            <div style={{ flex: '0 0 auto', maxWidth: '420px' }}>
+              <div style={{ marginBottom: '16px' }}>
+                <Image src="/logo-white.svg" alt="Chizlab" width={192} height={45} />
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-sf)',
+                  fontSize: '24px',
+                  color: '#FFFFF6',
+                  lineHeight: '1.4',
+                }}
+              >
+                Chizmachilik va dizayn sohasidagi
+                <br />
+                O‘zbekistondagi ilk sayt
+              </div>
+            </div>
+          </div>
+
+          {/* Pastki qator: copyright o'ng tomonda */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
+              <Image src="/copyright.svg" alt="©" width={65} height={65} />
+              <span
+                style={{
+                  fontFamily: 'var(--font-ppe)',
+                  fontSize: '106px',
+                  color: '#FFFFF6',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                2025 Chizlab
+              </span>
+            </div>
+          </div>
+        </footer>
       </div>
 
       {/* Scroll indicator */}
