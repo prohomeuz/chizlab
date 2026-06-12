@@ -18,6 +18,9 @@ const S4_PART1 = 'Barcha ' // SF Pro
 const S4_ITALIC = 'manbalar' // PPE italic
 const S4_PART2 = ' bir joyda:' // SF Pro
 
+const VECTOR6_PATH =
+  'M15.2466 0.968147C44.2466 8.46815 103.147 30.4681 106.747 58.4681C111.247 93.4681 86.7466 133.468 106.747 150.968C126.747 168.468 186.747 178.468 183.247 198.968C179.747 219.468 200.747 270.968 177.747 275.468C154.747 279.968 129.747 268.468 122.747 275.468C115.747 282.468 110.247 302.968 122.747 300.968C135.247 298.968 119.247 276.968 100.247 284.968C81.2466 292.968 67.7466 366.968 117.247 396.468C166.747 425.968 129.747 462.968 172.747 493.468C215.747 523.968 214.747 586.468 148.247 600.468C81.7466 614.468 45.7466 549.968 0.746593 600.468'
+
 const HAND_PATH =
   'M718.838 300.529C706.339 292.759 697.184 280.332 694.463 263.663C693.817 259.743 685.954 257.945 682.402 260.32C660.795 274.891 638.611 284.551 615.458 295.134C607.387 298.822 604.089 301.843 595.695 295.941C578.884 284.136 567.239 269.081 558.822 249.806L532.256 188.894C524.185 170.403 512.909 153.319 498.98 139.601C453.551 94.8043 382.225 160.881 348.719 206.393C388.221 208.929 424.795 246.348 430.791 280.493C433.558 296.24 427.101 309.151 412.481 313.716C372.125 326.328 320.239 303.364 320.401 264.77C320.47 245.795 330.132 230.348 337.973 213.194C283.227 232.054 246.054 272.447 186.005 275.721C165.066 276.851 143.32 277.727 122.52 275.536C81.0341 271.156 40.8399 265.599 0 252.85C41.4164 255.824 79.074 268.228 120.168 270.948C200.049 276.251 225.138 269.358 291.529 229.287C307.141 219.857 324.206 212.825 341.616 207.753C362.601 181.193 384.601 155.44 413.887 137.434C451.13 114.54 481.962 110.459 511.156 145.596C524.185 161.273 533.156 179.326 541.434 198.139L567.492 257.392C574.895 274.199 588.731 286.349 602.221 293.358C618.71 270.626 673.893 210.451 680.281 224.976C684.362 234.244 683.163 245.933 682.702 255.063L707.63 254.348C741.552 253.38 789.587 298.108 760.715 300.021C735.418 301.704 717.615 286.995 700.643 268.735C705.785 290.084 723.98 301.75 744.85 303.618C779.579 306.754 820.903 311.964 814.769 341.959C817.836 346.801 821.572 355.723 820.257 361.626C809.649 367.159 793.945 368.727 782.83 361.995C775.566 357.591 777.203 340.069 785.597 336.103C789.541 334.236 796.343 333.913 803.262 332.852C798.649 328.979 791.616 325.405 785.136 323.838L734.772 311.711L714.987 306.938C719.552 337.74 725.548 363.585 755.019 365.384L788.688 367.436C807.781 368.611 820.857 373.983 833.056 388.716C846.846 405.362 862.434 420.463 878.369 435.173C897.855 453.133 918.287 467.635 945.129 472.822C949.718 473.698 962.378 473.307 963.992 468.903L971.21 449.444L941.808 448.015C919.44 443.15 898.57 435.196 880.237 421.893C863.818 409.996 855.24 392.451 847.261 374.122C824.523 321.832 800.356 276.205 744.619 257.622C730.506 252.919 717.293 243.72 707.331 232.999L685.169 209.16C672.809 195.857 673.339 179.625 686.299 167.475C694.371 159.89 702.695 155.625 714.318 161.688L710.075 154.633C708.991 152.858 711.989 147.993 713.88 146.748C736.825 131.762 729.653 104.28 743.927 75.599C751.376 60.6129 768.095 55.4485 782.922 62.7802C804.276 73.3626 822.955 85.8126 842.556 100.199C846.039 102.758 848.252 109.86 849.129 115.439C889.484 83.5071 928.802 51.2293 970.887 21.3033C986.914 9.91387 1003.24 1.08361 1023.42 0C1033.33 6.43249 1043.57 22.4791 1044.57 32.8772L1032.32 47.8402C994.155 75.0687 954.353 97.8937 912.914 119.843C905.673 123.67 896.887 123.854 887.64 126.367C899.885 131.716 912.06 135.013 921.561 140.685C937.404 166.622 951.816 192.075 960.948 220.987C982.279 288.494 1016.57 333.659 1083.61 359.505C1152.46 386.041 1222.29 404.786 1294.42 420.256C1319.24 425.582 1369.76 440.222 1359.73 450.943C1352.21 458.989 1337.71 459.335 1327.72 457.076L1283.86 447.139L1103.09 388.255C1074.77 379.033 1048.83 371.424 1018.23 367.597L1023.03 398.399C1021.09 438.47 986.914 457.398 986.407 466.851C986.269 469.433 990.581 472.822 993.487 475.289L1078.49 502.748C1109.2 514.184 1138.7 525.458 1167.98 539.983C1203.22 557.459 1236.5 574.198 1270.37 594.556C1329.71 630.222 1389.2 662.8 1446 704L1245.12 585.034C1176.75 544.548 1106 513.838 1029.55 492.051L989.889 478.102C986.753 476.995 981.818 471.693 981.518 468.58C980.158 455.369 1016.11 438.769 1018.55 398.353C1019.2 387.748 1010.25 374.998 1015.76 367.159C1017.15 365.176 1023.37 362.871 1026.14 363.539L1078.56 375.966L1275.1 439.622L1323.13 452.142C1334.39 455.07 1345.25 454.977 1356.76 448.222C1340.5 436.164 1321.96 431.069 1301.83 426.665C1236.52 412.417 1173.54 396.186 1110.26 374.214C1082.89 364.715 1056.74 354.732 1033.31 338.017C993.948 309.958 970.726 268.666 956.821 223.085C948.219 194.888 933.875 170.911 919.025 145.342C907.333 135.636 893.059 136.396 886.44 130.586C882.105 126.782 892.298 117.007 883.004 108.591C880.56 106.378 878.254 104.372 878.9 102.943L882.197 95.6804L841.242 127.082L844.54 109.099C826.207 92.9368 803.861 77.9507 781.516 66.884C768.233 60.3132 754.535 64.9935 748.355 77.7662C732.351 110.828 741.898 134.69 713.372 153.619C730.645 165.262 751.837 169.389 770.17 164.132C776.604 157.953 783.361 152.259 791.04 147.463L824.8 126.344C826.53 125.261 833.771 124.984 833.517 126.967L832.341 136.258L772.753 170.726C780.363 181.055 789.425 189.585 800.379 195.949L860.912 146.402C872.489 136.927 884.296 136.097 898.455 140.777C909.132 144.304 918.148 150.276 920.869 162.472C925.551 183.453 919.555 203.419 909.155 222.094C903.597 232.1 896.933 241.576 884.964 245.288C927.05 266.96 964.177 307.791 994.224 347.124C1017.47 378.802 1012.58 422.169 979.351 444.695C968.143 462.286 972.824 480.408 949.234 477.572C924.674 474.621 902.421 462.609 883.696 446.055C863.91 428.556 846.269 410.342 828.42 390.653C822.863 384.52 815.945 376.543 807.32 374.975C770.77 368.335 738.485 375.344 725.502 355.355C715.171 339.423 703.802 304.679 718.838 300.436V300.529ZM1006.08 8.94554C992.91 11.643 983.179 18.3061 973.032 25.6377C943.007 47.333 914.136 68.3365 884.964 94.2048C923.637 70.8957 969.804 41.3846 1006.08 8.92248V8.94554ZM891.883 111.381L911.576 97.8015C951.286 74.0543 988.183 50.0535 1026.46 23.1247L1014.7 8.25387C994.755 25.8222 976.491 39.7477 955.345 53.996L884.688 101.629C885.818 104.672 889.969 110.321 891.859 111.404L891.883 111.381ZM910.654 116.292C951.471 94.5045 989.013 72.3713 1026.56 46.9641C1029.14 45.2349 1032.46 40.0705 1033.13 37.4422C1033.8 34.8138 1030.68 29.1883 1028.28 27.2977C992.449 52.336 957.812 75.6912 920.662 97.4787C910.492 103.45 902.721 109.053 892.413 118.044C898.339 120.05 904.635 119.497 910.654 116.292ZM880.398 234.567C880.814 236.434 884.503 239.639 886.256 239.87C898.639 241.483 934.936 176.259 909.8 152.189C902.813 145.503 884.203 139.186 874.864 143.959C857.084 153.042 843.94 166.184 829.435 179.395L851.181 170.426C857.338 168.559 866.009 171.833 867.646 178.519L872.604 198.785L880.375 234.544L880.398 234.567ZM724.118 201.021L737.194 185.044C728.085 178.196 716.347 165.193 703.087 164.247C692.318 163.487 682.172 177.343 680.604 186.911C679.681 192.444 683.97 200.883 686.945 204.456C700.435 194.174 714.825 212.387 724.118 201.021ZM999.759 410.48C1008.22 393.096 1005.04 372.623 994.086 356.092C971.072 321.371 941.624 290.822 908.371 265.046C872.374 237.149 813.062 231.546 815.391 190.646C810.964 194.312 801.002 201.044 796.159 198.462C783.176 191.568 774.275 181.793 767.656 170.703C750.269 171.694 735.695 169.066 718.399 164.109L741.575 182.046C757.763 176.098 777.987 189.908 793.853 202.289C797.796 205.355 801.232 215.5 802.616 220.042C809.695 219.834 817.697 221.033 823.624 224.953C837.967 234.405 851.734 241.668 867.462 248.17C879.615 253.196 889.092 261.058 898.639 270.026C940.978 309.797 996.323 353.971 999.759 410.503V410.48ZM879.661 242.705C867.162 220.111 872.35 194.081 860.521 176.19C850.674 171.717 823.647 186.473 820.903 196.387C815.876 214.601 856.669 233.299 879.661 242.705ZM989.405 382.721C978.889 359.505 964.315 338.893 946.167 321.509L897.832 275.26C886.048 263.963 874.495 255.34 859.16 249.23C823.947 235.189 808.727 210.843 793.276 233.299C789.471 238.832 779.164 244.826 773.029 240.331C773.606 226.405 793.507 226.474 797.104 219.788C801.901 210.912 770.055 186.104 746.718 183.845C740.307 205.517 724.995 221.517 702.165 219.396C714.318 238.025 732.605 249.138 753.313 256.4C806.628 275.052 831.119 325.797 852.519 375.666C864.095 402.641 880.998 422.423 908.832 432.982C938.049 444.072 966.183 454.516 983.524 432.544C994.962 418.066 997.868 401.489 989.382 382.721H989.405ZM703.618 206.969L692.895 205.817C701.911 217.483 715.056 216.238 725.018 209.298C716.393 209.09 711.527 207.822 703.618 206.969ZM406.231 310.973C421.474 307.491 429.799 296.171 426.132 280.586C417.738 244.85 380.957 208.86 344.337 212.48C331.562 235.95 317.126 262.233 329.694 283.398C343.392 306.477 377.291 317.59 406.231 310.973ZM679.035 250.406C679.035 240.953 678.736 235.65 676.568 225.944C663.447 233.737 657.128 239.501 649.979 248.861C661.902 242.613 667.99 241.115 679.058 250.429L679.035 250.406ZM678.136 257.161C672.371 251.951 669.073 248.953 666.468 247.755C659.388 244.504 637.988 268.481 626.319 284.113C646.636 277.173 661.879 268.205 678.136 257.161ZM766.342 293.012C756.726 277.98 743.789 271.617 730.852 264.7C720.636 260.066 711.366 255.916 699.075 259.743L723.473 283.675C734.219 294.211 751.814 298.822 766.342 293.012ZM811.31 334.051C808.45 315.054 769.04 308.898 744.02 309.497L787.004 319.572C796.482 321.786 804 327.55 811.31 334.028V334.051ZM817.444 357.937L807.966 339.354C803.215 338.662 793.922 338.593 789.033 339.723C782.277 341.268 780.57 356.208 786.082 358.905C795.998 363.77 807.159 362.502 817.444 357.914V357.937Z'
 
@@ -113,6 +116,11 @@ export default function Home() {
 
   const soundHintRef = useRef(null)
   const [hintDismissed, setHintDismissed] = useState(false)
+
+  // Mobile wave section
+  const mobileWaveSectionRef = useRef(null)
+  const mobileWavePathRef = useRef(null)
+  const mobileFeatureItemsRef = useRef([])
 
   const initAudio = () => {
     if (audioRef.current) return
@@ -215,6 +223,34 @@ export default function Home() {
       cancelAnimationFrame(rafId)
     }
   }, [loaderDone, hintDismissed])
+
+  // Mobile wave animation
+  useEffect(() => {
+    if (!loaderDone) return
+    if (typeof window === 'undefined' || window.innerWidth > 430) return
+    const section = mobileWaveSectionRef.current
+    const path = mobileWavePathRef.current
+    const items = mobileFeatureItemsRef.current.filter(Boolean)
+    if (!section || !path) return
+    const totalLen = path.getTotalLength()
+    gsap.set(path, { strokeDasharray: totalLen, strokeDashoffset: totalLen })
+    items.forEach((item) => gsap.set(item, { opacity: 0, y: 16 }))
+    let played = false
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !played) {
+          played = true
+          gsap.to(path, { strokeDashoffset: 0, duration: 3, ease: 'none' })
+          items.forEach((item, i) =>
+            gsap.to(item, { opacity: 1, y: 0, duration: 0.6, delay: 0.4 + i * 0.45, ease: 'power2.out' }),
+          )
+        }
+      },
+      { threshold: 0.1 },
+    )
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [loaderDone])
 
   useEffect(() => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
@@ -622,6 +658,62 @@ export default function Home() {
       else transitionTo(current - 1)
     }
 
+    // --- Touch handling for mobile ---
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
+    let touchStartY = 0
+    let touchLastY = 0
+
+    function onTouchStart(e) {
+      if (bodyScrollOpen) return
+      touchStartY = e.touches[0].clientY
+      touchLastY = touchStartY
+    }
+
+    function onTouchMove(e) {
+      if (bodyScrollOpen) return
+      e.preventDefault()
+      const y = e.touches[0].clientY
+      const deltaY = touchLastY - y
+      touchLastY = y
+      const absDelta = Math.abs(deltaY)
+      if (absDelta < 1 || busy || Date.now() < cooldownUntil) return
+      const dir = deltaY > 0 ? 1 : -1
+      if (current === 1) driveScene2(dir, absDelta * 3)
+      else if (current === 2) driveScene3(dir, absDelta * 3)
+      else if (current === 3) driveScene4(dir, absDelta * 3)
+    }
+
+    function onTouchEnd() {
+      if (bodyScrollOpen) return
+      const totalDelta = touchStartY - touchLastY
+      if (Math.abs(totalDelta) < 25) return
+      const dir = totalDelta > 0 ? 1 : -1
+      if (dir > 0 && current === 0) transitionTo(1)
+    }
+
+    function onContentTouchStart(e) {
+      touchStartY = e.touches[0].clientY
+    }
+
+    function onContentTouchEnd(e) {
+      if (!bodyScrollOpen) return
+      const contentEl = contentSectionRef.current
+      if (!contentEl || contentEl.scrollTop > 5) return
+      const endY = e.changedTouches[0]?.clientY ?? touchStartY
+      if (touchStartY - endY < -30) closeBodyScroll(Math.abs(touchStartY - endY))
+    }
+
+    if (isTouchDevice) {
+      window.addEventListener('touchstart', onTouchStart, { passive: true })
+      window.addEventListener('touchmove', onTouchMove, { passive: false })
+      window.addEventListener('touchend', onTouchEnd, { passive: true })
+      const cEl = contentSectionRef.current
+      if (cEl) {
+        cEl.addEventListener('touchstart', onContentTouchStart, { passive: true })
+        cEl.addEventListener('touchend', onContentTouchEnd, { passive: true })
+      }
+    }
+
     indicatorClickRef.current = function handleIndicatorClick() {
       if (current === 0) {
         transitionTo(1)
@@ -728,6 +820,16 @@ export default function Home() {
       window.removeEventListener('wheel', onWheel)
       contentSectionRef.current?.removeEventListener('wheel', onContentScrollRewindCheck)
       gsap.killTweensOf([handProxy, s3Proxy, s4Proxy])
+      if (isTouchDevice) {
+        window.removeEventListener('touchstart', onTouchStart)
+        window.removeEventListener('touchmove', onTouchMove)
+        window.removeEventListener('touchend', onTouchEnd)
+        const cEl = contentSectionRef.current
+        if (cEl) {
+          cEl.removeEventListener('touchstart', onContentTouchStart)
+          cEl.removeEventListener('touchend', onContentTouchEnd)
+        }
+      }
     }
   }, [])
 
@@ -867,8 +969,8 @@ export default function Home() {
             background: '#003837',
           }}
         >
-          <div style={{ position: 'absolute', bottom: '48px', left: '48px' }}>
-            <div style={{ position: 'relative', width: 600, height: 600 }}>
+          <div className="loader-inner" style={{ position: 'absolute', bottom: '48px', left: '48px' }}>
+            <div className="loader-img-wrap" style={{ position: 'relative', width: 600, height: 600 }}>
               <img
                 ref={loaderImgRef}
                 src="/loader.png"
@@ -877,12 +979,15 @@ export default function Home() {
                 height={600}
                 style={{
                   display: 'block',
+                  width: '100%',
+                  height: '100%',
                   WebkitMaskImage: 'conic-gradient(from -90deg, #000 0deg, transparent 0deg)',
                   maskImage: 'conic-gradient(from -90deg, #000 0deg, transparent 0deg)',
                 }}
               />
               <span
                 ref={loaderCountRef}
+                className="loader-count"
                 style={{
                   position: 'absolute',
                   top: '50%',
@@ -937,20 +1042,15 @@ export default function Home() {
 
       {/* Persistent nav */}
       <nav
-        className="fixed left-0 right-0 flex items-center justify-between p-10"
+        className="nav-root fixed left-0 right-0 flex items-center justify-between p-10"
         style={{ top: '42px', zIndex: 100, background: '#fffff6' }}
       >
-        <Image src="/logo.svg" alt="Chizlab" width={210} height={48} priority />
-        <div className="flex items-center">
+        <Image className="nav-logo" src="/logo.svg" alt="Chizlab" width={210} height={48} priority />
+        {/* Desktop nav items */}
+        <div className="nav-desktop flex items-center">
           {navItems.map((item) => (
             <div key={item} className="flex items-center">
-              <Image
-                src="/naqsh.svg"
-                alt=""
-                width={22}
-                height={22}
-                className="opacity-60 mx-3.75"
-              />
+              <Image src="/naqsh.svg" alt="" width={22} height={22} className="opacity-60 mx-3.75" />
               {item === 'Ovoz' ? (
                 <button
                   onClick={toggleAudio}
@@ -962,16 +1062,33 @@ export default function Home() {
                   {item}
                 </button>
               ) : (
-                <a
-                  href="#"
-                  className="text-[20px] text-[#003837] hover:opacity-70 transition-opacity"
-                >
+                <a href="#" className="text-[20px] text-[#003837] hover:opacity-70 transition-opacity">
                   {item}
                 </a>
               )}
             </div>
           ))}
           <Image src="/naqsh.svg" alt="" width={22} height={22} className="opacity-60 mx-3.75" />
+        </div>
+        {/* Mobile Menyu button */}
+        <div className="nav-mobile hidden items-center gap-2">
+          <Image src="/naqsh.svg" alt="" width={18} height={18} className="opacity-60" />
+          <button
+            onClick={toggleAudio}
+            style={{
+              fontFamily: 'var(--font-sf)',
+              fontSize: '16px',
+              color: isPlaying ? '#FFFFF6' : '#003837',
+              background: isPlaying ? '#003837' : 'transparent',
+              border: 'none',
+              padding: '4px 8px',
+              borderRadius: '4px',
+              cursor: 'pointer',
+            }}
+          >
+            Menyu
+          </button>
+          <Image src="/naqsh.svg" alt="" width={18} height={18} className="opacity-60" />
         </div>
       </nav>
 
@@ -980,7 +1097,7 @@ export default function Home() {
         <div ref={scene1Ref} className="absolute inset-0 flex flex-col bg-[#fffff6]">
           <div className="flex-1 flex items-center justify-center relative overflow-hidden">
             <svg
-              className="absolute bottom-[-45vw] left-1/2 -translate-x-1/2"
+              className="s1-arc absolute bottom-[-45vw] left-1/2 -translate-x-1/2"
               style={{ width: '80vw', height: '80vw' }}
               viewBox="0 0 1000 1000"
               fill="none"
@@ -993,29 +1110,15 @@ export default function Home() {
                 fill="none"
               />
             </svg>
-            <h1 className="relative z-10 text-center leading-none select-none text-[#003837] text-[170px]">
+            <h1 className="s1-title relative z-10 text-center leading-none select-none text-[#003837] text-[170px]">
               <em style={{ fontFamily: 'var(--font-ppe)' }} className="italic">
                 {MAIN_WORD.split('').map((char, i) => (
-                  <span
-                    key={i}
-                    ref={(el) => {
-                      charsRef.current[i] = el
-                    }}
-                  >
-                    {char}
-                  </span>
+                  <span key={i} ref={(el) => { charsRef.current[i] = el }}>{char}</span>
                 ))}
               </em>
               <span style={{ fontFamily: 'var(--font-sf)' }} className="not-italic font-normal">
                 {SUFFIX.split('').map((char, i) => (
-                  <span
-                    key={i}
-                    ref={(el) => {
-                      charsRef.current[MAIN_WORD.length + i] = el
-                    }}
-                  >
-                    {char}
-                  </span>
+                  <span key={i} ref={(el) => { charsRef.current[MAIN_WORD.length + i] = el }}>{char}</span>
                 ))}
               </span>
             </h1>
@@ -1029,33 +1132,19 @@ export default function Home() {
         <div ref={scene3Ref} className="absolute inset-0 bg-[#fffff6]" style={{ opacity: 0 }}>
           {/* Left: text — vertically centered */}
           <div
-            className="absolute left-0 top-0 bottom-0 w-1/2 flex flex-col justify-center pl-16"
+            className="s3-text-col absolute left-0 top-0 bottom-0 w-1/2 flex flex-col justify-center pl-16"
             style={{ marginBottom: '12vh' }}
           >
             <h2
-              className="text-[#003837] font-normal leading-none"
+              className="s3-title text-[#003837] font-normal leading-none"
               style={{ fontFamily: 'var(--font-sf)', fontSize: '130px' }}
             >
               {S3_LINE1.split('').map((char, i) => (
-                <span
-                  key={`l1-${i}`}
-                  ref={(el) => {
-                    s3CharsRef.current[i] = el
-                  }}
-                >
-                  {char}
-                </span>
+                <span key={`l1-${i}`} ref={(el) => { s3CharsRef.current[i] = el }}>{char}</span>
               ))}
               <br />
               {S3_LINE2.split('').map((char, i) => (
-                <span
-                  key={`l2-${i}`}
-                  ref={(el) => {
-                    s3CharsRef.current[S3_LINE1.length + i] = el
-                  }}
-                >
-                  {char}
-                </span>
+                <span key={`l2-${i}`} ref={(el) => { s3CharsRef.current[S3_LINE1.length + i] = el }}>{char}</span>
               ))}
             </h2>
           </div>
@@ -1065,15 +1154,10 @@ export default function Home() {
             viewBox="0 0 1323 606"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="s3-svg"
             style={{ position: 'absolute', bottom: 0, right: 0, width: '62vw', height: 'auto' }}
           >
-            <path
-              ref={laptopStrokeRef}
-              d={LAPTOP_PATH}
-              stroke="#B8926A"
-              strokeWidth="1.5"
-              fill="none"
-            />
+            <path ref={laptopStrokeRef} d={LAPTOP_PATH} stroke="#B8926A" strokeWidth="1.5" fill="none" />
             <path ref={laptopFillRef} d={LAPTOP_PATH} fill="#B8926A" opacity="0" />
           </svg>
         </div>
@@ -1086,11 +1170,11 @@ export default function Home() {
         >
           {/* Title */}
           <div
-            className="absolute top-0 left-0 right-0 flex justify-center"
+            className="s4-title-wrap absolute top-0 left-0 right-0 flex justify-center"
             style={{ paddingTop: '28vh' }}
           >
             <h2
-              className="text-[#003837] font-normal leading-none text-center select-none whitespace-nowrap"
+              className="s4-title text-[#003837] font-normal leading-none text-center select-none whitespace-nowrap"
               style={{ fontSize: '100px' }}
             >
               {S4_PART1.split('').map((char, i) => (
@@ -1171,6 +1255,7 @@ export default function Home() {
           viewBox="0 0 1446 704"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className="hand-svg"
           style={{ width: '90vw', height: 'auto', marginTop: '18vh' }}
         >
           <path ref={handStrokeRef} d={HAND_PATH} stroke="#B8926A" strokeWidth="2" fill="none" />
@@ -1193,8 +1278,9 @@ export default function Home() {
           scrollbarGutter: 'stable',
         }}
       >
-        <section style={{ padding: '220px 20px 80px' }}>
+        <section className="content-intro-section" style={{ padding: '220px 20px 80px' }}>
           <h2
+            className="content-intro-heading"
             style={{
               fontFamily: 'var(--font-sf)',
               fontSize: '80px',
@@ -1210,7 +1296,7 @@ export default function Home() {
             <br />
             AI yordam beradi.
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
+          <div className="category-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
             {[
               { title: 'Chizmachilik', img: '/chizmachilik.jpg' },
               { title: 'Dizayn', img: '/dizayn.jpg' },
@@ -1218,6 +1304,7 @@ export default function Home() {
             ].map(({ title, img }) => (
               <div key={title}>
                 <h3
+                  className="category-title"
                   style={{
                     fontFamily: 'var(--font-ppe)',
                     fontStyle: 'normal',
@@ -1235,6 +1322,7 @@ export default function Home() {
                   <img
                     src={img}
                     alt={title}
+                    className="category-img"
                     style={{ width: '100%', display: 'block', height: '270px', objectFit: 'cover' }}
                   />
                 </div>
@@ -1243,9 +1331,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Wave feature section */}
+        {/* Wave feature section — desktop */}
         <section
           ref={waveSectionRef}
+          className="wave-desktop"
           style={{ padding: '60px 0 80px', position: 'relative', overflow: 'hidden' }}
         >
           {/* Container uses padding-bottom to maintain SVG natural aspect ratio (386/1920 = 20.104%) */}
@@ -1455,8 +1544,58 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Wave feature section — mobile */}
+        <section
+          ref={mobileWaveSectionRef}
+          className="wave-mobile"
+          style={{ padding: '20px 0 40px', position: 'relative', display: 'none' }}
+        >
+          {/* Snake SVG decoration */}
+          <svg
+            viewBox="0 0 203.121 603.506"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            style={{ position: 'absolute', left: '-10px', top: 0, width: '52%', height: '100%', pointerEvents: 'none' }}
+          >
+            <path ref={mobileWavePathRef} d={VECTOR6_PATH} stroke="#B8926A" strokeWidth="2" />
+          </svg>
+
+          {/* Item 1 — left */}
+          <div ref={(el) => (mobileFeatureItemsRef.current[0] = el)} className="mobile-wave-item mobile-wave-left">
+            <div className="mobile-wave-img-wrap">
+              <img src="/clock.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            </div>
+            <p className="mobile-wave-text">1 daqiqada kerakli manbalarni topish imkoniyati</p>
+          </div>
+
+          {/* Item 2 — right */}
+          <div ref={(el) => (mobileFeatureItemsRef.current[1] = el)} className="mobile-wave-item mobile-wave-right">
+            <div className="mobile-wave-img-wrap">
+              <img src="/hand.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            </div>
+            <p className="mobile-wave-text">{`Oson va mustaqil\no'rganish`}</p>
+          </div>
+
+          {/* Item 3 — left */}
+          <div ref={(el) => (mobileFeatureItemsRef.current[2] = el)} className="mobile-wave-item mobile-wave-left">
+            <div className="mobile-wave-img-wrap">
+              <img src="/with-ai.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            </div>
+            <p className="mobile-wave-text">{`AI bilan g'oyani\nchizmaga aylantirish`}</p>
+          </div>
+
+          {/* Item 4 — right */}
+          <div ref={(el) => (mobileFeatureItemsRef.current[3] = el)} className="mobile-wave-item mobile-wave-right">
+            <div className="mobile-wave-img-wrap">
+              <img src="/ijodkor.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            </div>
+            <p className="mobile-wave-text">{`Ijodkorlar bilan\no'sish va ulashish`}</p>
+          </div>
+        </section>
+
         {/* About section */}
-        <section style={{ padding: '100px 20px 80px' }}>
+        <section className="about-section" style={{ padding: '100px 20px 80px' }}>
           {/* Header */}
           <div
             style={{
@@ -1467,146 +1606,89 @@ export default function Home() {
               justifyContent: 'center',
             }}
           >
-            <img
-              src="https://www.figma.com/api/mcp/asset/0f329452-c72e-445b-b83a-d2cfc80ef245"
-              alt=""
-              style={{ width: '26.6px', height: '26.6px' }}
-            />
-            <p
-              style={{
-                fontFamily: 'var(--font-sf)',
-                fontSize: '24px',
-                color: '#003837',
-                margin: 0,
-                fontWeight: 400,
-              }}
-            >
+            <img src="/naqsh-about.svg" alt="" style={{ width: '26.6px', height: '26.6px' }} />
+            <p style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#003837', margin: 0, fontWeight: 400 }}>
               Biz haqimizda
             </p>
-            <img
-              src="https://www.figma.com/api/mcp/asset/0f329452-c72e-445b-b83a-d2cfc80ef245"
-              alt=""
-              style={{ width: '26.6px', height: '26.6px' }}
-            />
+            <img src="/naqsh-about.svg" alt="" style={{ width: '26.6px', height: '26.6px' }} />
           </div>
 
           {/* Rows */}
           {[
+            { title: 'Biz kimmiz?', desc: 'ChizLab — chizmachilik va dizayn materiallari makoni. Bilim va kreativlik bir joyda.' },
+            { title: 'Hikoyamiz', desc: "Oddiy g'oyadan boshlangan loyiha. Bugun esa ijodkorlar uchun platforma." },
+            { title: 'Nega Chizlab?', desc: "Murakkab texnik bilimlarni oson va kreativ usulda o'rganing." },
+            { title: 'Jamoamiz', desc: 'Sifat va innovatsiyaga intiluvchi professional mutaxassislar birlashmasi.' },
+            { title: 'Missiyamiz', desc: "O'zbekiston ijodkorlik madaniyatini yuksaltirish va yangi imkoniyatlar yaratish." },
             {
-              title: 'Biz kimmiz?',
-              desc: 'ChizLab — chizmachilik va dizayn materiallari makoni. Bilim va kreativlik bir joyda.',
-            },
-            {
-              title: 'Hikoyamiz',
-              desc: 'Oddiy g‘oyadan boshlangan loyiha. Bugun esa ijodkorlar uchun platforma.',
-            },
-            {
-              title: 'Nega Chizlab?',
-              desc: "Murakkab texnik bilimlarni oson va kreativ usulda o'rganing.",
-            },
-            {
-              title: 'Jamoamiz',
-              desc: 'Sifat va innovatsiyaga intiluvchi professional mutaxassislar birlashmasi.',
-            },
-            {
-              title: 'Missiyamiz',
-              desc: 'O‘zbekiston ijodkorlik madaniyatini yuksaltirish va yangi imkoniyatlar yaratish.',
-            },
-            {
-              title: 'Ta’riflar',
+              title: "Ta'riflar",
               desc: (
                 <>
                   Bepul bazadan foydalaning yoki <strong style={{ fontWeight: 700 }}>Pro</strong>{' '}
-                  bilan barcha resurslarga cheksiz yo‘l oching.
+                  bilan barcha resurslarga cheksiz yo'l oching.
                 </>
               ),
             },
           ].map((row, i, arr) => (
             <div key={row.title}>
-              <div
-                style={{
-                  display: 'flex',
-                  padding: '60px 0',
-                  alignItems: 'flex-start',
-                }}
-              >
+              {/* Desktop layout */}
+              <div className="about-row-desktop" style={{ display: 'flex', padding: '60px 0', alignItems: 'flex-start' }}>
                 <div style={{ flex: '0 0 50%', paddingRight: '32px' }}>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-ppe)',
-                      fontSize: '70px',
-                      color: '#003837',
-                      margin: 0,
-                      fontWeight: 400,
-                      lineHeight: 1.1,
-                      letterSpacing: '-0.02em',
-                    }}
-                  >
+                  <p style={{ fontFamily: 'var(--font-ppe)', fontSize: '70px', color: '#003837', margin: 0, fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em' }}>
                     {row.title}
                   </p>
                 </div>
                 <div style={{ flex: '0 0 50%', paddingLeft: '32px' }}>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-sf)',
-                      fontSize: '44px',
-                      color: '#003837',
-                      margin: 0,
-                      fontWeight: 400,
-                      lineHeight: 1.3,
-                    }}
-                  >
+                  <p style={{ fontFamily: 'var(--font-sf)', fontSize: '44px', color: '#003837', margin: 0, fontWeight: 400, lineHeight: 1.3 }}>
                     {row.desc}
                   </p>
                 </div>
               </div>
+              {/* Mobile layout */}
+              <div className="about-row-mobile" style={{ display: 'none' }}>
+                {i < 5 ? (
+                  <p style={{ fontFamily: 'var(--font-ppe)', fontSize: '46px', color: '#003837', margin: 0, fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em', padding: '24px 0' }}>
+                    {row.title}
+                  </p>
+                ) : (
+                  <p style={{ fontFamily: 'var(--font-sf)', fontSize: '22px', color: '#003837', margin: 0, fontWeight: 400, lineHeight: 1.4, padding: '20px 0 28px' }}>
+                    {row.desc}
+                  </p>
+                )}
+              </div>
+              {/* Divider: desktop after all except last; mobile after rows 0-4 (includes row 4=Missiyamiz) */}
               {i < arr.length - 1 && (
-                <div style={{ height: '1px', background: '#B8926A', width: '100%' }} />
+                <div className="about-divider-desktop" style={{ height: '1px', background: '#B8926A', width: '100%' }} />
+              )}
+              {i < 5 && (
+                <div className="about-divider-mobile" style={{ display: 'none', height: '1px', background: '#B8926A', width: '100%' }} />
               )}
             </div>
           ))}
         </section>
 
         {/* Jamoamiz section */}
-        <section style={{ padding: '100px 20px 80px' }}>
+        <section className="team-section" style={{ padding: '100px 20px 80px' }}>
           {/* Header */}
           <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '64px',
-              justifyContent: 'center',
-            }}
+            className="section-header"
+            style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '64px', justifyContent: 'center' }}
           >
-            <img
-              src="https://www.figma.com/api/mcp/asset/52c09ade-56d9-4aed-9c85-47cfb7de7d95"
-              alt=""
-              style={{ width: '26.6px', height: '26.6px' }}
-            />
+            <img src="/naqsh-team.svg" alt="" style={{ width: '26.6px', height: '26.6px' }} />
             <p
-              style={{
-                fontFamily: 'var(--font-sf)',
-                fontSize: '24px',
-                color: '#003837',
-                margin: 0,
-                fontWeight: 400,
-              }}
+              className="section-header-text"
+              style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#003837', margin: 0, fontWeight: 400 }}
             >
               Jamoamiz
             </p>
-            <img
-              src="https://www.figma.com/api/mcp/asset/52c09ade-56d9-4aed-9c85-47cfb7de7d95"
-              alt=""
-              style={{ width: '26.6px', height: '26.6px' }}
-            />
+            <img src="/naqsh-team.svg" alt="" style={{ width: '26.6px', height: '26.6px' }} />
           </div>
 
           {/* Team member rows */}
           {[
             {
-              name: 'Mo‘tabarxon\nTurdaliyeva',
-              role: 'G‘oya muallifi &\ndizayner',
+              name: "Mo'tabarxon\nTurdaliyeva",
+              role: "G'oya muallifi &\ndizayner",
               credentials: 'Magistr, MRDI\nVeb&Grafik dizayner',
               links: [
                 { label: 'Telegram', href: 'https://t.me/turdaliyeva_mm' },
@@ -1617,7 +1699,7 @@ export default function Home() {
               dark: false,
             },
             {
-              name: 'Mirzo Ulug‘bek\nXudoyberdiyev',
+              name: "Mirzo Ulug'bek\nXudoyberdiyev",
               role: 'Bosh\ndasturchi',
               credentials: 'Frontend arxitektor',
               links: [
@@ -1644,6 +1726,7 @@ export default function Home() {
           ].map((member, i, arr) => (
             <div key={i}>
               <div
+                className="member-grid"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '33.33% 41.67% 25%',
@@ -1652,95 +1735,58 @@ export default function Home() {
                   alignItems: 'start',
                 }}
               >
-                {/* Ism — ustun 1, qator 1 */}
+                {/* Ism */}
                 <p
+                  className="member-name"
                   style={{
-                    gridColumn: '1',
-                    gridRow: '1',
-                    fontFamily: 'var(--font-ppe)',
-                    fontSize: '60px',
-                    color: '#003837',
-                    margin: 0,
-                    fontWeight: 400,
-                    lineHeight: 1.1,
-                    whiteSpace: 'pre-line',
+                    gridColumn: '1', gridRow: '1',
+                    fontFamily: 'var(--font-ppe)', fontSize: '60px', color: '#003837',
+                    margin: 0, fontWeight: 400, lineHeight: 1.1, whiteSpace: 'pre-line',
                   }}
                 >
                   {member.name}
                 </p>
-                {/* Lavozim — ustun 2, qator 1 */}
+                {/* Lavozim */}
                 <p
+                  className="member-role"
                   style={{
-                    gridColumn: '2',
-                    gridRow: '1',
-                    fontFamily: 'var(--font-ppe)',
-                    fontSize: '60px',
-                    color: '#003837',
-                    margin: 0,
-                    fontWeight: 400,
-                    lineHeight: 1.1,
-                    whiteSpace: 'pre-line',
-                    paddingLeft: '32px',
+                    gridColumn: '2', gridRow: '1',
+                    fontFamily: 'var(--font-ppe)', fontSize: '60px', color: '#003837',
+                    margin: 0, fontWeight: 400, lineHeight: 1.1, whiteSpace: 'pre-line', paddingLeft: '32px',
                   }}
                 >
                   {member.role}
                 </p>
-                {/* Rasm — ustun 3, qator 1-2 */}
+                {/* Rasm */}
                 <div
-                  style={{
-                    gridColumn: '3',
-                    gridRow: '1 / 3',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    alignItems: 'flex-start',
-                  }}
+                  className="member-photo-col"
+                  style={{ gridColumn: '3', gridRow: '1 / 3', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start' }}
                 >
                   <div
-                    style={{
-                      width: '301px',
-                      height: '301px',
-                      background: member.dark ? '#131313' : 'transparent',
-                      overflow: 'hidden',
-                    }}
+                    className="member-photo-box"
+                    style={{ width: '301px', height: '301px', background: member.dark ? '#131313' : 'transparent', overflow: 'hidden' }}
                   >
-                    <img
-                      src={member.photo}
-                      alt=""
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block',
-                      }}
-                    />
+                    <img src={member.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                   </div>
                 </div>
-                {/* Credentials — ustun 1, qator 2 */}
+                {/* Credentials */}
                 <p
+                  className="member-credentials"
                   style={{
-                    gridColumn: '1',
-                    gridRow: '2',
-                    fontFamily: 'var(--font-sf)',
-                    fontSize: '39px',
-                    color: '#b8926a',
-                    margin: '32px 0 0',
-                    fontWeight: 400,
-                    lineHeight: 1.1,
-                    whiteSpace: 'pre-line',
+                    gridColumn: '1', gridRow: '2',
+                    fontFamily: 'var(--font-sf)', fontSize: '39px', color: '#b8926a',
+                    margin: '32px 0 0', fontWeight: 400, lineHeight: 1.1, whiteSpace: 'pre-line',
                   }}
                 >
                   {member.credentials}
                 </p>
-                {/* Linklar — ustun 2, qator 2 */}
+                {/* Linklar */}
                 <div
+                  className="member-links"
                   style={{
-                    gridColumn: '2',
-                    gridRow: '2',
-                    display: 'grid',
-                    gridTemplateColumns: 'max-content max-content',
-                    gap: '16px 16px',
-                    margin: '32px 0 0',
-                    paddingLeft: '32px',
+                    gridColumn: '2', gridRow: '2',
+                    display: 'grid', gridTemplateColumns: 'max-content max-content',
+                    gap: '16px 16px', margin: '32px 0 0', paddingLeft: '32px',
                   }}
                 >
                   {member.links.map((link) => (
@@ -1749,14 +1795,8 @@ export default function Home() {
                       href={link.href}
                       target={link.href.startsWith('mailto:') ? undefined : '_blank'}
                       rel="noopener noreferrer"
-                      style={{
-                        fontFamily: 'var(--font-sf)',
-                        fontSize: '25px',
-                        color: '#b8926a',
-                        fontWeight: 275,
-                        lineHeight: 1.1,
-                        textDecoration: 'none',
-                      }}
+                      className="member-link"
+                      style={{ fontFamily: 'var(--font-sf)', fontSize: '25px', color: '#b8926a', fontWeight: 275, lineHeight: 1.1, textDecoration: 'none' }}
                     >
                       {'{' + link.label + '}'}
                     </a>
@@ -1772,6 +1812,7 @@ export default function Home() {
 
         {/* Footer */}
         <footer
+          className="footer-root"
           style={{
             background: '#003837',
             padding: '48px 64px',
@@ -1781,106 +1822,62 @@ export default function Home() {
           }}
         >
           {/* Yuqori qator: Bog'lanish, Bo'limlar, Logo */}
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0' }}>
+          <div className="footer-top-row" style={{ display: 'flex', alignItems: 'flex-start', gap: '0' }}>
             {/* Bog'lanish */}
-            <div style={{ flex: '0 0 auto', minWidth: '200px', marginRight: '48px' }}>
+            <div className="footer-contact" style={{ flex: '0 0 auto', minWidth: '200px', marginRight: '48px' }}>
               <div
-                style={{
-                  fontFamily: 'var(--font-ppe)',
-                  fontSize: '36px',
-                  color: '#FFFFF6',
-                  marginBottom: '20px',
-                  lineHeight: '1.2',
-                }}
+                className="footer-heading"
+                style={{ fontFamily: 'var(--font-ppe)', fontSize: '36px', color: '#FFFFF6', marginBottom: '20px', lineHeight: '1.2' }}
               >
-                Bog‘lanish
+                Bog'lanish
               </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-sf)',
-                  fontSize: '24px',
-                  color: '#FFFFF6',
-                  marginBottom: '8px',
-                }}
-              >
+              <div className="footer-text" style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6', marginBottom: '8px' }}>
                 Telefon
               </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-sf)',
-                  fontSize: '24px',
-                  color: '#FFFFF6',
-                }}
-              >
+              <div className="footer-text" style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6' }}>
                 Email
               </div>
             </div>
 
             {/* Bo'limlar */}
-            <div style={{ flex: '0 0 auto', minWidth: '220px', marginRight: '64px' }}>
+            <div className="footer-sections" style={{ flex: '0 0 auto', minWidth: '220px', marginRight: '64px' }}>
               <div
-                style={{
-                  fontFamily: 'var(--font-ppe)',
-                  fontSize: '36px',
-                  color: '#FFFFF6',
-                  marginBottom: '20px',
-                  lineHeight: '1.2',
-                }}
+                className="footer-heading"
+                style={{ fontFamily: 'var(--font-ppe)', fontSize: '36px', color: '#FFFFF6', marginBottom: '20px', lineHeight: '1.2' }}
               >
-                Bo‘limlar
+                Bo'limlar
               </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-sf)',
-                  fontSize: '24px',
-                  color: '#FFFFF6',
-                  marginBottom: '8px',
-                }}
-              >
+              <div className="footer-text" style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6', marginBottom: '8px' }}>
                 Chizmachilik
               </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-sf)',
-                  fontSize: '24px',
-                  color: '#FFFFF6',
-                }}
-              >
+              <div className="footer-text" style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6' }}>
                 Dizayn
               </div>
             </div>
 
             {/* Logo + Tavsif */}
-            <div style={{ flex: '0 0 auto', maxWidth: '420px' }}>
+            <div className="footer-logo-block" style={{ flex: '0 0 auto', maxWidth: '420px' }}>
               <div style={{ marginBottom: '16px' }}>
                 <Image src="/logo-white.svg" alt="Chizlab" width={192} height={45} />
               </div>
               <div
-                style={{
-                  fontFamily: 'var(--font-sf)',
-                  fontSize: '24px',
-                  color: '#FFFFF6',
-                  lineHeight: '1.4',
-                }}
+                className="footer-text"
+                style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6', lineHeight: '1.4' }}
               >
                 Chizmachilik va dizayn sohasidagi
                 <br />
-                O‘zbekistondagi ilk sayt
+                O'zbekistondagi ilk sayt
               </div>
             </div>
           </div>
 
           {/* Pastki qator: copyright o'ng tomonda */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <div className="footer-copyright-row" style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
-              <Image src="/copyright.svg" alt="©" width={65} height={65} />
+              <Image className="copyright-icon" src="/copyright.svg" alt="©" width={65} height={65} />
               <span
-                style={{
-                  fontFamily: 'var(--font-ppe)',
-                  fontSize: '106px',
-                  color: '#FFFFF6',
-                  whiteSpace: 'nowrap',
-                }}
+                className="copyright-text"
+                style={{ fontFamily: 'var(--font-ppe)', fontSize: '106px', color: '#FFFFF6', whiteSpace: 'nowrap' }}
               >
                 2025 Chizlab
               </span>
@@ -1927,6 +1924,234 @@ export default function Home() {
         .scroll-indicator:hover {
           opacity: 0.6;
           transform: scale(1.12);
+        }
+
+        /* ─── MOBILE ≤ 430px ─────────────────────────────────── */
+        @media (max-width: 430px) {
+
+          /* NAV */
+          .nav-root {
+            padding: 14px 20px !important;
+          }
+          .nav-logo {
+            width: 110px !important;
+            height: auto !important;
+          }
+          .nav-desktop {
+            display: none !important;
+          }
+          .nav-mobile {
+            display: flex !important;
+          }
+
+          /* SCENE 1 */
+          .s1-arc {
+            width: 130vw !important;
+            height: 130vw !important;
+            bottom: -65vw !important;
+          }
+          .s1-title {
+            font-size: 62px !important;
+          }
+
+          /* SCENE 3 */
+          .s3-text-col {
+            width: 100% !important;
+            padding-left: 24px !important;
+            padding-right: 24px !important;
+            justify-content: flex-start !important;
+            padding-top: 18vh !important;
+            margin-bottom: 0 !important;
+          }
+          .s3-title {
+            font-size: 38px !important;
+            line-height: 1.15 !important;
+          }
+          .s3-svg {
+            width: 80vw !important;
+            bottom: 0 !important;
+            right: -10px !important;
+            opacity: 0.55 !important;
+          }
+
+          /* SCENE 4 */
+          .s4-title-wrap {
+            padding-top: 18vh !important;
+          }
+          .s4-title {
+            font-size: 32px !important;
+            white-space: normal !important;
+            padding: 0 20px !important;
+          }
+
+          /* HAND SVG */
+          .hand-svg {
+            width: 96vw !important;
+            margin-top: 24vh !important;
+          }
+
+          /* CONTENT INTRO */
+          .content-intro-section {
+            padding: 100px 20px 48px !important;
+          }
+          .content-intro-heading {
+            font-size: 28px !important;
+            margin-bottom: 40px !important;
+          }
+          .category-grid {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+          .category-title {
+            font-size: 22px !important;
+          }
+          .category-img {
+            height: 200px !important;
+          }
+
+          /* WAVE — desktop versiyanı yashir, mobileni ko'rsat */
+          .wave-desktop {
+            display: none !important;
+          }
+          .wave-mobile {
+            display: block !important;
+          }
+          .mobile-wave-item {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+            padding: 16px 20px !important;
+            max-width: 58% !important;
+          }
+          .mobile-wave-left {
+            align-self: flex-start !important;
+            margin-left: 36% !important;
+          }
+          .mobile-wave-right {
+            align-self: flex-end !important;
+            margin-right: 4% !important;
+          }
+          .mobile-wave-img-wrap {
+            width: 56px !important;
+            height: 56px !important;
+            border-radius: 50% !important;
+            overflow: hidden !important;
+            background: #e8ddd4 !important;
+          }
+          .mobile-wave-text {
+            font-size: 13px !important;
+            line-height: 1.4 !important;
+            color: #003837 !important;
+            margin: 0 !important;
+            white-space: pre-line !important;
+          }
+
+          /* ABOUT */
+          .about-section {
+            padding: 60px 20px 60px !important;
+          }
+          .about-row-desktop {
+            display: none !important;
+          }
+          .about-row-mobile {
+            display: block !important;
+          }
+          .about-divider-desktop {
+            display: none !important;
+          }
+          .about-divider-mobile {
+            display: block !important;
+          }
+
+          /* TEAM (JAMOAMIZ) */
+          .team-section {
+            padding: 60px 20px 60px !important;
+          }
+          .section-header {
+            margin-bottom: 32px !important;
+          }
+          .section-header-text {
+            font-size: 16px !important;
+          }
+          .member-grid {
+            grid-template-columns: 1fr !important;
+            grid-template-rows: auto !important;
+            padding: 32px 0 !important;
+          }
+          .member-photo-col {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            justify-content: flex-start !important;
+            margin-bottom: 16px !important;
+          }
+          .member-photo-box {
+            width: 120px !important;
+            height: 120px !important;
+          }
+          .member-name {
+            grid-column: 1 !important;
+            grid-row: 2 !important;
+            font-size: 28px !important;
+          }
+          .member-role {
+            grid-column: 1 !important;
+            grid-row: 3 !important;
+            font-size: 20px !important;
+            padding-left: 0 !important;
+            margin-top: 6px !important;
+          }
+          .member-credentials {
+            grid-column: 1 !important;
+            grid-row: 4 !important;
+            font-size: 16px !important;
+            margin-top: 12px !important;
+          }
+          .member-links {
+            grid-column: 1 !important;
+            grid-row: 5 !important;
+            padding-left: 0 !important;
+            margin-top: 12px !important;
+            grid-template-columns: max-content !important;
+            gap: 8px !important;
+          }
+          .member-link {
+            font-size: 15px !important;
+          }
+
+          /* FOOTER */
+          .footer-root {
+            padding: 32px 20px !important;
+            gap: 28px !important;
+          }
+          .footer-top-row {
+            flex-direction: column !important;
+            gap: 28px !important;
+          }
+          .footer-contact,
+          .footer-sections {
+            min-width: unset !important;
+            margin-right: 0 !important;
+          }
+          .footer-logo-block {
+            max-width: 100% !important;
+          }
+          .footer-heading {
+            font-size: 22px !important;
+            margin-bottom: 12px !important;
+          }
+          .footer-text {
+            font-size: 15px !important;
+          }
+          .footer-copyright-row {
+            justify-content: flex-start !important;
+          }
+          .copyright-icon {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .copyright-text {
+            font-size: 40px !important;
+          }
         }
       `}</style>
       <div
