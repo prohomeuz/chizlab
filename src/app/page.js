@@ -584,7 +584,6 @@ export default function Home() {
           },
         })
       }
-
       const hintEl = soundHintRef.current
       if (hintEl) {
         gsap.to(hintEl, {
@@ -1200,6 +1199,7 @@ export default function Home() {
                   </span>
                 ))}
               </em>
+              <br className="s4-mobile-br" style={{ display: 'none' }} />
               {S4_PART2.split('').map((char, i) => (
                 <span
                   key={`s4p2-${i}`}
@@ -1215,7 +1215,7 @@ export default function Home() {
           </div>
 
           {/* Illustration — slides in from bottom */}
-          <div ref={endSvgRef} className="absolute bottom-0 left-0 right-0">
+          <div ref={endSvgRef} className="s4-svg-wrap absolute bottom-0 left-0 right-0">
             <svg
               viewBox="0 0 1920 835"
               fill="none"
@@ -1906,7 +1906,7 @@ export default function Home() {
         <Image src="/scroll.svg" alt="" width={32} height={76} />
       </div>
 
-      {/* Marquee banner — fixed to bottom */}
+{/* Marquee banner — fixed to bottom */}
       <style>{`
         @keyframes marquee-scroll {
           0%   { transform: translateX(0); }
@@ -1929,9 +1929,29 @@ export default function Home() {
         /* ─── MOBILE ≤ 430px ─────────────────────────────────── */
         @media (max-width: 430px) {
 
+          /* LOADER */
+          .loader-inner {
+            position: absolute !important;
+            bottom: auto !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+          }
+          .loader-img-wrap {
+            width: 220px !important;
+            height: 220px !important;
+          }
+          .loader-count {
+            font-size: 22px !important;
+          }
+
           /* NAV */
           .nav-root {
             padding: 14px 20px !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
           }
           .nav-logo {
             width: 110px !important;
@@ -1944,14 +1964,20 @@ export default function Home() {
             display: flex !important;
           }
 
+          /* SCROLL INDICATOR */
+          .scroll-indicator {
+            display: none !important;
+          }
+
           /* SCENE 1 */
           .s1-arc {
-            width: 130vw !important;
-            height: 130vw !important;
-            bottom: -65vw !important;
+            width: 110vw !important;
+            height: 110vw !important;
+            bottom: calc(50vh + 33px - 55vw) !important;
           }
           .s1-title {
-            font-size: 62px !important;
+            font-size: 46px !important;
+            margin-bottom: 48vh !important;
           }
 
           /* SCENE 3 */
@@ -1966,11 +1992,14 @@ export default function Home() {
           .s3-title {
             font-size: 38px !important;
             line-height: 1.15 !important;
+            text-align: center !important;
           }
           .s3-svg {
-            width: 80vw !important;
-            bottom: 0 !important;
-            right: -10px !important;
+            width: 100vw !important;
+            top: calc(18vh + 120px) !important;
+            bottom: auto !important;
+            right: 0 !important;
+            left: 0 !important;
             opacity: 0.55 !important;
           }
 
@@ -1983,16 +2012,24 @@ export default function Home() {
             white-space: normal !important;
             padding: 0 20px !important;
           }
+          .s4-mobile-br {
+            display: block !important;
+          }
+          .s4-svg-wrap {
+            top: calc(18vh + 20px) !important;
+            bottom: auto !important;
+            width: 100vw !important;
+          }
 
           /* HAND SVG */
           .hand-svg {
             width: 96vw !important;
-            margin-top: 24vh !important;
+            margin-top: -28vh !important;
           }
 
           /* CONTENT INTRO */
           .content-intro-section {
-            padding: 100px 20px 48px !important;
+            padding: 160px 20px 48px !important;
           }
           .content-intro-heading {
             font-size: 28px !important;
