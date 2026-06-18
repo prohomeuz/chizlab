@@ -116,6 +116,7 @@ export default function Home() {
 
   const soundHintRef = useRef(null)
   const [hintDismissed, setHintDismissed] = useState(false)
+  const [openAboutIdx, setOpenAboutIdx] = useState(0)
 
   // Mobile wave section
   const mobileWaveSectionRef = useRef(null)
@@ -233,20 +234,62 @@ export default function Home() {
     const items = mobileFeatureItemsRef.current.filter(Boolean)
     if (!section || !path) return
     const totalLen = path.getTotalLength()
-    gsap.set(path, { strokeDasharray: totalLen, strokeDashoffset: totalLen })
-    items.forEach((item) => gsap.set(item, { opacity: 0, y: 16 }))
-    let played = false
+
+    const snapReset = () => {
+      gsap.killTweensOf(path)
+      items.forEach((item) => {
+        gsap.killTweensOf(item.children[0])
+        gsap.killTweensOf(item.children[1])
+        gsap.set(item.children[0], { opacity: 0, filter: 'blur(10px)' })
+        gsap.set(item.children[1], { opacity: 0, filter: 'blur(8px)' })
+      })
+      gsap.set(path, { strokeDasharray: totalLen, strokeDashoffset: totalLen, opacity: 1 })
+    }
+
+    snapReset()
+
+    const DRAW_DURATION = 3
+    let playing = false
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !played) {
-          played = true
-          gsap.to(path, { strokeDashoffset: 0, duration: 3, ease: 'none' })
-          items.forEach((item, i) =>
-            gsap.to(item, { opacity: 1, y: 0, duration: 0.6, delay: 0.4 + i * 0.45, ease: 'power2.out' }),
-          )
+        if (entry.isIntersecting && !playing) {
+          playing = true
+          gsap.killTweensOf(path)
+          items.forEach((item) => {
+            gsap.killTweensOf(item.children[0])
+            gsap.killTweensOf(item.children[1])
+          })
+          gsap.set(path, { strokeDasharray: totalLen, strokeDashoffset: totalLen, opacity: 1 })
+          items.forEach((item) => {
+            gsap.set(item.children[0], { opacity: 0, filter: 'blur(10px)' })
+            gsap.set(item.children[1], { opacity: 0, filter: 'blur(8px)' })
+          })
+          gsap.to(path, { strokeDashoffset: 0, duration: DRAW_DURATION, ease: 'none' })
+          items.forEach((item, i) => {
+            const delay = 0.4 + i * 0.55
+            gsap.to(item.children[0], { opacity: 1, filter: 'blur(0px)', duration: 0.6, delay, ease: 'power2.out' })
+            gsap.to(item.children[1], { opacity: 1, filter: 'blur(0px)', duration: 0.65, delay: delay + 0.15, ease: 'power2.out' })
+          })
+        } else if (!entry.isIntersecting && playing) {
+          playing = false
+          gsap.killTweensOf(path)
+          items.forEach((item) => {
+            gsap.killTweensOf(item.children[0])
+            gsap.killTweensOf(item.children[1])
+            gsap.to(item.children[0], { opacity: 0, filter: 'blur(10px)', duration: 0.45, ease: 'power2.in' })
+            gsap.to(item.children[1], { opacity: 0, filter: 'blur(8px)', duration: 0.4, ease: 'power2.in' })
+          })
+          gsap.to(path, {
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.in',
+            onComplete: () =>
+              gsap.set(path, { strokeDasharray: totalLen, strokeDashoffset: totalLen, opacity: 1 }),
+          })
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0, rootMargin: '0px 0px -20% 0px' },
     )
     observer.observe(section)
     return () => observer.disconnect()
@@ -1014,6 +1057,7 @@ export default function Home() {
         <div
           ref={soundHintRef}
           aria-hidden="true"
+          className="sound-hint-pill"
           style={{
             position: 'fixed',
             top: 0,
@@ -1073,12 +1117,11 @@ export default function Home() {
         <div className="nav-mobile hidden items-center gap-2">
           <Image src="/naqsh.svg" alt="" width={18} height={18} className="opacity-60" />
           <button
-            onClick={toggleAudio}
             style={{
               fontFamily: 'var(--font-sf)',
               fontSize: '16px',
-              color: isPlaying ? '#FFFFF6' : '#003837',
-              background: isPlaying ? '#003837' : 'transparent',
+              color: '#003837',
+              background: 'transparent',
               border: 'none',
               padding: '4px 8px',
               borderRadius: '4px',
@@ -1094,9 +1137,9 @@ export default function Home() {
       <div ref={heroContainerRef} className="fixed inset-0 bg-[#fffff6]">
         {/* Scene 1 */}
         <div ref={scene1Ref} className="absolute inset-0 flex flex-col bg-[#fffff6]">
-          <div className="flex-1 flex items-center justify-center relative overflow-hidden">
+          <div className="flex-1 flex items-center justify-center relative overflow-hidden" style={{ paddingTop: '80px' }}>
             <svg
-              className="s1-arc absolute bottom-[-45vw] left-1/2 -translate-x-1/2"
+              className="s1-arc absolute bottom-[-55vw] left-1/2 -translate-x-1/2"
               style={{ width: '80vw', height: '80vw' }}
               viewBox="0 0 1000 1000"
               fill="none"
@@ -1256,7 +1299,7 @@ export default function Home() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="hand-svg"
-          style={{ width: '90vw', height: 'auto', marginTop: '18vh' }}
+          style={{ width: '90vw', height: 'auto', marginTop: '30vh' }}
         >
           <path ref={handStrokeRef} d={HAND_PATH} stroke="#B8926A" strokeWidth="2" fill="none" />
           <path ref={handFillRef} d={HAND_PATH} fill="#B8926A" opacity="0" />
@@ -1291,7 +1334,7 @@ export default function Home() {
             }}
           >
             Chizmachilik va dizayn materiallari
-            <br />
+            <br className="desktop-br" />
             bir joyda. Topilmadimi?
             <br />
             AI yordam beradi.
@@ -1548,7 +1591,7 @@ export default function Home() {
         <section
           ref={mobileWaveSectionRef}
           className="wave-mobile"
-          style={{ padding: '20px 0 40px', position: 'relative', display: 'none' }}
+          style={{ padding: '40px 0 60px', position: 'relative', display: 'none' }}
         >
           {/* Snake SVG decoration */}
           <svg
@@ -1644,25 +1687,72 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              {/* Mobile layout */}
+              {/* Mobile layout — accordion */}
               <div className="about-row-mobile" style={{ display: 'none' }}>
-                {i < 5 ? (
-                  <p style={{ fontFamily: 'var(--font-ppe)', fontSize: '46px', color: '#003837', margin: 0, fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em', padding: '24px 0' }}>
+                <button
+                  onClick={() => setOpenAboutIdx(openAboutIdx === i ? null : i)}
+                  style={{
+                    width: '100%',
+                    background: 'none',
+                    border: 'none',
+                    padding: '22px 0',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '12px',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    WebkitTapHighlightColor: 'transparent',
+                  }}
+                >
+                  <p style={{ fontFamily: 'var(--font-ppe)', fontSize: '46px', color: '#003837', margin: 0, fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em' }}>
                     {row.title}
                   </p>
-                ) : (
-                  <p style={{ fontFamily: 'var(--font-sf)', fontSize: '22px', color: '#003837', margin: 0, fontWeight: 400, lineHeight: 1.4, padding: '20px 0 28px' }}>
-                    {row.desc}
-                  </p>
-                )}
+                  <svg
+                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    style={{
+                      flexShrink: 0,
+                      transform: openAboutIdx === i ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.42s cubic-bezier(0.4, 0, 0.2, 1)',
+                    }}
+                  >
+                    <path d="M6 9L12 15L18 9" stroke="#003837" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateRows: openAboutIdx === i ? '1fr' : '0fr',
+                    transition: 'grid-template-rows 0.44s cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                >
+                  <div style={{ overflow: 'hidden' }}>
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-sf)',
+                        fontSize: '18px',
+                        color: '#003837',
+                        margin: 0,
+                        fontWeight: 400,
+                        lineHeight: 1.55,
+                        paddingBottom: '26px',
+                        opacity: openAboutIdx === i ? 1 : 0,
+                        transform: openAboutIdx === i ? 'translateY(0)' : 'translateY(8px)',
+                        transition: openAboutIdx === i
+                          ? 'opacity 0.36s ease 0.09s, transform 0.36s ease 0.09s'
+                          : 'opacity 0.16s ease, transform 0.16s ease',
+                      }}
+                    >
+                      {row.desc}
+                    </p>
+                  </div>
+                </div>
               </div>
-              {/* Divider: desktop after all except last; mobile after rows 0-4 (includes row 4=Missiyamiz) */}
+              {/* Divider: desktop after all except last; mobile after all rows */}
               {i < arr.length - 1 && (
                 <div className="about-divider-desktop" style={{ height: '1px', background: '#B8926A', width: '100%' }} />
               )}
-              {i < 5 && (
-                <div className="about-divider-mobile" style={{ display: 'none', height: '1px', background: '#B8926A', width: '100%' }} />
-              )}
+              <div className="about-divider-mobile" style={{ display: 'none', height: '1px', background: '#B8926A', width: '100%' }} />
             </div>
           ))}
         </section>
@@ -1929,6 +2019,11 @@ export default function Home() {
         /* ─── MOBILE ≤ 430px ─────────────────────────────────── */
         @media (max-width: 430px) {
 
+          /* CURSOR & SOUND HINT */
+          .sound-hint-pill {
+            display: none !important;
+          }
+
           /* LOADER */
           .loader-inner {
             position: absolute !important;
@@ -1948,14 +2043,13 @@ export default function Home() {
           /* NAV */
           .nav-root {
             padding: 14px 20px !important;
-            flex-direction: column !important;
+            flex-direction: row !important;
             align-items: center !important;
-            justify-content: center !important;
-            gap: 6px !important;
+            justify-content: space-between !important;
           }
           .nav-logo {
-            width: 110px !important;
-            height: auto !important;
+            width: 163px !important;
+            height: 37.52px !important;
           }
           .nav-desktop {
             display: none !important;
@@ -1973,7 +2067,7 @@ export default function Home() {
           .s1-arc {
             width: 110vw !important;
             height: 110vw !important;
-            bottom: calc(50vh + 33px - 55vw) !important;
+            bottom: calc(35vh + 33px - 55vw) !important;
           }
           .s1-title {
             font-size: 46px !important;
@@ -1990,7 +2084,7 @@ export default function Home() {
             margin-bottom: 0 !important;
           }
           .s3-title {
-            font-size: 38px !important;
+            font-size: 46px !important;
             line-height: 1.15 !important;
             text-align: center !important;
           }
@@ -2008,7 +2102,7 @@ export default function Home() {
             padding-top: 18vh !important;
           }
           .s4-title {
-            font-size: 32px !important;
+            font-size: 46px !important;
             white-space: normal !important;
             padding: 0 20px !important;
           }
@@ -2016,7 +2110,7 @@ export default function Home() {
             display: block !important;
           }
           .s4-svg-wrap {
-            top: calc(18vh + 20px) !important;
+            top: calc(25vh + 20px) !important;
             bottom: auto !important;
             width: 100vw !important;
           }
@@ -2029,18 +2123,23 @@ export default function Home() {
 
           /* CONTENT INTRO */
           .content-intro-section {
-            padding: 160px 20px 48px !important;
+            padding: 120px 20px 48px !important;
           }
           .content-intro-heading {
-            font-size: 28px !important;
+            font-size: 36px !important;
             margin-bottom: 40px !important;
+            text-align: center !important;
+          }
+          .desktop-br {
+            display: none !important;
           }
           .category-grid {
             grid-template-columns: 1fr !important;
             gap: 24px !important;
           }
           .category-title {
-            font-size: 22px !important;
+            font-size: 36px !important;
+            margin-bottom: 16px !important;
           }
           .category-img {
             height: 200px !important;
@@ -2055,30 +2154,38 @@ export default function Home() {
           }
           .mobile-wave-item {
             display: flex !important;
-            flex-direction: column !important;
-            gap: 10px !important;
-            padding: 16px 20px !important;
-            max-width: 58% !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            gap: 16px !important;
+            padding: 0 16px 0 0 !important;
+            max-width: 92% !important;
+            margin-bottom: 56px !important;
           }
           .mobile-wave-left {
             align-self: flex-start !important;
-            margin-left: 36% !important;
           }
           .mobile-wave-right {
-            align-self: flex-end !important;
-            margin-right: 4% !important;
+            align-self: flex-start !important;
+            margin-right: 0 !important;
           }
+          .wave-mobile .mobile-wave-item:nth-child(2) { margin-left: 54px !important; }
+          .wave-mobile .mobile-wave-item:nth-child(3) { margin-left: 133px !important; }
+          .wave-mobile .mobile-wave-item:nth-child(4) { margin-left: 37px !important; }
+          .wave-mobile .mobile-wave-item:nth-child(5) { margin-left: 90px !important; }
           .mobile-wave-img-wrap {
-            width: 56px !important;
-            height: 56px !important;
-            border-radius: 50% !important;
+            width: 85px !important;
+            height: 85px !important;
+            flex-shrink: 0 !important;
             overflow: hidden !important;
-            background: #e8ddd4 !important;
+            clip-path: polygon(22% 0%, 78% 3%, 100% 20%, 97% 78%, 80% 100%, 18% 97%, 0% 80%, 3% 22%) !important;
+            border-radius: 0 !important;
           }
           .mobile-wave-text {
-            font-size: 13px !important;
-            line-height: 1.4 !important;
+            font-size: 18px !important;
+            line-height: normal !important;
+            letter-spacing: -0.4px !important;
             color: #003837 !important;
+            font-family: var(--font-sf) !important;
             margin: 0 !important;
             white-space: pre-line !important;
           }

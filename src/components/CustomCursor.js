@@ -15,7 +15,7 @@ export default function CustomCursor() {
     const hov = hoverRef.current
     if (!wrap || !def || !act || !hov) return
 
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 430) {
       wrap.style.display = 'none'
       hov.style.display = 'none'
       return
