@@ -268,8 +268,20 @@ export default function Home() {
           gsap.to(path, { strokeDashoffset: 0, duration: DRAW_DURATION, ease: 'none' })
           items.forEach((item, i) => {
             const delay = 0.4 + i * 0.55
-            gsap.to(item.children[0], { opacity: 1, filter: 'blur(0px)', duration: 0.6, delay, ease: 'power2.out' })
-            gsap.to(item.children[1], { opacity: 1, filter: 'blur(0px)', duration: 0.65, delay: delay + 0.15, ease: 'power2.out' })
+            gsap.to(item.children[0], {
+              opacity: 1,
+              filter: 'blur(0px)',
+              duration: 0.6,
+              delay,
+              ease: 'power2.out',
+            })
+            gsap.to(item.children[1], {
+              opacity: 1,
+              filter: 'blur(0px)',
+              duration: 0.65,
+              delay: delay + 0.15,
+              ease: 'power2.out',
+            })
           })
         } else if (!entry.isIntersecting && playing) {
           playing = false
@@ -277,8 +289,18 @@ export default function Home() {
           items.forEach((item) => {
             gsap.killTweensOf(item.children[0])
             gsap.killTweensOf(item.children[1])
-            gsap.to(item.children[0], { opacity: 0, filter: 'blur(10px)', duration: 0.45, ease: 'power2.in' })
-            gsap.to(item.children[1], { opacity: 0, filter: 'blur(8px)', duration: 0.4, ease: 'power2.in' })
+            gsap.to(item.children[0], {
+              opacity: 0,
+              filter: 'blur(10px)',
+              duration: 0.45,
+              ease: 'power2.in',
+            })
+            gsap.to(item.children[1], {
+              opacity: 0,
+              filter: 'blur(8px)',
+              duration: 0.4,
+              ease: 'power2.in',
+            })
           })
           gsap.to(path, {
             opacity: 0,
@@ -1011,8 +1033,14 @@ export default function Home() {
             background: '#003837',
           }}
         >
-          <div className="loader-inner" style={{ position: 'absolute', bottom: '48px', left: '48px' }}>
-            <div className="loader-img-wrap" style={{ position: 'relative', width: 600, height: 600 }}>
+          <div
+            className="loader-inner"
+            style={{ position: 'absolute', bottom: '48px', left: '48px' }}
+          >
+            <div
+              className="loader-img-wrap"
+              style={{ position: 'relative', width: 600, height: 600 }}
+            >
               <img
                 ref={loaderImgRef}
                 src="/loader.png"
@@ -1088,12 +1116,25 @@ export default function Home() {
         className="nav-root fixed left-0 right-0 flex items-center justify-between p-10"
         style={{ top: '42px', zIndex: 100, background: '#fffff6' }}
       >
-        <Image className="nav-logo" src="/logo.svg" alt="Chizlab" width={210} height={48} priority />
+        <Image
+          className="nav-logo"
+          src="/logo.svg"
+          alt="Chizlab"
+          width={210}
+          height={48}
+          priority
+        />
         {/* Desktop nav items */}
         <div className="nav-desktop flex items-center">
           {navItems.map((item) => (
             <div key={item} className="flex items-center">
-              <Image src="/naqsh.svg" alt="" width={22} height={22} className="opacity-60 mx-3.75" />
+              <Image
+                src="/naqsh.svg"
+                alt=""
+                width={22}
+                height={22}
+                className="opacity-60 mx-3.75"
+              />
               {item === 'Ovoz' ? (
                 <button
                   onClick={toggleAudio}
@@ -1105,7 +1146,10 @@ export default function Home() {
                   {item}
                 </button>
               ) : (
-                <a href="#" className="text-[20px] text-[#003837] hover:opacity-70 transition-opacity">
+                <a
+                  href="#"
+                  className="text-[20px] text-[#003837] hover:opacity-70 transition-opacity"
+                >
                   {item}
                 </a>
               )}
@@ -1137,7 +1181,10 @@ export default function Home() {
       <div ref={heroContainerRef} className="fixed inset-0 bg-[#fffff6]">
         {/* Scene 1 */}
         <div ref={scene1Ref} className="absolute inset-0 flex flex-col bg-[#fffff6]">
-          <div className="flex-1 flex items-center justify-center relative overflow-hidden" style={{ paddingTop: '80px' }}>
+          <div
+            className="flex-1 flex items-center justify-center relative overflow-hidden"
+            style={{ paddingTop: '80px' }}
+          >
             <svg
               className="s1-arc absolute bottom-[-55vw] left-1/2 -translate-x-1/2"
               style={{ width: '80vw', height: '80vw' }}
@@ -1155,12 +1202,26 @@ export default function Home() {
             <h1 className="s1-title relative z-10 text-center leading-none select-none text-[#003837] text-[170px]">
               <em style={{ fontFamily: 'var(--font-ppe)' }} className="italic">
                 {MAIN_WORD.split('').map((char, i) => (
-                  <span key={i} ref={(el) => { charsRef.current[i] = el }}>{char}</span>
+                  <span
+                    key={i}
+                    ref={(el) => {
+                      charsRef.current[i] = el
+                    }}
+                  >
+                    {char}
+                  </span>
                 ))}
               </em>
               <span style={{ fontFamily: 'var(--font-sf)' }} className="not-italic font-normal">
                 {SUFFIX.split('').map((char, i) => (
-                  <span key={i} ref={(el) => { charsRef.current[MAIN_WORD.length + i] = el }}>{char}</span>
+                  <span
+                    key={i}
+                    ref={(el) => {
+                      charsRef.current[MAIN_WORD.length + i] = el
+                    }}
+                  >
+                    {char}
+                  </span>
                 ))}
               </span>
             </h1>
@@ -1182,11 +1243,25 @@ export default function Home() {
               style={{ fontFamily: 'var(--font-sf)', fontSize: '130px' }}
             >
               {S3_LINE1.split('').map((char, i) => (
-                <span key={`l1-${i}`} ref={(el) => { s3CharsRef.current[i] = el }}>{char}</span>
+                <span
+                  key={`l1-${i}`}
+                  ref={(el) => {
+                    s3CharsRef.current[i] = el
+                  }}
+                >
+                  {char}
+                </span>
               ))}
               <br />
               {S3_LINE2.split('').map((char, i) => (
-                <span key={`l2-${i}`} ref={(el) => { s3CharsRef.current[S3_LINE1.length + i] = el }}>{char}</span>
+                <span
+                  key={`l2-${i}`}
+                  ref={(el) => {
+                    s3CharsRef.current[S3_LINE1.length + i] = el
+                  }}
+                >
+                  {char}
+                </span>
               ))}
             </h2>
           </div>
@@ -1199,7 +1274,13 @@ export default function Home() {
             className="s3-svg"
             style={{ position: 'absolute', bottom: 0, right: 0, width: '62vw', height: 'auto' }}
           >
-            <path ref={laptopStrokeRef} d={LAPTOP_PATH} stroke="#B8926A" strokeWidth="1.5" fill="none" />
+            <path
+              ref={laptopStrokeRef}
+              d={LAPTOP_PATH}
+              stroke="#B8926A"
+              strokeWidth="1.5"
+              fill="none"
+            />
             <path ref={laptopFillRef} d={LAPTOP_PATH} fill="#B8926A" opacity="0" />
           </svg>
         </div>
@@ -1339,7 +1420,10 @@ export default function Home() {
             <br />
             AI yordam beradi.
           </h2>
-          <div className="category-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
+          <div
+            className="category-grid"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}
+          >
             {[
               { title: 'Chizmachilik', img: '/chizmachilik.jpg' },
               { title: 'Dizayn', img: '/dizayn.jpg' },
@@ -1491,7 +1575,7 @@ export default function Home() {
                   whiteSpace: 'pre',
                 }}
               >
-                {`Oson va mustaqil\no'rganish`}
+                {`Oson va mustaqil\no‘rganish`}
               </p>
             </div>
 
@@ -1536,7 +1620,7 @@ export default function Home() {
                   whiteSpace: 'pre',
                 }}
               >
-                {`AI bilan g'oyani\nchizmaga aylantirish`}
+                {`AI bilan g‘oyani\nchizmaga aylantirish`}
               </p>
             </div>
 
@@ -1581,7 +1665,7 @@ export default function Home() {
                   whiteSpace: 'pre',
                 }}
               >
-                {`Ijodkorlar bilan\no'sish va ulashish`}
+                {`Ijodkorlar bilan\no‘sish va ulashish`}
               </p>
             </div>
           </div>
@@ -1599,39 +1683,74 @@ export default function Home() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="none"
-            style={{ position: 'absolute', left: '-10px', top: 0, width: '52%', height: '100%', pointerEvents: 'none' }}
+            style={{
+              position: 'absolute',
+              left: '-10px',
+              top: 0,
+              width: '52%',
+              height: '100%',
+              pointerEvents: 'none',
+            }}
           >
             <path ref={mobileWavePathRef} d={VECTOR6_PATH} stroke="#B8926A" strokeWidth="2" />
           </svg>
 
           {/* Item 1 — left */}
-          <div ref={(el) => (mobileFeatureItemsRef.current[0] = el)} className="mobile-wave-item mobile-wave-left">
+          <div
+            ref={(el) => (mobileFeatureItemsRef.current[0] = el)}
+            className="mobile-wave-item mobile-wave-left"
+          >
             <div className="mobile-wave-img-wrap">
-              <img src="/clock.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img
+                src="/clock.png"
+                alt=""
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
             </div>
             <p className="mobile-wave-text">1 daqiqada kerakli manbalarni topish imkoniyati</p>
           </div>
 
           {/* Item 2 — right */}
-          <div ref={(el) => (mobileFeatureItemsRef.current[1] = el)} className="mobile-wave-item mobile-wave-right">
+          <div
+            ref={(el) => (mobileFeatureItemsRef.current[1] = el)}
+            className="mobile-wave-item mobile-wave-right"
+          >
             <div className="mobile-wave-img-wrap">
-              <img src="/hand.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img
+                src="/hand.png"
+                alt=""
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
             </div>
             <p className="mobile-wave-text">{`Oson va mustaqil\no'rganish`}</p>
           </div>
 
           {/* Item 3 — left */}
-          <div ref={(el) => (mobileFeatureItemsRef.current[2] = el)} className="mobile-wave-item mobile-wave-left">
+          <div
+            ref={(el) => (mobileFeatureItemsRef.current[2] = el)}
+            className="mobile-wave-item mobile-wave-left"
+          >
             <div className="mobile-wave-img-wrap">
-              <img src="/with-ai.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img
+                src="/with-ai.png"
+                alt=""
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
             </div>
             <p className="mobile-wave-text">{`AI bilan g'oyani\nchizmaga aylantirish`}</p>
           </div>
 
           {/* Item 4 — right */}
-          <div ref={(el) => (mobileFeatureItemsRef.current[3] = el)} className="mobile-wave-item mobile-wave-right">
+          <div
+            ref={(el) => (mobileFeatureItemsRef.current[3] = el)}
+            className="mobile-wave-item mobile-wave-right"
+          >
             <div className="mobile-wave-img-wrap">
-              <img src="/ijodkor.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img
+                src="/ijodkor.png"
+                alt=""
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
             </div>
             <p className="mobile-wave-text">{`Ijodkorlar bilan\no'sish va ulashish`}</p>
           </div>
@@ -1650,7 +1769,15 @@ export default function Home() {
             }}
           >
             <img src="/naqsh-about.svg" alt="" style={{ width: '26.6px', height: '26.6px' }} />
-            <p style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#003837', margin: 0, fontWeight: 400 }}>
+            <p
+              style={{
+                fontFamily: 'var(--font-sf)',
+                fontSize: '24px',
+                color: '#003837',
+                margin: 0,
+                fontWeight: 400,
+              }}
+            >
               Biz haqimizda
             </p>
             <img src="/naqsh-about.svg" alt="" style={{ width: '26.6px', height: '26.6px' }} />
@@ -1658,13 +1785,28 @@ export default function Home() {
 
           {/* Rows */}
           {[
-            { title: 'Biz kimmiz?', desc: 'ChizLab — chizmachilik va dizayn materiallari makoni. Bilim va kreativlik bir joyda.' },
-            { title: 'Hikoyamiz', desc: "Oddiy g'oyadan boshlangan loyiha. Bugun esa ijodkorlar uchun platforma." },
-            { title: 'Nega Chizlab?', desc: "Murakkab texnik bilimlarni oson va kreativ usulda o'rganing." },
-            { title: 'Jamoamiz', desc: 'Sifat va innovatsiyaga intiluvchi professional mutaxassislar birlashmasi.' },
-            { title: 'Missiyamiz', desc: "O'zbekiston ijodkorlik madaniyatini yuksaltirish va yangi imkoniyatlar yaratish." },
             {
-              title: "Ta'riflar",
+              title: 'Biz kimmiz?',
+              desc: 'ChizLab — chizmachilik va dizayn materiallari makoni. Bilim va kreativlik bir joyda.',
+            },
+            {
+              title: 'Hikoyamiz',
+              desc: 'Oddiy g‘oyadan boshlangan loyiha. Bugun esa ijodkorlar uchun platforma.',
+            },
+            {
+              title: 'Nega Chizlab?',
+              desc: 'Murakkab texnik bilimlarni oson va kreativ usulda o‘rganing.',
+            },
+            {
+              title: 'Jamoamiz',
+              desc: 'Sifat va innovatsiyaga intiluvchi professional mutaxassislar birlashmasi.',
+            },
+            {
+              title: 'Missiyamiz',
+              desc: 'Oʻzbekiston ijodkorlik madaniyatini yuksaltirish va yangi imkoniyatlar yaratish.',
+            },
+            {
+              title: 'Ta’riflar',
               desc: (
                 <>
                   Bepul bazadan foydalaning yoki <strong style={{ fontWeight: 700 }}>Pro</strong>{' '}
@@ -1675,14 +1817,36 @@ export default function Home() {
           ].map((row, i, arr) => (
             <div key={row.title}>
               {/* Desktop layout */}
-              <div className="about-row-desktop" style={{ display: 'flex', padding: '60px 0', alignItems: 'flex-start' }}>
+              <div
+                className="about-row-desktop"
+                style={{ display: 'flex', padding: '60px 0', alignItems: 'flex-start' }}
+              >
                 <div style={{ flex: '0 0 50%', paddingRight: '32px' }}>
-                  <p style={{ fontFamily: 'var(--font-ppe)', fontSize: '70px', color: '#003837', margin: 0, fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em' }}>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-ppe)',
+                      fontSize: '70px',
+                      color: '#003837',
+                      margin: 0,
+                      fontWeight: 400,
+                      lineHeight: 1.1,
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
                     {row.title}
                   </p>
                 </div>
                 <div style={{ flex: '0 0 50%', paddingLeft: '32px' }}>
-                  <p style={{ fontFamily: 'var(--font-sf)', fontSize: '44px', color: '#003837', margin: 0, fontWeight: 400, lineHeight: 1.3 }}>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-sf)',
+                      fontSize: '44px',
+                      color: '#003837',
+                      margin: 0,
+                      fontWeight: 400,
+                      lineHeight: 1.3,
+                    }}
+                  >
                     {row.desc}
                   </p>
                 </div>
@@ -1705,18 +1869,37 @@ export default function Home() {
                     WebkitTapHighlightColor: 'transparent',
                   }}
                 >
-                  <p style={{ fontFamily: 'var(--font-ppe)', fontSize: '46px', color: '#003837', margin: 0, fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em' }}>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-ppe)',
+                      fontSize: '46px',
+                      color: '#003837',
+                      margin: 0,
+                      fontWeight: 400,
+                      lineHeight: 1.1,
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
                     {row.title}
                   </p>
                   <svg
-                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
                     style={{
                       flexShrink: 0,
                       transform: openAboutIdx === i ? 'rotate(180deg)' : 'rotate(0deg)',
                       transition: 'transform 0.42s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
                   >
-                    <path d="M6 9L12 15L18 9" stroke="#003837" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="#003837"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
                 <div
@@ -1738,9 +1921,10 @@ export default function Home() {
                         paddingBottom: '26px',
                         opacity: openAboutIdx === i ? 1 : 0,
                         transform: openAboutIdx === i ? 'translateY(0)' : 'translateY(8px)',
-                        transition: openAboutIdx === i
-                          ? 'opacity 0.36s ease 0.09s, transform 0.36s ease 0.09s'
-                          : 'opacity 0.16s ease, transform 0.16s ease',
+                        transition:
+                          openAboutIdx === i
+                            ? 'opacity 0.36s ease 0.09s, transform 0.36s ease 0.09s'
+                            : 'opacity 0.16s ease, transform 0.16s ease',
                       }}
                     >
                       {row.desc}
@@ -1750,9 +1934,15 @@ export default function Home() {
               </div>
               {/* Divider: desktop after all except last; mobile after all rows */}
               {i < arr.length - 1 && (
-                <div className="about-divider-desktop" style={{ height: '1px', background: '#B8926A', width: '100%' }} />
+                <div
+                  className="about-divider-desktop"
+                  style={{ height: '1px', background: '#B8926A', width: '100%' }}
+                />
               )}
-              <div className="about-divider-mobile" style={{ display: 'none', height: '1px', background: '#B8926A', width: '100%' }} />
+              <div
+                className="about-divider-mobile"
+                style={{ display: 'none', height: '1px', background: '#B8926A', width: '100%' }}
+              />
             </div>
           ))}
         </section>
@@ -1762,12 +1952,24 @@ export default function Home() {
           {/* Header */}
           <div
             className="section-header"
-            style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '64px', justifyContent: 'center' }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              marginBottom: '64px',
+              justifyContent: 'center',
+            }}
           >
             <img src="/naqsh-team.svg" alt="" style={{ width: '26.6px', height: '26.6px' }} />
             <p
               className="section-header-text"
-              style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#003837', margin: 0, fontWeight: 400 }}
+              style={{
+                fontFamily: 'var(--font-sf)',
+                fontSize: '24px',
+                color: '#003837',
+                margin: 0,
+                fontWeight: 400,
+              }}
             >
               Jamoamiz
             </p>
@@ -1777,8 +1979,8 @@ export default function Home() {
           {/* Team member rows */}
           {[
             {
-              name: "Mo'tabarxon\nTurdaliyeva",
-              role: "G'oya muallifi &\ndizayner",
+              name: 'Moʻtabarxon\nTurdaliyeva',
+              role: 'Gʻoya muallifi &\ndizayner',
               credentials: 'Magistr, MRDI\nVeb&Grafik dizayner',
               links: [
                 { label: 'Telegram', href: 'https://t.me/turdaliyeva_mm' },
@@ -1789,7 +1991,7 @@ export default function Home() {
               dark: false,
             },
             {
-              name: "Mirzo Ulug'bek\nXudoyberdiyev",
+              name: 'Mirzo Ulugʻbek\nXudoyberdiyev',
               role: 'Bosh\ndasturchi',
               credentials: 'Frontend arxitektor',
               links: [
@@ -1829,9 +2031,15 @@ export default function Home() {
                 <p
                   className="member-name"
                   style={{
-                    gridColumn: '1', gridRow: '1',
-                    fontFamily: 'var(--font-ppe)', fontSize: '60px', color: '#003837',
-                    margin: 0, fontWeight: 400, lineHeight: 1.1, whiteSpace: 'pre-line',
+                    gridColumn: '1',
+                    gridRow: '1',
+                    fontFamily: 'var(--font-ppe)',
+                    fontSize: '60px',
+                    color: '#003837',
+                    margin: 0,
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    whiteSpace: 'pre-line',
                   }}
                 >
                   {member.name}
@@ -1840,9 +2048,16 @@ export default function Home() {
                 <p
                   className="member-role"
                   style={{
-                    gridColumn: '2', gridRow: '1',
-                    fontFamily: 'var(--font-ppe)', fontSize: '60px', color: '#003837',
-                    margin: 0, fontWeight: 400, lineHeight: 1.1, whiteSpace: 'pre-line', paddingLeft: '32px',
+                    gridColumn: '2',
+                    gridRow: '1',
+                    fontFamily: 'var(--font-ppe)',
+                    fontSize: '60px',
+                    color: '#003837',
+                    margin: 0,
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    whiteSpace: 'pre-line',
+                    paddingLeft: '32px',
                   }}
                 >
                   {member.role}
@@ -1850,22 +2065,48 @@ export default function Home() {
                 {/* Rasm */}
                 <div
                   className="member-photo-col"
-                  style={{ gridColumn: '3', gridRow: '1 / 3', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start' }}
+                  style={{
+                    gridColumn: '3',
+                    gridRow: '1 / 3',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    alignItems: 'flex-start',
+                  }}
                 >
                   <div
                     className="member-photo-box"
-                    style={{ width: '301px', height: '301px', background: member.dark ? '#131313' : 'transparent', overflow: 'hidden' }}
+                    style={{
+                      width: '301px',
+                      height: '301px',
+                      background: member.dark ? '#131313' : 'transparent',
+                      overflow: 'hidden',
+                    }}
                   >
-                    <img src={member.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                    <img
+                      src={member.photo}
+                      alt=""
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        display: 'block',
+                      }}
+                    />
                   </div>
                 </div>
                 {/* Credentials */}
                 <p
                   className="member-credentials"
                   style={{
-                    gridColumn: '1', gridRow: '2',
-                    fontFamily: 'var(--font-sf)', fontSize: '39px', color: '#b8926a',
-                    margin: '32px 0 0', fontWeight: 400, lineHeight: 1.1, whiteSpace: 'pre-line',
+                    gridColumn: '1',
+                    gridRow: '2',
+                    fontFamily: 'var(--font-sf)',
+                    fontSize: '39px',
+                    color: '#b8926a',
+                    margin: '32px 0 0',
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    whiteSpace: 'pre-line',
                   }}
                 >
                   {member.credentials}
@@ -1874,9 +2115,13 @@ export default function Home() {
                 <div
                   className="member-links"
                   style={{
-                    gridColumn: '2', gridRow: '2',
-                    display: 'grid', gridTemplateColumns: 'max-content max-content',
-                    gap: '16px 16px', margin: '32px 0 0', paddingLeft: '32px',
+                    gridColumn: '2',
+                    gridRow: '2',
+                    display: 'grid',
+                    gridTemplateColumns: 'max-content max-content',
+                    gap: '16px 16px',
+                    margin: '32px 0 0',
+                    paddingLeft: '32px',
                   }}
                 >
                   {member.links.map((link) => (
@@ -1886,7 +2131,14 @@ export default function Home() {
                       target={link.href.startsWith('mailto:') ? undefined : '_blank'}
                       rel="noopener noreferrer"
                       className="member-link"
-                      style={{ fontFamily: 'var(--font-sf)', fontSize: '25px', color: '#b8926a', fontWeight: 275, lineHeight: 1.1, textDecoration: 'none' }}
+                      style={{
+                        fontFamily: 'var(--font-sf)',
+                        fontSize: '25px',
+                        color: '#b8926a',
+                        fontWeight: 275,
+                        lineHeight: 1.1,
+                        textDecoration: 'none',
+                      }}
                     >
                       {'{' + link.label + '}'}
                     </a>
@@ -1912,35 +2164,78 @@ export default function Home() {
           }}
         >
           {/* Yuqori qator: Bog'lanish, Bo'limlar, Logo */}
-          <div className="footer-top-row" style={{ display: 'flex', alignItems: 'flex-start', gap: '0' }}>
+          <div
+            className="footer-top-row"
+            style={{ display: 'flex', alignItems: 'flex-start', gap: '0' }}
+          >
             {/* Bog'lanish */}
-            <div className="footer-contact" style={{ flex: '0 0 auto', minWidth: '200px', marginRight: '48px' }}>
+            <div
+              className="footer-contact"
+              style={{ flex: '0 0 auto', minWidth: '200px', marginRight: '48px' }}
+            >
               <div
                 className="footer-heading"
-                style={{ fontFamily: 'var(--font-ppe)', fontSize: '36px', color: '#FFFFF6', marginBottom: '20px', lineHeight: '1.2' }}
+                style={{
+                  fontFamily: 'var(--font-ppe)',
+                  fontSize: '36px',
+                  color: '#FFFFF6',
+                  marginBottom: '20px',
+                  lineHeight: '1.2',
+                }}
               >
-                Bog'lanish
+                Bogʻlanish
               </div>
-              <div className="footer-text" style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6', marginBottom: '8px' }}>
+              <div
+                className="footer-text"
+                style={{
+                  fontFamily: 'var(--font-sf)',
+                  fontSize: '24px',
+                  color: '#FFFFF6',
+                  marginBottom: '8px',
+                }}
+              >
                 Telefon
               </div>
-              <div className="footer-text" style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6' }}>
+              <div
+                className="footer-text"
+                style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6' }}
+              >
                 Email
               </div>
             </div>
 
             {/* Bo'limlar */}
-            <div className="footer-sections" style={{ flex: '0 0 auto', minWidth: '220px', marginRight: '64px' }}>
+            <div
+              className="footer-sections"
+              style={{ flex: '0 0 auto', minWidth: '220px', marginRight: '64px' }}
+            >
               <div
                 className="footer-heading"
-                style={{ fontFamily: 'var(--font-ppe)', fontSize: '36px', color: '#FFFFF6', marginBottom: '20px', lineHeight: '1.2' }}
+                style={{
+                  fontFamily: 'var(--font-ppe)',
+                  fontSize: '36px',
+                  color: '#FFFFF6',
+                  marginBottom: '20px',
+                  lineHeight: '1.2',
+                }}
               >
-                Bo'limlar
+                Boʻlimlar
               </div>
-              <div className="footer-text" style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6', marginBottom: '8px' }}>
+              <div
+                className="footer-text"
+                style={{
+                  fontFamily: 'var(--font-sf)',
+                  fontSize: '24px',
+                  color: '#FFFFF6',
+                  marginBottom: '8px',
+                }}
+              >
                 Chizmachilik
               </div>
-              <div className="footer-text" style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6' }}>
+              <div
+                className="footer-text"
+                style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6' }}
+              >
                 Dizayn
               </div>
             </div>
@@ -1952,22 +2247,41 @@ export default function Home() {
               </div>
               <div
                 className="footer-text"
-                style={{ fontFamily: 'var(--font-sf)', fontSize: '24px', color: '#FFFFF6', lineHeight: '1.4' }}
+                style={{
+                  fontFamily: 'var(--font-sf)',
+                  fontSize: '24px',
+                  color: '#FFFFF6',
+                  lineHeight: '1.4',
+                }}
               >
                 Chizmachilik va dizayn sohasidagi
                 <br />
-                O'zbekistondagi ilk sayt
+                Oʻzbekistondagi ilk sayt
               </div>
             </div>
           </div>
 
           {/* Pastki qator: copyright o'ng tomonda */}
-          <div className="footer-copyright-row" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <div
+            className="footer-copyright-row"
+            style={{ display: 'flex', justifyContent: 'flex-end' }}
+          >
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
-              <Image className="copyright-icon" src="/copyright.svg" alt="©" width={65} height={65} />
+              <Image
+                className="copyright-icon"
+                src="/copyright.svg"
+                alt="©"
+                width={65}
+                height={65}
+              />
               <span
                 className="copyright-text"
-                style={{ fontFamily: 'var(--font-ppe)', fontSize: '106px', color: '#FFFFF6', whiteSpace: 'nowrap' }}
+                style={{
+                  fontFamily: 'var(--font-ppe)',
+                  fontSize: '106px',
+                  color: '#FFFFF6',
+                  whiteSpace: 'nowrap',
+                }}
               >
                 2025 Chizlab
               </span>
@@ -1996,7 +2310,7 @@ export default function Home() {
         <Image src="/scroll.svg" alt="" width={32} height={76} />
       </div>
 
-{/* Marquee banner — fixed to bottom */}
+      {/* Marquee banner — fixed to bottom */}
       <style>{`
         @keyframes marquee-scroll {
           0%   { transform: translateX(0); }
@@ -2067,11 +2381,11 @@ export default function Home() {
           .s1-arc {
             width: 110vw !important;
             height: 110vw !important;
-            bottom: calc(35vh + 33px - 55vw) !important;
+            bottom: calc(29vh + 33px - 55vw) !important;
           }
           .s1-title {
             font-size: 46px !important;
-            margin-bottom: 48vh !important;
+            margin-bottom: 38vh !important;
           }
 
           /* SCENE 3 */
@@ -2080,7 +2394,7 @@ export default function Home() {
             padding-left: 24px !important;
             padding-right: 24px !important;
             justify-content: flex-start !important;
-            padding-top: 18vh !important;
+            padding-top: 24vh !important;
             margin-bottom: 0 !important;
           }
           .s3-title {
@@ -2090,7 +2404,7 @@ export default function Home() {
           }
           .s3-svg {
             width: 100vw !important;
-            top: calc(18vh + 120px) !important;
+            top: calc(24vh + 120px) !important;
             bottom: auto !important;
             right: 0 !important;
             left: 0 !important;
@@ -2099,7 +2413,7 @@ export default function Home() {
 
           /* SCENE 4 */
           .s4-title-wrap {
-            padding-top: 18vh !important;
+            padding-top: 24vh !important;
           }
           .s4-title {
             font-size: 46px !important;
@@ -2110,7 +2424,7 @@ export default function Home() {
             display: block !important;
           }
           .s4-svg-wrap {
-            top: calc(25vh + 20px) !important;
+            top: calc(31vh + 20px) !important;
             bottom: auto !important;
             width: 100vw !important;
           }
@@ -2118,12 +2432,12 @@ export default function Home() {
           /* HAND SVG */
           .hand-svg {
             width: 96vw !important;
-            margin-top: -28vh !important;
+            margin-top: -18vh !important;
           }
 
           /* CONTENT INTRO */
           .content-intro-section {
-            padding: 120px 20px 48px !important;
+            padding: 160px 20px 48px !important;
           }
           .content-intro-heading {
             font-size: 36px !important;
@@ -2268,33 +2582,36 @@ export default function Home() {
             gap: 28px !important;
           }
           .footer-top-row {
-            flex-direction: column !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
             gap: 28px !important;
           }
           .footer-contact,
           .footer-sections {
             min-width: unset !important;
             margin-right: 0 !important;
+            flex: 1 1 auto !important;
           }
           .footer-logo-block {
             max-width: 100% !important;
+            margin-top: 32px !important;
           }
           .footer-heading {
-            font-size: 22px !important;
+            font-size: 36px !important;
             margin-bottom: 12px !important;
           }
           .footer-text {
-            font-size: 15px !important;
+            font-size: 24px !important;
           }
           .footer-copyright-row {
-            justify-content: flex-start !important;
+            justify-content: center !important;
           }
           .copyright-icon {
-            width: 28px !important;
-            height: 28px !important;
+            width: 36px !important;
+            height: 36px !important;
           }
           .copyright-text {
-            font-size: 40px !important;
+            font-size: 48px !important;
           }
         }
       `}</style>
