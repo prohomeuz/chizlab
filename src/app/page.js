@@ -2215,44 +2215,44 @@ export default function Home() {
             margin-bottom: 32px !important;
           }
           .section-header-text {
-            font-size: 16px !important;
+            font-size: 24px !important;
           }
           .member-grid {
-            grid-template-columns: 1fr !important;
-            grid-template-rows: auto !important;
+            grid-template-columns: 1fr 120px !important;
+            grid-template-rows: auto auto auto !important;
             padding: 32px 0 !important;
+            gap: 0 16px !important;
+          }
+          .member-name {
+            grid-column: 1 / 3 !important;
+            grid-row: 1 !important;
+            font-size: 40px !important;
+            margin-bottom: 25px !important;
+          }
+          .member-role {
+            grid-column: 1 !important;
+            grid-row: 2 !important;
+            font-size: 28px !important;
+            padding-left: 0 !important;
+            margin-top: 6px !important;
           }
           .member-photo-col {
-            grid-column: 1 !important;
-            grid-row: 1 !important;
-            justify-content: flex-start !important;
-            margin-bottom: 16px !important;
+            grid-column: 2 !important;
+            grid-row: 2 / 4 !important;
+            justify-content: flex-end !important;
+            align-items: flex-start !important;
+            margin-bottom: 0 !important;
           }
           .member-photo-box {
             width: 120px !important;
             height: 120px !important;
           }
-          .member-name {
-            grid-column: 1 !important;
-            grid-row: 2 !important;
-            font-size: 28px !important;
-          }
-          .member-role {
-            grid-column: 1 !important;
-            grid-row: 3 !important;
-            font-size: 20px !important;
-            padding-left: 0 !important;
-            margin-top: 6px !important;
-          }
           .member-credentials {
-            grid-column: 1 !important;
-            grid-row: 4 !important;
-            font-size: 16px !important;
-            margin-top: 12px !important;
+            display: none !important;
           }
           .member-links {
             grid-column: 1 !important;
-            grid-row: 5 !important;
+            grid-row: 3 !important;
             padding-left: 0 !important;
             margin-top: 12px !important;
             grid-template-columns: max-content !important;
