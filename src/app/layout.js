@@ -16,6 +16,15 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} h-full antialiased`}
       style={{ cursor: 'none' }}
     >
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          imageSizes="(max-width: 430px) 220px, 600px"
+          imageSrcSet="/_next/image?url=%2Floader.png&w=220&q=75 220w, /_next/image?url=%2Floader.png&w=430&q=75 430w, /_next/image?url=%2Floader.png&w=640&q=75 640w"
+          fetchPriority="high"
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <CustomCursor />
         {children}

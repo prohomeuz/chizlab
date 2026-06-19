@@ -35,7 +35,7 @@ export default function CategorySection() {
                 placeholder="blur"
                 loading="lazy"
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="(max-width: 430px) 100vw, calc(33vw - 40px)"
               />
             </div>
           </div>
