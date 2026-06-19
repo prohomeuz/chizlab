@@ -1,7 +1,7 @@
 const ABOUT_ROWS = [
   {
     title: 'Biz kimmiz?',
-    desc: 'ChizLab — chizmachilik va dizayn materiallari makoni. Bilim va kreativlik bir joyda.',
+    desc: 'Chizlab — chizmachilik va dizayn materiallari makoni. Bilim va kreativlik bir joyda.',
   },
   {
     title: 'Hikoyamiz',
@@ -23,8 +23,8 @@ const ABOUT_ROWS = [
     title: "Ta'riflar",
     desc: (
       <>
-        Bepul bazadan foydalaning yoki <strong className="font-bold">Pro</strong>{' '}
-        bilan barcha resurslarga cheksiz yo'l oching.
+        Bepul bazadan foydalaning yoki <strong className="font-bold">Pro</strong> bilan barcha
+        resurslarga cheksiz yo'l oching.
       </>
     ),
   },
@@ -112,9 +112,7 @@ export default function AboutSection({ openAboutIdx, onToggle }) {
           </div>
 
           {/* Divider */}
-          {i < arr.length - 1 && (
-            <div className="h-px bg-accent w-full mobile:hidden" />
-          )}
+          {i < arr.length - 1 && <div className="h-px bg-accent w-full mobile:hidden" />}
           <div className="hidden mobile:block h-px bg-accent w-full" />
         </div>
       ))}

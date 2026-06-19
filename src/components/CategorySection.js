@@ -13,7 +13,7 @@ export default function CategorySection() {
         Chizmachilik va dizayn materiallari
         <br className="hidden mobile:block" />
         bir joyda. Topilmadimi?
-        <br />
+        <br className="hidden mobile:block" />
         AI yordam beradi.
       </h2>
       <div className="grid grid-cols-3 gap-10 mobile:grid-cols-1 mobile:gap-6">
