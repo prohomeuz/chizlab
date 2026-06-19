@@ -15,6 +15,7 @@ const ppe = localFont({
     { path: "../../public/fonts/PPEditorialNew-UltralightItalic.woff", format: "woff", style: "italic", weight: "200" },
   ],
   variable: "--font-ppe",
+  display: "swap",
 });
 
 const sfPro = localFont({
@@ -24,6 +25,7 @@ const sfPro = localFont({
   ],
   variable: "--font-sf",
   weight: "400",
+  display: "swap",
 });
 
 export const metadata = {

@@ -82,15 +82,8 @@ export default function CustomCursor() {
       <div
         ref={wrapRef}
         aria-hidden="true"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          opacity: 0,
-          pointerEvents: 'none',
-          zIndex: 9998,
-          display: 'grid',
-        }}
+        className="fixed top-0 left-0 pointer-events-none z-[9998] grid"
+        style={{ opacity: 0 }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -99,7 +92,8 @@ export default function CustomCursor() {
           width={65}
           height={64}
           alt=""
-          style={{ gridArea: '1/1', transition: 'opacity 0.15s ease', opacity: 1 }}
+          className="[grid-area:1/1] [transition:opacity_0.15s_ease]"
+          style={{ opacity: 1 }}
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -108,7 +102,8 @@ export default function CustomCursor() {
           width={65}
           height={64}
           alt=""
-          style={{ gridArea: '1/1', transition: 'opacity 0.15s ease', opacity: 0 }}
+          className="[grid-area:1/1] [transition:opacity_0.15s_ease]"
+          style={{ opacity: 0 }}
         />
       </div>
 
@@ -116,25 +111,8 @@ export default function CustomCursor() {
       <div
         ref={hoverRef}
         aria-hidden="true"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '86px',
-          height: '86px',
-          borderRadius: '50%',
-          background: '#fffff6',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          opacity: 0,
-          pointerEvents: 'none',
-          zIndex: 9998,
-          fontFamily: 'var(--font-inter)',
-          fontSize: '18px',
-          color: '#003837',
-          transition: 'opacity 0.2s ease',
-        }}
+        className="fixed top-0 left-0 w-[86px] h-[86px] rounded-full bg-bg flex items-center justify-center pointer-events-none z-[9998] font-inter text-[18px] text-primary [transition:opacity_0.2s_ease]"
+        style={{ opacity: 0 }}
       >
         Ko&#39;rish
       </div>
