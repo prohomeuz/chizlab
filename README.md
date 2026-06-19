@@ -1,1 +1,1 @@
-chizlab.uz[https://chizlab.uz]
+chizlab.uz
