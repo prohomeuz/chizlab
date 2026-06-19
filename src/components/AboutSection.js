@@ -5,7 +5,7 @@ const ABOUT_ROWS = [
   },
   {
     title: 'Hikoyamiz',
-    desc: "Oddiy g'oyadan boshlangan loyiha. Bugun esa ijodkorlar uchun platforma.",
+    desc: 'Oddiy gʻoyadan boshlangan loyiha. Bugun esa ijodkorlar uchun platforma.',
   },
   {
     title: 'Nega Chizlab?',
@@ -20,7 +20,7 @@ const ABOUT_ROWS = [
     desc: 'Oʻzbekiston ijodkorlik madaniyatini yuksaltirish va yangi imkoniyatlar yaratish.',
   },
   {
-    title: "Ta'riflar",
+    title: 'Ta’riflar',
     desc: (
       <>
         Bepul bazadan foydalaning yoki <strong className="font-bold">Pro</strong> bilan barcha

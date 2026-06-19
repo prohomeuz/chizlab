@@ -1,12 +1,11 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useRef, useState, useCallback } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 import Loader from '@/components/Loader'
 import SoundHint from '@/components/SoundHint'
 import Navbar from '@/components/Navbar'
 import ScrollIndicator from '@/components/ScrollIndicator'
-import MarqueeBanner from '@/components/MarqueeBanner'
 import ContentSection from '@/components/ContentSection'
 import { useSound } from '@/hooks/useSound'
 import { useSoundHint } from '@/hooks/useSoundHint'
@@ -42,6 +41,11 @@ export default function Home() {
 
   const { isPlaying, toggleAudio, fadeIn, initAudio } = useSound()
 
+  useEffect(() => {
+    if (!loaderDone) return
+    initAudio()
+  }, [loaderDone, initAudio])
+
   const handleAboutToggle = useCallback((i) => {
     setOpenAboutIdx((prev) => (prev === i ? null : i))
   }, [])
@@ -59,8 +63,6 @@ export default function Home() {
   // === UI ===
   return (
     <main className="bg-[#fffff6]">
-      <MarqueeBanner />
-
       <Loader
         loaderRef={loaderRef}
         loaderImgRef={loaderImgRef}
@@ -82,6 +84,7 @@ export default function Home() {
         loaderCountRef={loaderCountRef}
         setLoaderDone={setLoaderDone}
         fadeIn={fadeIn}
+        onHintHide={() => setHintDismissed(true)}
       />
 
       <ContentSection

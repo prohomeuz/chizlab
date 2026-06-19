@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 
 // === DATA ===
 const WAVE_PATH = 'M-1 0.99707C60 5.49707 183.8 40.2971 191 143.497C200 272.497 137.5 198.997 154 183.497C170.5 167.997 300 215.497 393 183.497C486 151.497 586 130.997 643 255.997C700 380.997 974.5 192.497 1010.5 208.997C1042.53 223.678 1128.4 318.321 1189.56 329.497C1197.13 330.882 1204.33 330.985 1211 329.497C1271.5 315.997 1134.12 281.497 1189.56 329.497C1208.54 355.997 1263.4 397.497 1331 351.497C1415.5 293.997 1430.5 237.497 1517.5 335.997C1587.1 414.797 1749.5 379.164 1822 351.497C1893.33 332.164 2037.6 296.497 2044 308.497'
@@ -37,7 +38,7 @@ function WaveSectionDesktop({ waveSectionRef, lineCTAPathRef, featureItemsRef })
             style={{ left: f.left, top: f.top }}
           >
             <div className="w-[85px] h-[85px] shrink-0 overflow-hidden [clip-path:polygon(22%_0%,78%_3%,100%_20%,97%_78%,80%_100%,18%_97%,0%_80%,3%_22%)]">
-              <img src={f.img} alt="" className="w-full h-full object-cover block" loading="lazy" />
+              <Image src={f.img} alt="" width={85} height={85} className="w-full h-full object-cover block" sizes="85px" loading="lazy" />
             </div>
             <p
               className="font-sf text-[20px] font-normal text-primary leading-normal tracking-[-0.4px] m-0"

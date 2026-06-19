@@ -25,10 +25,10 @@ function Loader({ loaderRef, loaderImgRef, loaderCountRef, visible }) {
             src="/loader.png"
             alt=""
             fill
+            priority
             className="block object-cover"
             style={MASK_STYLE}
             sizes="(max-width: 430px) 220px, 600px"
-            fetchPriority="high"
           />
           <span
             ref={loaderCountRef}

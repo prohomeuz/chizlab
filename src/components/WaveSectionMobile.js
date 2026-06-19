@@ -1,15 +1,16 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import { VECTOR6_PATH } from '@/data/svgPaths'
 
 // === DATA ===
 // ml: left indent per item (was nth-child CSS in globals)
 const FEATURES = [
-  { img: '/clock.png', text: '1 daqiqada kerakli manbalarni topish imkoniyati', ml: undefined },
-  { img: '/hand.png', text: "Oson va mustaqil\no'rganish", ml: '54px' },
-  { img: '/with-ai.png', text: "AI bilan g'oyani\nchizmaga aylantirish", ml: '133px' },
-  { img: '/ijodkor.png', text: "Ijodkorlar bilan\no'sish va ulashish", ml: '37px' },
+  { img: '/clock.png', text: '1 daqiqada kerakli manbalarni topish imkoniyati', ml: '54px' },
+  { img: '/hand.png', text: "Oson va mustaqil\no'rganish", ml: '110px' },
+  { img: '/with-ai.png', text: "AI bilan g'oyani\nchizmaga aylantirish", ml: '35px' },
+  { img: '/ijodkor.png', text: "Ijodkorlar bilan\no'sish va ulashish", ml: '85px' },
 ]
 
 // === BUSINESS LOGIC ===
@@ -37,7 +38,7 @@ function WaveSectionMobile({ mobileWaveSectionRef, mobileWavePathRef, mobileFeat
           style={f.ml ? { marginLeft: f.ml } : undefined}
         >
           <div className="w-[85px] h-[85px] shrink-0 overflow-hidden [clip-path:polygon(22%_0%,78%_3%,100%_20%,97%_78%,80%_100%,18%_97%,0%_80%,3%_22%)]">
-            <img src={f.img} alt="" className="w-full h-full object-cover block" loading="lazy" />
+            <Image src={f.img} alt="" width={85} height={85} className="w-full h-full object-cover block" sizes="85px" loading="lazy" />
           </div>
           <p className="font-sf text-[18px] leading-normal tracking-[-0.4px] text-primary m-0 whitespace-pre-line">
             {f.text}

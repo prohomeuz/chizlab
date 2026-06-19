@@ -9,6 +9,7 @@ const LERP = 0.07
 export function useSoundHint(loaderDone, hintDismissed, soundHintRef, onDismissAndPlay) {
   useEffect(() => {
     if (!loaderDone || hintDismissed) return
+    if (window.innerWidth <= 430) return
     const hint = soundHintRef.current
     if (!hint) return
 

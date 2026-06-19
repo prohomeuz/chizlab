@@ -20,7 +20,7 @@ export function useSound() {
     const AudioCtx = window.AudioContext || window['webkitAudioContext']
     const audio = new Audio('/sound.mp3')
     audio.loop = true
-    audio.preload = 'none'
+    audio.preload = 'auto'
     audioRef.current = audio
 
     const ctx = new AudioCtx()

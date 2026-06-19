@@ -1,9 +1,14 @@
+'use client'
+
 import Image from 'next/image'
+import chizmachilikImg from '../../public/chizmachilik.jpg'
+import dizaynImg from '../../public/dizayn.jpg'
+import aiImg from '../../public/ai.jpg'
 
 const CATEGORIES = [
-  { title: 'Chizmachilik', img: '/chizmachilik.jpg' },
-  { title: 'Dizayn', img: '/dizayn.jpg' },
-  { title: 'AI', img: '/ai.jpg' },
+  { title: 'Chizmachilik', img: chizmachilikImg },
+  { title: 'Dizayn', img: dizaynImg },
+  { title: 'AI', img: aiImg },
 ]
 
 export default function CategorySection() {
@@ -22,11 +27,13 @@ export default function CategorySection() {
             <h3 className="font-ppe text-[50px] font-normal text-primary leading-[1.2] tracking-[-0.02em] mb-5 mobile:text-[36px] mobile:mb-4">
               {title}
             </h3>
-            <div data-cursor-hover="" className="relative h-[270px] mobile:h-[200px]">
+            <div data-cursor-hover="" className="relative h-[270px] mobile:h-[200px] cursor-pointer" onClick={() => alert('Tez kunda!')}>
               <Image
                 src={img}
                 alt={title}
                 fill
+                placeholder="blur"
+                loading="lazy"
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 33vw"
               />

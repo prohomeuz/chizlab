@@ -10,7 +10,7 @@ import { navItems } from '@/data/navItems'
 // === UI ===
 function Navbar({ isPlaying, onToggleAudio }) {
   return (
-    <nav className="fixed left-0 right-0 flex items-center justify-between p-10 top-[42px] z-[100] bg-bg mobile:py-3.5 mobile:px-5">
+    <nav className="fixed left-0 right-0 flex items-center justify-between p-10 top-0 z-[100] bg-bg mobile:py-3.5 mobile:px-5">
       <Image
         className="mobile:w-[163px] mobile:h-[37.52px]"
         src="/logo.svg"
@@ -27,14 +27,18 @@ function Navbar({ isPlaying, onToggleAudio }) {
             {item === 'Ovoz' ? (
               <button
                 onClick={onToggleAudio}
-                className={`text-[20px] transition-colors px-2 py-0.5 rounded-sm ${
+                className={`text-[20px] transition-colors px-3.5 py-1 rounded-full ${
                   isPlaying ? 'bg-primary text-bg' : 'text-primary'
                 }`}
               >
                 {item}
               </button>
             ) : (
-              <a href="#" className="text-[20px] text-primary hover:opacity-70 transition-opacity">
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); alert('Tez kunda!') }}
+                className="text-[20px] text-primary hover:opacity-70 transition-opacity"
+              >
                 {item}
               </a>
             )}

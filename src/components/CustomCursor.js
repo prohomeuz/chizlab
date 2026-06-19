@@ -15,10 +15,69 @@ export default function CustomCursor() {
     const hov = hoverRef.current
     if (!wrap || !def || !act || !hov) return
 
-    if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 430) {
-      wrap.style.display = 'none'
+    const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 430
+
+    if (isMobile) {
       hov.style.display = 'none'
-      return
+      wrap.style.opacity = '0'
+
+      let targetX = 0, targetY = 0
+      let currentX = 0, currentY = 0
+      let isActive = false
+      let hideTimeout = null
+      let rafId = null
+      const LERP = 0.12
+
+      const animate = () => {
+        currentX += (targetX - currentX) * LERP
+        currentY += (targetY - currentY) * LERP
+        wrap.style.transform = `translate(${currentX}px, ${currentY}px)`
+        if (isActive || Math.abs(targetX - currentX) > 0.3 || Math.abs(targetY - currentY) > 0.3) {
+          rafId = requestAnimationFrame(animate)
+        } else {
+          rafId = null
+        }
+      }
+
+      const handleTouchStart = (e) => {
+        const touch = e.touches[0]
+        if (!touch) return
+        currentX = targetX = touch.clientX - 32
+        currentY = targetY = touch.clientY - 32
+        wrap.style.transform = `translate(${currentX}px, ${currentY}px)`
+      }
+
+      const handleTouchMove = (e) => {
+        const touch = e.touches[0]
+        if (!touch) return
+        targetX = touch.clientX - 32
+        targetY = touch.clientY - 32
+        if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null }
+        if (!isActive) {
+          isActive = true
+          wrap.style.opacity = '1'
+        }
+        if (!rafId) rafId = requestAnimationFrame(animate)
+      }
+
+      const handleTouchEnd = () => {
+        isActive = false
+        hideTimeout = setTimeout(() => { wrap.style.opacity = '0' }, 300)
+      }
+
+      window.addEventListener('touchstart', handleTouchStart, { passive: true })
+      window.addEventListener('touchmove', handleTouchMove, { passive: true })
+      window.addEventListener('touchend', handleTouchEnd)
+      window.addEventListener('touchcancel', handleTouchEnd)
+
+      return () => {
+        window.removeEventListener('touchstart', handleTouchStart)
+        window.removeEventListener('touchmove', handleTouchMove)
+        window.removeEventListener('touchend', handleTouchEnd)
+        window.removeEventListener('touchcancel', handleTouchEnd)
+        if (rafId) cancelAnimationFrame(rafId)
+        if (hideTimeout) clearTimeout(hideTimeout)
+      }
     }
 
     let x = 0, y = 0, rafId = null
@@ -82,7 +141,7 @@ export default function CustomCursor() {
       <div
         ref={wrapRef}
         aria-hidden="true"
-        className="fixed top-0 left-0 pointer-events-none z-[9998] grid"
+        className="fixed top-0 left-0 pointer-events-none z-[9998] grid [transition:opacity_0.2s_ease]"
         style={{ opacity: 0 }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

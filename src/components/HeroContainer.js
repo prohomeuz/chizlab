@@ -20,6 +20,7 @@ export default function HeroContainer({
   loaderCountRef,
   setLoaderDone,
   fadeIn,
+  onHintHide,
 }) {
   const arcRef = useRef(null)
   const charsRef = useRef([])
@@ -48,7 +49,7 @@ export default function HeroContainer({
       scrollIndicatorRef, indicatorClickRef,
       soundHintRef, loaderRef, loaderImgRef, loaderCountRef,
     },
-    { setLoaderDone, fadeIn }
+    { setLoaderDone, fadeIn, onHintHide }
   )
 
   // === UI ===

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import mirzoulugbekImg from '../../public/mirzo-ulugbek.png'
 
 const TEAM_MEMBERS = [
   {
@@ -10,7 +11,8 @@ const TEAM_MEMBERS = [
       { label: 'Instagram', href: 'https://instagram.com/motabarxon_muhammadyusuf/' },
       { label: 'Elektron pochta', href: 'mailto:turdaliyevamm@gmail.com' },
     ],
-    photo: '/mutabarxon.jpg',
+    photo: '/mutabarxon.svg',
+    photoData: null,
     dark: false,
   },
   {
@@ -23,7 +25,8 @@ const TEAM_MEMBERS = [
       { label: 'Github', href: 'https://github.com/prohomeuz' },
       { label: 'Elektron pochta', href: 'mailto:mu.xudoyberdiyev@gmail.com' },
     ],
-    photo: '/mirzo-ulugbek.jpg',
+    photo: mirzoulugbekImg,
+    photoData: mirzoulugbekImg,
     dark: false,
   },
   {
@@ -35,7 +38,8 @@ const TEAM_MEMBERS = [
       { label: 'Behance', href: 'https://www.behance.net/ismailovislam' },
       { label: 'Elektron pochta', href: 'mailto:ismailovislam.wide@gmail.com' },
     ],
-    photo: '/ismailov.jpg',
+    photo: '/ismailov.svg',
+    photoData: null,
     dark: true,
   },
 ]
@@ -73,6 +77,7 @@ export default function TeamSection() {
                   className="object-cover"
                   sizes="(max-width: 430px) 120px, 301px"
                   loading="lazy"
+                  {...(member.photoData ? { placeholder: 'blur' } : {})}
                 />
               </div>
             </div>

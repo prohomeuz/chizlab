@@ -14,7 +14,7 @@ function Scene1({ sceneRef, arcRef, charsRef }) {
     <div ref={sceneRef} className="absolute inset-0 flex flex-col bg-bg">
       <div className="flex-1 flex items-center justify-center relative overflow-hidden pt-20">
         <svg
-          className="s1-arc absolute w-[80vw] h-[80vw] bottom-[-45vw] left-1/2 -translate-x-1/2 mobile:w-[100vw] mobile:h-[100vw] mobile:bottom-[10vh]"
+          className="s1-arc absolute w-[80vw] h-[80vw] bottom-[-45vw] left-1/2 -translate-x-1/2 mobile:w-[100vw] mobile:h-[100vw] mobile:top-[210px] mobile:bottom-auto"
           viewBox="0 0 1000 1000"
           fill="none"
         >
@@ -26,7 +26,7 @@ function Scene1({ sceneRef, arcRef, charsRef }) {
             fill="none"
           />
         </svg>
-        <h1 className="relative z-10 text-center leading-none select-none text-primary text-[170px] mobile:text-[46px] mobile:mb-[38vh]">
+        <h1 className="relative z-10 text-center leading-none select-none text-primary text-[170px] mobile:text-[46px] mobile:absolute mobile:top-[225px] mobile:w-full mobile:mb-0">
           <em className="font-ppe italic">
             {MAIN_WORD.split('').map((char, i) => (
               <span

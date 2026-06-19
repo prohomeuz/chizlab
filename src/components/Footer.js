@@ -13,14 +13,14 @@ function Footer() {
       <div className="flex items-start gap-0 mobile:flex-wrap mobile:gap-7">
         <div className="flex-none min-w-[200px] mr-12 mobile:min-w-0 mobile:mr-0 mobile:flex-auto">
           <div className="font-ppe text-[36px] text-bg mb-5 leading-[1.2] mobile:mb-3">Bogʻlanish</div>
-          <div className="font-sf text-[24px] text-bg mb-2">Telefon</div>
-          <div className="font-sf text-[24px] text-bg">Email</div>
+          <div className="font-sf text-[24px] text-bg mb-2 cursor-pointer hover:opacity-70 transition-opacity" onClick={() => alert('Tez kunda!')}>Telefon</div>
+          <div className="font-sf text-[24px] text-bg cursor-pointer hover:opacity-70 transition-opacity" onClick={() => alert('Tez kunda!')}>Email</div>
         </div>
 
         <div className="flex-none min-w-[220px] mr-16 mobile:min-w-0 mobile:mr-0 mobile:flex-auto">
           <div className="font-ppe text-[36px] text-bg mb-5 leading-[1.2] mobile:mb-3">Boʻlimlar</div>
-          <div className="font-sf text-[24px] text-bg mb-2">Chizmachilik</div>
-          <div className="font-sf text-[24px] text-bg">Dizayn</div>
+          <div className="font-sf text-[24px] text-bg mb-2 cursor-pointer hover:opacity-70 transition-opacity" onClick={() => alert('Tez kunda!')}>Chizmachilik</div>
+          <div className="font-sf text-[24px] text-bg cursor-pointer hover:opacity-70 transition-opacity" onClick={() => alert('Tez kunda!')}>Dizayn</div>
         </div>
 
         <div className="flex-none max-w-[420px] mobile:max-w-full mobile:mt-8">

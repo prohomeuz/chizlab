@@ -12,7 +12,7 @@ const FADE_DUR = 0.7
 
 // === BUSINESS LOGIC ===
 // setLoaderDone is a stable React setter — safe to omit from deps
-export function useHeroAnimation(refs, { setLoaderDone, fadeIn }) {
+export function useHeroAnimation(refs, { setLoaderDone, fadeIn, onHintHide }) {
   useEffect(() => {
     const {
       arcRef,
@@ -262,7 +262,7 @@ export function useHeroAnimation(refs, { setLoaderDone, fadeIn }) {
       }
       const hintEl = soundHintRef.current
       if (hintEl) {
-        gsap.to(hintEl, { opacity: 0, duration: 0.3, overwrite: true, onComplete: () => { hintEl.style.display = 'none' } })
+        gsap.to(hintEl, { opacity: 0, duration: 0.3, overwrite: true, onComplete: () => { hintEl.style.display = 'none'; onHintHide?.() } })
       }
     }
 
