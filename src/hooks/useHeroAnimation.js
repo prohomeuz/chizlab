@@ -385,7 +385,7 @@ export function useHeroAnimation(refs, { setLoaderDone, fadeIn }) {
     }
 
     const rnd = (min, max) => min + Math.random() * (max - min)
-    const totalTime = rnd(2.4, 3.2)
+    const totalTime = rnd(1.2, 1.6)
     const numMid = Math.random() < 0.5 ? 1 : 2
     const midAngles = Array.from({ length: numMid }, () => Math.round(rnd(72, 270))).sort((a, b) => a - b)
     const targets = [...midAngles, 360]

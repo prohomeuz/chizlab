@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 
 // === DATA ===
 // Conic-gradient mask is GSAP-animated (angle changes) — keep inline
@@ -19,14 +20,15 @@ function Loader({ loaderRef, loaderImgRef, loaderCountRef, visible }) {
     <div ref={loaderRef} className="fixed inset-0 z-[9999] bg-primary">
       <div className="absolute bottom-12 left-12 mobile:bottom-auto mobile:left-1/2 mobile:top-1/2 mobile:-translate-x-1/2 mobile:-translate-y-1/2">
         <div className="relative w-[600px] h-[600px] mobile:w-[220px] mobile:h-[220px]">
-          <img
+          <Image
             ref={loaderImgRef}
             src="/loader.png"
             alt=""
-            width={600}
-            height={600}
-            className="block w-full h-full"
+            fill
+            className="block object-cover"
             style={MASK_STYLE}
+            sizes="(max-width: 430px) 220px, 600px"
+            fetchPriority="high"
           />
           <span
             ref={loaderCountRef}

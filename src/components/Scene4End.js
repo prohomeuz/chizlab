@@ -33,9 +33,7 @@ function Scene4End({ sceneRef, endSvgRef, s4CharsRef }) {
         className="absolute bottom-0 left-0 right-0 mobile:top-[calc(31vh_+_20px)] mobile:bottom-auto mobile:w-[100vw]"
       >
         <svg viewBox="0 0 1920 835" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block">
-          {END_PATHS.map((d, i) => (
-            <path key={i} d={d} fill="#B8926A" stroke="#B8926A" strokeWidth="0.5" strokeMiterlimit="10" />
-          ))}
+          <path d={END_PATHS.join(' ')} fill="#B8926A" stroke="#B8926A" strokeWidth="0.5" strokeMiterlimit="10" />
         </svg>
       </div>
     </div>

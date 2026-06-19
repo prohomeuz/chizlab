@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const TEAM_MEMBERS = [
   {
     name: 'Moʻtabarxon\nTurdaliyeva',
@@ -60,11 +62,18 @@ export default function TeamSection() {
             </p>
             <div className="[grid-column:3] [grid-row:1/3] flex justify-end items-start mobile:[grid-column:2] mobile:[grid-row:2/4]">
               <div
-                className={`w-[301px] h-[301px] overflow-hidden mobile:w-[120px] mobile:h-[120px] ${
+                className={`relative w-[301px] h-[301px] overflow-hidden mobile:w-[120px] mobile:h-[120px] ${
                   member.dark ? 'bg-dark' : 'bg-transparent'
                 }`}
               >
-                <img src={member.photo} alt="" className="w-full h-full object-cover block" />
+                <Image
+                  src={member.photo}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 430px) 120px, 301px"
+                  loading="lazy"
+                />
               </div>
             </div>
             <p className="[grid-column:1] [grid-row:2] font-sf text-[39px] text-accent m-0 mt-8 font-normal leading-[1.1] whitespace-pre-line mobile:hidden">
