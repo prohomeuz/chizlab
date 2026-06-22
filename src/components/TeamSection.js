@@ -57,16 +57,16 @@ export default function TeamSection() {
       {/* Team member rows */}
       {TEAM_MEMBERS.map((member, i, arr) => (
         <div key={member.name}>
-          <div className="grid grid-cols-[33.33%_41.67%_25%] grid-rows-[auto_auto] py-[60px] items-start mobile:grid-cols-[1fr_120px] mobile:grid-rows-[auto_auto_auto] mobile:py-8 mobile:gap-x-4">
+          <div className="grid grid-cols-[33.33%_41.67%_25%] grid-rows-[auto_auto] py-[60px] items-start mobile:grid-cols-[1fr_147px] mobile:grid-rows-[auto_auto_auto] mobile:py-8 mobile:gap-x-4">
             <p className="[grid-column:1] [grid-row:1] font-ppe text-[60px] text-primary m-0 font-normal leading-[1.1] whitespace-pre-line mobile:[grid-column:1/3] mobile:text-[40px] mobile:mb-[25px]">
               {member.name}
             </p>
-            <p className="[grid-column:2] [grid-row:1] font-ppe text-[60px] text-primary m-0 font-normal leading-[1.1] whitespace-pre-line pl-8 mobile:[grid-column:1] mobile:[grid-row:2] mobile:text-[28px] mobile:pl-0 mobile:mt-1.5">
+            <p className="[grid-column:2] [grid-row:1] font-ppe text-[60px] text-primary m-0 font-normal leading-[1.1] whitespace-pre-line pl-8 mobile:[grid-column:1] mobile:[grid-row:2] mobile:text-[24px] mobile:pl-0 mobile:mt-1.5">
               {member.role}
             </p>
             <div className="[grid-column:3] [grid-row:1/3] flex justify-end items-start mobile:[grid-column:2] mobile:[grid-row:2/4]">
               <div
-                className={`relative w-[301px] h-[301px] overflow-hidden mobile:w-[120px] mobile:h-[120px] ${
+                className={`relative w-[301px] h-[301px] overflow-hidden mobile:w-[147px] mobile:h-[147px] ${
                   member.dark ? 'bg-dark' : 'bg-transparent'
                 }`}
               >
@@ -75,7 +75,7 @@ export default function TeamSection() {
                   alt=""
                   fill
                   className="object-cover"
-                  sizes="(max-width: 430px) 120px, 301px"
+                  sizes="(max-width: 430px) 147px, 301px"
                   loading="lazy"
                   {...(member.photoData ? { placeholder: 'blur' } : {})}
                 />
@@ -84,17 +84,21 @@ export default function TeamSection() {
             <p className="[grid-column:1] [grid-row:2] font-sf text-[39px] text-accent m-0 mt-8 font-normal leading-[1.1] whitespace-pre-line mobile:hidden">
               {member.credentials}
             </p>
-            <div className="[grid-column:2] [grid-row:2] grid grid-cols-[max-content_max-content] gap-4 mt-8 pl-8 mobile:[grid-column:1] mobile:[grid-row:3] mobile:pl-0 mobile:mt-3 mobile:grid-cols-[max-content] mobile:gap-2">
-              {member.links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith('mailto:') ? undefined : '_blank'}
-                  rel="noopener noreferrer"
-                  className="font-sf text-[25px] text-accent font-[275] leading-[1.1] no-underline mobile:text-[15px]"
-                >
-                  {'{' + link.label + '}'}
-                </a>
+            <div className="[grid-column:2] [grid-row:2] flex flex-col gap-2 mt-8 pl-8 mobile:[grid-column:1] mobile:[grid-row:3] mobile:pl-0 mobile:mt-3">
+              {Array.from({ length: Math.ceil(member.links.length / 2) }, (_, rowIdx) => (
+                <div key={rowIdx} className="flex gap-4">
+                  {member.links.slice(rowIdx * 2, rowIdx * 2 + 2).map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+                      rel="noopener noreferrer"
+                      className="font-sf text-[25px] text-accent font-[275] leading-[1.1] no-underline mobile:text-[14px]"
+                    >
+                      {'{' + link.label + '}'}
+                    </a>
+                  ))}
+                </div>
               ))}
             </div>
           </div>
