@@ -20,7 +20,7 @@ const ABOUT_ROWS = [
     desc: 'Oʻzbekiston ijodkorlik madaniyatini yuksaltirish va yangi imkoniyatlar yaratish.',
   },
   {
-    title: 'Ta’riflar',
+    title: "Ta'riflar",
     desc: (
       <>
         Bepul bazadan foydalaning yoki <strong className="font-bold">Pro</strong> bilan barcha
@@ -42,7 +42,11 @@ export default function AboutSection({ openAboutIdx, onToggle }) {
 
       {/* Rows */}
       {ABOUT_ROWS.map((row, i, arr) => (
-        <div key={row.title}>
+        <div
+          key={row.title}
+          className="sticky top-[130px] mobile:top-[70px] bg-bg"
+          style={{ zIndex: i + 1 }}
+        >
           {/* Desktop layout */}
           <div className="flex py-[60px] items-start mobile:hidden">
             <div className="flex-[0_0_50%] pr-8">
@@ -57,58 +61,14 @@ export default function AboutSection({ openAboutIdx, onToggle }) {
             </div>
           </div>
 
-          {/* Mobile layout — accordion */}
-          <div className="hidden mobile:block">
-            <button
-              onClick={() => onToggle(i)}
-              className="w-full bg-transparent border-0 py-[22px] flex items-center justify-between gap-3 text-left [-webkit-tap-highlight-color:transparent]"
-            >
-              <p className="font-ppe text-[46px] text-primary m-0 font-normal leading-[1.1] tracking-[-0.02em]">
-                {row.title}
-              </p>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="shrink-0"
-                style={{
-                  transform: openAboutIdx === i ? 'rotate(180deg)' : 'rotate(0deg)',
-                  transition: 'transform 0.42s cubic-bezier(0.4, 0, 0.2, 1)',
-                }}
-              >
-                <path
-                  d="M6 9L12 15L18 9"
-                  stroke="#003837"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <div
-              className="grid"
-              style={{
-                gridTemplateRows: openAboutIdx === i ? '1fr' : '0fr',
-                transition: 'grid-template-rows 0.44s cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-            >
-              <div className="overflow-hidden">
-                <p
-                  className="font-sf text-[18px] text-primary m-0 font-normal leading-[1.55] pb-[26px]"
-                  style={{
-                    opacity: openAboutIdx === i ? 1 : 0,
-                    transform: openAboutIdx === i ? 'translateY(0)' : 'translateY(8px)',
-                    transition:
-                      openAboutIdx === i
-                        ? 'opacity 0.36s ease 0.09s, transform 0.36s ease 0.09s'
-                        : 'opacity 0.16s ease, transform 0.16s ease',
-                  }}
-                >
-                  {row.desc}
-                </p>
-              </div>
-            </div>
+          {/* Mobile layout — always visible */}
+          <div className="hidden mobile:block py-[22px]">
+            <p className="font-ppe text-[46px] text-primary m-0 font-normal leading-[1.1] tracking-[-0.02em] mb-4">
+              {row.title}
+            </p>
+            <p className="font-sf text-[18px] text-primary m-0 font-normal leading-[1.55] pb-[10px]">
+              {row.desc}
+            </p>
           </div>
 
           {/* Divider */}

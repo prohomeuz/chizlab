@@ -5,6 +5,7 @@ import { useRef, useState, useCallback, useEffect } from 'react'
 import Loader from '@/components/Loader'
 import SoundHint from '@/components/SoundHint'
 import Navbar from '@/components/Navbar'
+import MobileVolumeButton from '@/components/MobileVolumeButton'
 import ScrollIndicator from '@/components/ScrollIndicator'
 import ContentSection from '@/components/ContentSection'
 import { useSound } from '@/hooks/useSound'
@@ -73,6 +74,7 @@ export default function Home() {
       <SoundHint soundHintRef={soundHintRef} visible={loaderDone && !hintDismissed} />
 
       <Navbar isPlaying={isPlaying} onToggleAudio={toggleAudio} />
+      <MobileVolumeButton isPlaying={isPlaying} onToggle={toggleAudio} />
 
       <HeroContainer
         contentSectionRef={contentSectionRef}
