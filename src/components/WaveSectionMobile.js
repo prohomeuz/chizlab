@@ -5,12 +5,15 @@ import Image from 'next/image'
 import { VECTOR6_PATH } from '@/data/svgPaths'
 
 // === DATA ===
-// ml: left indent per item (was nth-child CSS in globals)
+// ml: left indent per item. The wave svg spans 52vw (starts at -10px) and its
+// height is fixed by content flow, so the path x at each icon's y scales linearly
+// with vw: ml = K*vw - 52.5px (52.5 = half icon 42.5 + svg offset 10). K values
+// measured from the rendered path so icon centers sit exactly on the line.
 const FEATURES = [
-  { img: '/clock.png', text: '1 daqiqada kerakli manbalarni topish imkoniyati', ml: '54px' },
-  { img: '/hand.png', text: "Oson va mustaqil\no'rganish", ml: '110px' },
-  { img: '/with-ai.png', text: "AI bilan g'oyani\nchizmaga aylantirish", ml: '35px' },
-  { img: '/ijodkor.png', text: "Ijodkorlar bilan\no'sish va ulashish", ml: '85px' },
+  { img: '/clock.png', text: '1 daqiqada kerakli manbalarni topish imkoniyati', ml: 'calc(27.44vw - 52.5px)' },
+  { img: '/hand.png', text: "Oson va mustaqil\no'rganish", ml: 'calc(46.86vw - 52.5px)' },
+  { img: '/with-ai.png', text: "AI bilan g'oyani\nchizmaga aylantirish", ml: 'calc(21.28vw - 52.5px)' },
+  { img: '/ijodkor.png', text: "Ijodkorlar bilan\no'sish va ulashish", ml: 'calc(38.42vw - 52.5px)' },
 ]
 
 // === BUSINESS LOGIC ===
@@ -19,7 +22,7 @@ const FEATURES = [
 // === UI ===
 function WaveSectionMobile({ mobileWaveSectionRef, mobileWavePathRef, mobileFeatureItemsRef }) {
   return (
-    <section ref={mobileWaveSectionRef} className="hidden mobile:block py-10 pb-[60px] relative">
+    <section ref={mobileWaveSectionRef} className="hidden mobile:block bp-sm:block bp-xs:block py-10 pb-[60px] relative">
       <svg
         viewBox="0 0 203.121 603.506"
         fill="none"
