@@ -1,8 +1,8 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { useRef, useState, useCallback, useEffect } from 'react'
 import Loader from '@/components/Loader'
+import HeroContainer from '@/components/HeroContainer'
 import SoundHint from '@/components/SoundHint'
 import Navbar from '@/components/Navbar'
 import MobileVolumeButton from '@/components/MobileVolumeButton'
@@ -13,18 +13,16 @@ import { useSoundHint } from '@/hooks/useSoundHint'
 import { useWaveAnimation } from '@/hooks/useWaveAnimation'
 import { useMobileWaveAnimation } from '@/hooks/useMobileWaveAnimation'
 
-// === DATA ===
-// Loaded client-only: GSAP needs window, prevents hydration mismatch
-const HeroContainer = dynamic(() => import('@/components/HeroContainer'), {
-  ssr: false,
-  loading: () => null,
-})
-
 // === BUSINESS LOGIC ===
 export default function Home() {
   const [loaderDone, setLoaderDone] = useState(false)
   const [hintDismissed, setHintDismissed] = useState(false)
   const [openAboutIdx, setOpenAboutIdx] = useState(0)
+  // HeroContainer is client-only (GSAP needs window). Rendering it after mount instead of via
+  // next/dynamic keeps it in the main bundle — no lazy chunk to fetch — so the loader animation
+  // starts right after hydration instead of waiting seconds for a separate chunk.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
 
   const loaderRef = useRef(null)
   const loaderImgRef = useRef(null)
@@ -76,18 +74,20 @@ export default function Home() {
       <Navbar isPlaying={isPlaying} onToggleAudio={toggleAudio} />
       <MobileVolumeButton isPlaying={isPlaying} onToggle={toggleAudio} />
 
-      <HeroContainer
-        contentSectionRef={contentSectionRef}
-        scrollIndicatorRef={scrollIndicatorRef}
-        indicatorClickRef={indicatorClickRef}
-        soundHintRef={soundHintRef}
-        loaderRef={loaderRef}
-        loaderImgRef={loaderImgRef}
-        loaderCountRef={loaderCountRef}
-        setLoaderDone={setLoaderDone}
-        fadeIn={fadeIn}
-        onHintHide={() => setHintDismissed(true)}
-      />
+      {mounted && (
+        <HeroContainer
+          contentSectionRef={contentSectionRef}
+          scrollIndicatorRef={scrollIndicatorRef}
+          indicatorClickRef={indicatorClickRef}
+          soundHintRef={soundHintRef}
+          loaderRef={loaderRef}
+          loaderImgRef={loaderImgRef}
+          loaderCountRef={loaderCountRef}
+          setLoaderDone={setLoaderDone}
+          fadeIn={fadeIn}
+          onHintHide={() => setHintDismissed(true)}
+        />
+      )}
 
       <ContentSection
         ref={contentSectionRef}

@@ -103,3 +103,30 @@ body {
   animation: var(--animate-marquee);
   will-change: transform;
 }
+
+/* --- Loading screen ---
+   The naqsh reveal + % counter run in PURE CSS so they animate the instant the HTML/CSS
+   paints — they do NOT wait for the JS bundle (GSAP) to download/hydrate, which can take
+   many seconds on a slow network. JS only takes over to slide the loader away once the app
+   is ready. Fallback (no @property support): naqsh shows fully at 100%. */
+/* Progress is driven in real time from :root by the inline script in <head> (0→~90% as the
+   page actually loads) and finished to 100% by JS once the app is interactive. Both custom
+   properties inherit so a value set on :root reaches the naqsh mask and the ::after counter. */
+@property --loader-angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}
+@property --loader-pct {
+  syntax: '<integer>';
+  inherits: true;
+  initial-value: 0;
+}
+.loader-naqsh {
+  -webkit-mask-image: conic-gradient(from -90deg, #000 var(--loader-angle), transparent var(--loader-angle));
+  mask-image: conic-gradient(from -90deg, #000 var(--loader-angle), transparent var(--loader-angle));
+}
+.loader-count::after {
+  counter-reset: loaderpct var(--loader-pct);
+  content: counter(loaderpct) '%';
+}
