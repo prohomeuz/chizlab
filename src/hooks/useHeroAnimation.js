@@ -372,62 +372,45 @@ export function useHeroAnimation(refs, { setLoaderDone, fadeIn, onHintHide }) {
     const stagger = (TOTAL_DURATION - CHAR_FADE) / (chars.length - 1)
     let tl = null
 
-    const loaderProxy = { angle: 0 }
-
-    const updateLoader = () => {
-      const el = loaderImgRef.current
-      if (!el) return
-      const mask = `conic-gradient(from -90deg, #000 ${loaderProxy.angle}deg, transparent ${loaderProxy.angle}deg)`
-      el.style.webkitMaskImage = mask
-      el.style.maskImage = mask
-      const pct = Math.round((loaderProxy.angle / 360) * 100)
-      if (loaderCountRef.current) loaderCountRef.current.textContent = pct + '%'
+    // The loader progress (0→~90%) is driven in real time by the inline script in <head>, so it
+    // reflects how much of the page has actually loaded — no fixed timer. Here we only finish it
+    // to 100% and slide the loader away, then hand off to the scene animations.
+    let loaderFinish = null
+    const doSlideUp = () => {
+      const loaderEl = loaderRef.current
+      if (!loaderEl) return
+      gsap.to(loaderEl, {
+        y: '-100%',
+        duration: 1.4,
+        ease: 'expo.inOut',
+        onComplete: () => {
+          setLoaderDone(true)
+          tl = gsap.timeline({ onComplete: () => attachWheel() })
+          tl.to(arc, { strokeDashoffset: 0, duration: TOTAL_DURATION, ease: 'none' }, 0)
+          tl.to(chars, { opacity: 1, duration: CHAR_FADE, stagger, ease: 'none' }, 0)
+          fadeIn()
+        },
+      })
     }
 
-    const rnd = (min, max) => min + Math.random() * (max - min)
-    const totalTime = rnd(1.2, 1.6)
-    const numMid = Math.random() < 0.5 ? 1 : 2
-    const midAngles = Array.from({ length: numMid }, () => Math.round(rnd(72, 270))).sort((a, b) => a - b)
-    const targets = [...midAngles, 360]
-    const weights = targets.map((_, i) => {
-      if (i === 0) return rnd(0.6, 1.0)
-      if (i === targets.length - 1) return rnd(0.2, 0.4)
-      return rnd(0.9, 1.6)
-    })
-    const wSum = weights.reduce((a, b) => a + b, 0)
-    const durations = weights.map((w) => (w / wSum) * totalTime)
-
-    const startEases = ['power2.out', 'power1.out', 'power3.out']
-    const midEases = ['power1.inOut', 'none', 'power1.in', 'sine.inOut']
-    const endEases = ['power3.in', 'power2.in', 'expo.in']
-    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
-
-    const loaderTween = gsap.timeline({
-      onComplete: () => {
-        const loaderEl = loaderRef.current
-        if (!loaderEl) return
-        gsap.to(loaderEl, {
-          y: '-100%',
-          duration: 1.4,
-          ease: 'expo.inOut',
-          onComplete: () => {
-            setLoaderDone(true)
-            tl = gsap.timeline({ onComplete: () => attachWheel() })
-            tl.to(arc, { strokeDashoffset: 0, duration: TOTAL_DURATION, ease: 'none' }, 0)
-            tl.to(chars, { opacity: 1, duration: CHAR_FADE, stagger, ease: 'none' }, 0)
-            fadeIn()
-          },
-        })
+    // App is now interactive: stop the inline creep and finish the count to 100%, then slide up.
+    window.__loaderTakeover = true
+    const rootEl = document.documentElement
+    const curPct = parseFloat(getComputedStyle(rootEl).getPropertyValue('--loader-pct')) || 0
+    const finishProxy = { p: curPct }
+    loaderFinish = gsap.to(finishProxy, {
+      p: 100,
+      duration: 0.4 + ((100 - curPct) / 100) * 0.5,
+      ease: 'power2.out',
+      onUpdate: () => {
+        rootEl.style.setProperty('--loader-pct', String(Math.round(finishProxy.p)))
+        rootEl.style.setProperty('--loader-angle', finishProxy.p * 3.6 + 'deg')
       },
-    })
-
-    targets.forEach((angle, i) => {
-      const ease = i === 0 ? pick(startEases) : i === targets.length - 1 ? pick(endEases) : pick(midEases)
-      loaderTween.to(loaderProxy, { angle, duration: durations[i], ease, onUpdate: updateLoader })
+      onComplete: doSlideUp,
     })
 
     return () => {
-      loaderTween.kill()
+      loaderFinish?.kill()
       tl?.kill()
       handTl?.kill()
       s3Tl?.kill()
