@@ -26,7 +26,7 @@ function Scene1({ sceneRef, arcRef, charsRef }) {
             fill="none"
           />
         </svg>
-        <h1 className="relative z-10 text-center leading-none select-none text-primary text-[170px] mobile:text-[46px] mobile:absolute mobile:top-[225px] mobile:w-full mobile:mb-0">
+        <h1 className="relative z-10 text-center leading-none select-none text-primary text-[clamp(46px,11.5vw,170px)] mobile:text-[46px] mobile:absolute mobile:top-[225px] mobile:w-full mobile:mb-0">
           <em className="font-ppe italic">
             {MAIN_WORD.split('').map((char, i) => (
               <span

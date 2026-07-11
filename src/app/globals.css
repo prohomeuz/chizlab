@@ -2,6 +2,12 @@
 
 @custom-variant mobile (@media (max-width: 430px));
 
+/* Tiered responsive breakpoints — each range tuned independently */
+@custom-variant bp-xs (@media (max-width: 499px)); /* ≤500 (tuned for 360–500) */
+@custom-variant bp-sm (@media (min-width: 500px) and (max-width: 749px)); /* 500–750 */
+@custom-variant bp-md (@media (min-width: 750px) and (max-width: 999px)); /* 750–1000 */
+@custom-variant bp-lg (@media (min-width: 1000px) and (max-width: 1200px)); /* 1000–1200 */
+
 @font-face {
   font-family: 'PPEditorialNew';
   src: url('/fonts/PPEditorialNew-Regular.woff2') format('woff2'),

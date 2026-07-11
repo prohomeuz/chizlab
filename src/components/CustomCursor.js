@@ -15,9 +15,9 @@ export default function CustomCursor() {
     const hov = hoverRef.current
     if (!wrap || !def || !act || !hov) return
 
-    const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 430
+    const mobileQuery = window.matchMedia('(pointer: coarse)')
 
-    if (isMobile) {
+    if (mobileQuery.matches) {
       hov.style.display = 'none'
       wrap.style.opacity = '0'
 
