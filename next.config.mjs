@@ -12,6 +12,11 @@ const nextConfig = {
     minimumCacheTTL: 31536000,
     deviceSizes: [220, 430, 640, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 85, 128, 256],
+    remotePatterns: [
+      { protocol: 'https', hostname: '**.chizlab.uz' },
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'http', hostname: '127.0.0.1' },
+    ],
   },
   async headers() {
     return [
