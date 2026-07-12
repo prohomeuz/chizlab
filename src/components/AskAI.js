@@ -29,10 +29,10 @@ function OpenAIIcon() {
 }
 
 function ClaudeIcon() {
-  // Dense radiating sunburst — thin rays of varying length.
-  const N = 24
-  const lengths = [10.5, 6.5, 8.5, 5.5, 9.5, 7]
-  const inner = 1
+  // Radiating sunburst — 16 rays alternating long/short.
+  const N = 16
+  const lengths = [10.5, 6, 8, 6]
+  const inner = 1.2
   const rays = Array.from({ length: N }, (_, i) => {
     const a = (i * Math.PI * 2) / N - Math.PI / 2
     const outer = lengths[i % lengths.length]
@@ -47,7 +47,7 @@ function ClaudeIcon() {
     )
   })
   return (
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" aria-hidden="true">
       {rays}
     </svg>
   )
@@ -81,7 +81,7 @@ function GrokIcon() {
 function AskAI() {
   return (
     <div className="flex flex-col gap-4 items-start">
-      <span className="font-ppe text-[20px] text-bg tracking-[0.06em] select-none bp-sm:text-[18px] bp-xs:text-[17px]">
+      <span className="font-ppe text-[16px] text-bg tracking-[0.06em] select-none">
         Chizlab haqida AIdan soʻrang
       </span>
       <div className="flex items-center gap-3 bp-sm:gap-2.5 bp-xs:gap-2.5 mobile:gap-2.5">
