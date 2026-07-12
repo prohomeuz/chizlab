@@ -52,20 +52,6 @@
   font-family: var(--inter-font), Arial, Helvetica, sans-serif;
 }
 
-html,
-body,
-* {
-  cursor: none !important;
-}
-
-@media (pointer: coarse) {
-  html,
-  body,
-  * {
-    cursor: auto !important;
-  }
-}
-
 body {
   font-family: var(--inter-font), Arial, Helvetica, sans-serif;
 }
