@@ -1,3 +1,4 @@
+import CustomCursor from '@/components/CustomCursor'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
@@ -46,8 +47,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="uz" className={`${inter.variable} h-full antialiased`}>
+    <html lang="uz" className={`${inter.variable} h-full antialiased`} style={{ cursor: 'none' }}>
       <body className="min-h-full flex flex-col">
+        <CustomCursor />
         {children}
       </body>
     </html>
