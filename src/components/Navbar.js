@@ -132,15 +132,18 @@ function Navbar({ isPlaying, onToggleAudio }) {
           </button>
         </div>
 
-        <div className="border-y border-accent/40 divide-y divide-accent/40 px-10 bp-md:px-6 bp-sm:px-5 bp-xs:px-4">
+        <div className="px-10 bp-md:px-6 bp-sm:px-5 bp-xs:px-5 py-6">
           {MOBILE_MENU_ORDER.map((item) => (
-            <div key={item} className="py-7 flex justify-center bp-sm:py-6 bp-xs:py-5">
+            <div
+              key={item}
+              className="py-8 flex justify-center border-t border-accent/50 last:border-b bp-sm:py-7 bp-xs:py-6"
+            >
               <NavItem
                 item={item}
                 isPlaying={isPlaying}
                 onToggleAudio={onToggleAudio}
                 onNavigate={() => setMenuOpen(false)}
-                className="text-[30px] text-center bp-md:text-[28px] bp-sm:text-[26px] bp-xs:text-[22px]"
+                className="text-[30px] font-[620] text-center px-6 py-1 bp-md:text-[28px] bp-sm:text-[26px] bp-xs:text-[22px]"
               />
             </div>
           ))}
