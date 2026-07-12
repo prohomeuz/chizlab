@@ -47,9 +47,9 @@ export const metadata = {
     siteName: 'Chizlab',
     images: [
       {
-        url: '/meta.svg',
-        width: 1200,
-        height: 630,
+        url: '/chizlab-meta.jpg',
+        width: 1280,
+        height: 720,
         alt: 'Chizlab — chizmachilik va dizayn platformasi',
       },
     ],
@@ -60,7 +60,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Chizlab — Chizmachilik va dizayn platformasi',
     description: DESCRIPTION,
-    images: ['/meta.svg'],
+    images: ['/chizlab-meta.jpg'],
   },
   robots: {
     index: true,
@@ -88,7 +88,7 @@ const STRUCTURED_DATA = {
       alternateName: 'chizlab.uz',
       url: SITE_URL,
       logo: `${SITE_URL}/logo.svg`,
-      image: `${SITE_URL}/meta.svg`,
+      image: `${SITE_URL}/chizlab-meta.jpg`,
       email: 'info@chizlab.uz',
       slogan: 'Chizmachilikdan raqamli dizayngacha — barcha manbalar bir joyda',
       description:

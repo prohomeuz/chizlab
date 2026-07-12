@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Self-hosting: emit a minimal standalone server (.next/standalone/server.js)
+  // so the Docker runtime image stays small and needs no node_modules install.
+  output: 'standalone',
   distDir: process.env.NEXT_DIST_DIR || '.next',
   compress: true,
   allowedDevOrigins: ['192.168.1.4'],
