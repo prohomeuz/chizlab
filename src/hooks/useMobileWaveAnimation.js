@@ -9,7 +9,7 @@ const DRAW_DURATION = 3
 export function useMobileWaveAnimation(loaderDone, mobileWaveSectionRef, mobileWavePathRef, mobileFeatureItemsRef) {
   useEffect(() => {
     if (!loaderDone) return
-    if (typeof window === 'undefined' || window.innerWidth > 430) return
+    if (typeof window === 'undefined' || window.innerWidth >= 750) return
     const section = mobileWaveSectionRef.current
     const path = mobileWavePathRef.current
     const items = mobileFeatureItemsRef.current.filter(Boolean)
