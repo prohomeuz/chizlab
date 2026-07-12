@@ -16,7 +16,8 @@ export default function CustomCursor() {
     if (!wrap || !def || !act || !hov) return
 
     // Desktop only: the custom cursor must never appear on touch / mobile devices
-    // (it used to flash on tap + scroll). Keep it hidden and attach no touch handlers.
+    // (it used to flash in on tap + scroll). Keep it hidden and attach no touch handlers,
+    // so touch scrolling stays completely normal.
     const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 430
 
     if (isMobile) {

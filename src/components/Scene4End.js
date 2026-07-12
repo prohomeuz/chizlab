@@ -11,8 +11,8 @@ import { S4_PART1, S4_ITALIC, S4_PART2 } from '@/data/heroConstants'
 function Scene4End({ sceneRef, endSvgRef, s4CharsRef }) {
   return (
     <div ref={sceneRef} className="absolute inset-0 bg-bg z-0" style={{ opacity: 0 }}>
-      <div className="absolute top-0 left-0 right-0 flex justify-center pt-[28vh] mobile:pt-[24vh]">
-        <h2 className="text-primary font-normal leading-none text-center select-none whitespace-nowrap text-[100px] mobile:text-[46px] mobile:whitespace-normal mobile:px-5">
+      <div className="absolute top-0 left-0 right-0 flex justify-center pt-[28vh] bp-xs:pt-[24vh] mobile:pt-[24vh]">
+        <h2 className="text-primary font-normal leading-none text-center select-none whitespace-nowrap text-[clamp(46px,6.6vw,100px)] bp-xs:whitespace-normal bp-xs:px-5 mobile:text-[46px] mobile:whitespace-normal mobile:px-5">
           {S4_PART1.split('').map((char, i) => (
             <span key={`s4p1-${i}`} ref={(el) => { s4CharsRef.current[i] = el }} className="font-sf">{char}</span>
           ))}
@@ -21,7 +21,7 @@ function Scene4End({ sceneRef, endSvgRef, s4CharsRef }) {
               <span key={`s4it-${i}`} ref={(el) => { s4CharsRef.current[S4_PART1.length + i] = el }}>{char}</span>
             ))}
           </em>
-          <br className="hidden mobile:block" />
+          <br className="hidden bp-xs:block mobile:block" />
           {S4_PART2.split('').map((char, i) => (
             <span key={`s4p2-${i}`} ref={(el) => { s4CharsRef.current[S4_PART1.length + S4_ITALIC.length + i] = el }} className="font-sf">{char}</span>
           ))}
