@@ -12,11 +12,11 @@ const q = encodeURIComponent(PROMPT)
 // Each entry links to the AI's chat with the prompt in the query string. Providers that
 // support a `?q=` (or `/search?q=`) param drop it straight into their input box.
 const AIS = [
-  { name: 'ChatGPT', href: `https://chatgpt.com/?q=${q}`, Icon: OpenAIIcon },
   { name: 'Claude', href: `https://claude.ai/new?q=${q}`, Icon: ClaudeIcon },
   { name: 'Gemini', href: `https://gemini.google.com/app?q=${q}`, Icon: GeminiIcon },
-  { name: 'Perplexity', href: `https://www.perplexity.ai/search?q=${q}`, Icon: PerplexityIcon },
+  { name: 'ChatGPT', href: `https://chatgpt.com/?q=${q}`, Icon: OpenAIIcon },
   { name: 'Grok', href: `https://grok.com/?q=${q}`, Icon: GrokIcon },
+  { name: 'Perplexity', href: `https://www.perplexity.ai/search?q=${q}`, Icon: PerplexityIcon },
 ]
 
 // === ICONS === (official brand marks, monochrome via currentColor)
@@ -29,9 +29,25 @@ function OpenAIIcon() {
 }
 
 function ClaudeIcon() {
+  // Radiating sunburst mark.
+  const N = 12
+  const rays = Array.from({ length: N }, (_, i) => {
+    const a = (i * Math.PI * 2) / N - Math.PI / 2
+    const inner = 1.6
+    const outer = i % 3 === 0 ? 10 : i % 3 === 1 ? 6.5 : 8
+    return (
+      <line
+        key={i}
+        x1={+(12 + Math.cos(a) * inner).toFixed(2)}
+        y1={+(12 + Math.sin(a) * inner).toFixed(2)}
+        x2={+(12 + Math.cos(a) * outer).toFixed(2)}
+        y2={+(12 + Math.sin(a) * outer).toFixed(2)}
+      />
+    )
+  })
   return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-      <path d="M17.3041 3.541h-3.6718l6.696 16.918H24ZM6.6959 3.541 0 20.459h3.7442l1.3693-3.5527h7.0038l1.3693 3.5527h3.7442L10.5397 3.541Zm-.3714 10.2439 2.2914-5.9471 2.2914 5.9471Z" />
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" aria-hidden="true">
+      {rays}
     </svg>
   )
 }
@@ -64,7 +80,7 @@ function GrokIcon() {
 function AskAI() {
   return (
     <div className="flex flex-col gap-4 items-start">
-      <span className="font-sf text-[18px] text-bg tracking-[0.04em] select-none bp-sm:text-[17px] bp-xs:text-[16px]">
+      <span className="font-ppe text-[20px] text-bg tracking-[0.06em] select-none bp-sm:text-[18px] bp-xs:text-[17px]">
         Chizlab haqida AIdan soʻrang
       </span>
       <div className="flex items-center gap-3 bp-sm:gap-2.5 bp-xs:gap-2.5 mobile:gap-2.5">
