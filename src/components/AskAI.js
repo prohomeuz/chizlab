@@ -81,8 +81,8 @@ function GrokIcon() {
 function AskAI() {
   return (
     <div className="flex flex-col gap-4 bp-xs:items-center mobile:items-center">
-      <span className="font-sf text-[13px] tracking-[0.18em] uppercase text-bg/60 select-none bp-xs:text-center mobile:text-center">
-        (Chizlab haqida AIdan soʻrang)
+      <span className="font-sf text-[18px] text-bg select-none bp-sm:text-[17px] bp-xs:text-[16px] bp-xs:text-center mobile:text-center">
+        Chizlab haqida AIdan soʻrang
       </span>
       <div className="flex items-center gap-3 bp-sm:gap-2.5 bp-xs:gap-2.5 mobile:gap-2.5">
         {AIS.map(({ name, href, Icon }) => (
