@@ -99,45 +99,66 @@ function Navbar({ isPlaying, onToggleAudio }) {
         <Image src="/naqsh.svg" alt="" width={18} height={18} className="opacity-60 bp-xs:w-[14px] bp-xs:h-[14px]" />
       </div>
 
-      {menuOpen && (
-        <div
-          id="mobile-menu"
-          role="dialog"
-          aria-modal="true"
-          className="hidden bp-md:flex bp-sm:flex bp-xs:flex fixed inset-0 z-[110] bg-bg flex-col"
-        >
-          <div className="flex items-center justify-between p-10 bp-md:py-4 bp-md:px-6 bp-sm:py-3.5 bp-sm:px-5 bp-xs:py-3 bp-xs:px-4">
-            <Image
-              src="/logo.svg"
-              alt="Chizlab"
-              width={210}
-              height={48}
-              className="bp-md:w-[163px] bp-md:h-[37.52px] bp-sm:w-[150px] bp-sm:h-[34.6px] bp-xs:w-[136px] bp-xs:h-[31.4px]"
-            />
-            <button
-              onClick={() => setMenuOpen(false)}
-              aria-label="Yopish"
-              data-cursor-hover=""
-              className="text-primary text-[28px] leading-none bp-xs:text-[24px]"
-            >
-              &times;
-            </button>
-          </div>
-
-          <div className="flex flex-col items-start gap-6 px-10 py-8 overflow-y-auto bp-md:px-6 bp-sm:px-5 bp-sm:gap-5 bp-xs:px-4 bp-xs:gap-4">
-            {navItems.map((item) => (
-              <NavItem
-                key={item}
-                item={item}
-                isPlaying={isPlaying}
-                onToggleAudio={onToggleAudio}
-                onNavigate={() => setMenuOpen(false)}
-                className="text-[32px] bp-md:text-[28px] bp-sm:text-[26px] bp-xs:text-[22px]"
-              />
-            ))}
-          </div>
+      {/* Mobile menu — fades in/out (kept mounted so opacity can animate). */}
+      <div
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!menuOpen}
+        className={`hidden bp-md:flex bp-sm:flex bp-xs:flex fixed inset-0 z-[110] bg-bg flex-col [transition:opacity_0.45s_ease] ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="flex items-center justify-between p-10 bp-md:py-4 bp-md:px-6 bp-sm:py-3.5 bp-sm:px-5 bp-xs:py-3 bp-xs:px-4">
+          <Image
+            src="/logo.svg"
+            alt="Chizlab"
+            width={210}
+            height={48}
+            className="bp-md:w-[163px] bp-md:h-[37.52px] bp-sm:w-[150px] bp-sm:h-[34.6px] bp-xs:w-[136px] bp-xs:h-[31.4px]"
+          />
+          <button
+            onClick={() => setMenuOpen(false)}
+            aria-label="Yopish"
+            data-cursor-hover=""
+            className="text-primary text-[28px] leading-none bp-xs:text-[24px]"
+          >
+            &times;
+          </button>
         </div>
-      )}
+
+        <div className="flex-1 flex flex-col items-start gap-6 px-10 py-8 overflow-y-auto bp-md:px-6 bp-sm:px-5 bp-sm:gap-5 bp-xs:px-4 bp-xs:gap-4">
+          {navItems.map((item) => (
+            <NavItem
+              key={item}
+              item={item}
+              isPlaying={isPlaying}
+              onToggleAudio={onToggleAudio}
+              onNavigate={() => setMenuOpen(false)}
+              className="text-[32px] bp-md:text-[28px] bp-sm:text-[26px] bp-xs:text-[22px]"
+            />
+          ))}
+        </div>
+
+        {/* Decorative naqsh (quatrefoil) band */}
+        <div className="px-10 pb-10 pt-4 pointer-events-none select-none bp-md:px-6 bp-sm:px-5 bp-xs:px-4" aria-hidden="true">
+          <svg viewBox="0 0 440 132" className="w-full h-auto text-accent" fill="none">
+            <defs>
+              <pattern id="navbar-quatrefoil" width="44" height="44" patternUnits="userSpaceOnUse">
+                <path
+                  transform="scale(0.44)"
+                  d="M50 0 C60 25 75 40 100 50 C75 60 60 75 50 100 C40 75 25 60 0 50 C25 40 40 25 50 0 Z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  opacity="0.5"
+                />
+              </pattern>
+            </defs>
+            <rect width="440" height="132" fill="url(#navbar-quatrefoil)" />
+          </svg>
+        </div>
+      </div>
     </nav>
   )
 }
