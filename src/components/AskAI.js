@@ -29,12 +29,13 @@ function OpenAIIcon() {
 }
 
 function ClaudeIcon() {
-  // Radiating sunburst mark.
-  const N = 12
+  // Dense radiating sunburst — thin rays of varying length.
+  const N = 24
+  const lengths = [10.5, 6.5, 8.5, 5.5, 9.5, 7]
+  const inner = 1
   const rays = Array.from({ length: N }, (_, i) => {
     const a = (i * Math.PI * 2) / N - Math.PI / 2
-    const inner = 1.6
-    const outer = i % 3 === 0 ? 10 : i % 3 === 1 ? 6.5 : 8
+    const outer = lengths[i % lengths.length]
     return (
       <line
         key={i}
@@ -46,7 +47,7 @@ function ClaudeIcon() {
     )
   })
   return (
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" aria-hidden="true">
       {rays}
     </svg>
   )
