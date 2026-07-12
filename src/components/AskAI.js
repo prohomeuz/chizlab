@@ -76,7 +76,7 @@ function AskAI() {
             rel="noopener noreferrer"
             title={`${name}da soʻrash`}
             aria-label={`${name}da Chizlab haqida soʻrash`}
-            className="w-12 h-12 rounded-xl bg-bg/10 hover:bg-bg/20 flex items-center justify-center text-bg transition-colors
+            className="w-12 h-12 rounded-none bg-bg/10 hover:bg-bg/20 flex items-center justify-center text-bg transition-colors
               bp-sm:w-11 bp-sm:h-11 bp-xs:w-10 bp-xs:h-10 mobile:w-10 mobile:h-10"
           >
             <Icon />
