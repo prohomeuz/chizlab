@@ -63,8 +63,8 @@ function GrokIcon() {
 // === UI ===
 function AskAI() {
   return (
-    <div className="flex flex-col gap-4 bp-xs:items-center mobile:items-center">
-      <span className="font-sf text-[18px] text-bg select-none bp-sm:text-[17px] bp-xs:text-[16px] bp-xs:text-center mobile:text-center">
+    <div className="flex flex-col gap-4 items-start">
+      <span className="font-sf text-[18px] text-bg tracking-[0.04em] select-none bp-sm:text-[17px] bp-xs:text-[16px]">
         Chizlab haqida AIdan soʻrang
       </span>
       <div className="flex items-center gap-3 bp-sm:gap-2.5 bp-xs:gap-2.5 mobile:gap-2.5">
