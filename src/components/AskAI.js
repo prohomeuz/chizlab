@@ -46,8 +46,8 @@ function GeminiIcon() {
 
 function PerplexityIcon() {
   return (
-    <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true">
-      <path d="M19.785 0v7.272H22.5V17.62h-2.935V24l-7.037-6.213v6.213H9.785v-6.213L2.75 24V17.62H0V7.272h2.715V0l7.037 6.213V0h2.5v6.213L19.785 0Z" />
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" fillRule="evenodd" aria-hidden="true">
+      <path d="M19.785 0v7.272H22.5V17.62h-2.935V24l-7.037-6.194v6.145h-1.091v-6.152L4.392 24v-6.465H1.5V7.188h2.884V0l7.053 6.494V.19h1.09v6.49L19.786 0zm-7.257 9.044v7.319l5.946 5.234V14.44l-5.946-5.397zm-1.099-.08l-5.946 5.398v7.235l5.946-5.234V8.965zm8.136 7.58h1.844V8.349H13.46l6.105 5.54v2.655zm-8.982-8.28H2.59v8.195h1.8v-2.576l6.192-5.62zM5.475 2.476v4.71h5.115l-5.115-4.71zm13.219 0l-5.115 4.71h5.115v-4.71z" />
     </svg>
   )
 }
@@ -64,7 +64,7 @@ function GrokIcon() {
 function AskAI() {
   return (
     <div className="flex flex-col gap-4 items-start">
-      <span className="font-ppe text-[16px] text-bg tracking-[0.06em] select-none">
+      <span className="font-inter text-[10px] uppercase text-bg tracking-[0.08em] select-none">
         Chizlab haqida AIdan soʻrang
       </span>
       <div className="flex items-center gap-3 bp-sm:gap-2.5 bp-xs:gap-2.5 mobile:gap-2.5">
@@ -76,7 +76,6 @@ function AskAI() {
             rel="noopener noreferrer"
             title={`${name}da soʻrash`}
             aria-label={`${name}da Chizlab haqida soʻrash`}
-            data-cursor-hover=""
             className="w-12 h-12 rounded-xl bg-bg/10 hover:bg-bg/20 flex items-center justify-center text-bg transition-colors
               bp-sm:w-11 bp-sm:h-11 bp-xs:w-10 bp-xs:h-10 mobile:w-10 mobile:h-10"
           >

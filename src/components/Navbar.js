@@ -11,6 +11,9 @@ const NAV_LINKS = {
   Dizayn: `/materiallar/${slugify('Dizayn')}`,
 }
 
+// Mobile menu order (top → bottom) per the design.
+const MOBILE_MENU_ORDER = ['Kirish', 'Chizmachilik', 'Ijodkorlar', 'Dizayn', 'AI', 'Ovoz']
+
 // === BUSINESS LOGIC ===
 function NavItem({ item, isPlaying, onToggleAudio, className, onNavigate }) {
   if (item === 'Ovoz') {
@@ -121,41 +124,46 @@ function Navbar({ isPlaying, onToggleAudio }) {
             onClick={() => setMenuOpen(false)}
             aria-label="Yopish"
             data-cursor-hover=""
-            className="text-primary text-[28px] leading-none bp-xs:text-[24px]"
+            className="w-11 h-11 rounded-full border border-primary flex items-center justify-center text-primary bp-xs:w-10 bp-xs:h-10"
           >
-            &times;
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+              <path d="M2 2l10 10M12 2L2 12" />
+            </svg>
           </button>
         </div>
 
-        <div className="flex-1 flex flex-col items-start gap-6 px-10 py-8 overflow-y-auto bp-md:px-6 bp-sm:px-5 bp-sm:gap-5 bp-xs:px-4 bp-xs:gap-4">
-          {navItems.map((item) => (
-            <NavItem
+        <div className="px-10 bp-md:px-6 bp-sm:px-5 bp-xs:px-5 py-6">
+          {MOBILE_MENU_ORDER.map((item) => (
+            <div
               key={item}
-              item={item}
-              isPlaying={isPlaying}
-              onToggleAudio={onToggleAudio}
-              onNavigate={() => setMenuOpen(false)}
-              className="text-[32px] bp-md:text-[28px] bp-sm:text-[26px] bp-xs:text-[22px]"
-            />
+              className="py-8 flex justify-center border-t border-accent/50 last:border-b bp-sm:py-7 bp-xs:py-6"
+            >
+              <NavItem
+                item={item}
+                isPlaying={isPlaying}
+                onToggleAudio={onToggleAudio}
+                onNavigate={() => setMenuOpen(false)}
+                className="text-[30px] font-[620] text-center px-6 py-1 bp-md:text-[28px] bp-sm:text-[26px] bp-xs:text-[22px]"
+              />
+            </div>
           ))}
         </div>
 
-        {/* Decorative naqsh (quatrefoil) band */}
-        <div className="px-10 pb-10 pt-4 pointer-events-none select-none bp-md:px-6 bp-sm:px-5 bp-xs:px-4" aria-hidden="true">
-          <svg viewBox="0 0 440 132" className="w-full h-auto text-accent" fill="none">
+        {/* Decorative quatrefoil lattice band at the bottom */}
+        <div className="mt-auto px-10 pb-10 pt-6 pointer-events-none select-none bp-md:px-6 bp-sm:px-5 bp-xs:px-4" aria-hidden="true">
+          <svg viewBox="0 0 480 132" className="w-full h-auto text-accent" fill="none">
             <defs>
-              <pattern id="navbar-quatrefoil" width="44" height="44" patternUnits="userSpaceOnUse">
+              <pattern id="navbar-quatrefoil" width="48" height="48" patternUnits="userSpaceOnUse">
                 <path
-                  transform="scale(0.44)"
-                  d="M50 0 C60 25 75 40 100 50 C75 60 60 75 50 100 C40 75 25 60 0 50 C25 40 40 25 50 0 Z"
+                  d="M12 12 a12 12 0 0 1 24 0 a12 12 0 0 1 0 24 a12 12 0 0 1 -24 0 a12 12 0 0 1 0 -24 z"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2.4"
-                  opacity="0.5"
+                  strokeWidth="1.1"
+                  opacity="0.55"
                 />
               </pattern>
             </defs>
-            <rect width="440" height="132" fill="url(#navbar-quatrefoil)" />
+            <rect width="480" height="132" fill="url(#navbar-quatrefoil)" />
           </svg>
         </div>
       </div>
