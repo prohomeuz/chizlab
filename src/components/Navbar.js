@@ -136,7 +136,7 @@ function Navbar({ isPlaying, onToggleAudio }) {
           {MOBILE_MENU_ORDER.map((item) => (
             <div
               key={item}
-              className="py-8 flex justify-center border-t border-accent/50 last:border-b bp-sm:py-7 bp-xs:py-6"
+              className="flex justify-center border-t border-accent/50 last:border-b bp-sm:py-7 bp-xs:py-4"
             >
               <NavItem
                 item={item}
