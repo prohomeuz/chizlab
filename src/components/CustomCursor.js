@@ -1,12 +1,24 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function CustomCursor() {
   const wrapRef = useRef(null)
   const defaultRef = useRef(null)
   const activeRef = useRef(null)
   const hoverRef = useRef(null)
+
+  // The custom cursor only runs on a real desktop: a mouse (fine pointer) AND a wide
+  // viewport. On narrow / mobile-layout widths or touch devices we hide it and let the
+  // normal default OS cursor show (see the matching @media rule in globals.css).
+  const [isDesktop, setIsDesktop] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(pointer: fine) and (min-width: 1000px)')
+    const update = () => setIsDesktop(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   useEffect(() => {
     const wrap = wrapRef.current
@@ -15,16 +27,16 @@ export default function CustomCursor() {
     const hov = hoverRef.current
     if (!wrap || !def || !act || !hov) return
 
-    // Desktop only: the custom cursor must never appear on touch / mobile devices
-    // (it used to flash in on tap + scroll). Keep it hidden and attach no touch handlers,
-    // so touch scrolling stays completely normal.
-    const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 430
-
-    if (isMobile) {
+    if (!isDesktop) {
+      // Not a desktop viewport — hide the custom cursor; the default cursor is used.
       wrap.style.display = 'none'
       hov.style.display = 'none'
       return
     }
+
+    // Desktop: ensure the cursor elements are visible again (e.g. after resizing wider).
+    wrap.style.display = ''
+    hov.style.display = ''
 
     let x = 0, y = 0, rafId = null
 
@@ -79,7 +91,7 @@ export default function CustomCursor() {
       document.documentElement.removeEventListener('mouseleave', handleLeave)
       if (rafId) cancelAnimationFrame(rafId)
     }
-  }, [])
+  }, [isDesktop])
 
   return (
     <>

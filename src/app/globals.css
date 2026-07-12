@@ -58,17 +58,14 @@
   font-family: var(--inter-font), Arial, Helvetica, sans-serif;
 }
 
-html,
-body,
-* {
-  cursor: none !important;
-}
-
-@media (pointer: coarse) {
+/* Hide the OS cursor (custom cursor replaces it) only on real desktop: a mouse/fine
+   pointer AND a wide viewport. On narrow / mobile-layout widths or touch devices the
+   normal default cursor is used. */
+@media (pointer: fine) and (min-width: 1000px) {
   html,
   body,
   * {
-    cursor: auto !important;
+    cursor: none !important;
   }
 }
 
