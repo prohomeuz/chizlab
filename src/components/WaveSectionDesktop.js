@@ -34,7 +34,7 @@ function WaveSectionDesktop({ waveSectionRef, lineCTAPathRef, featureItemsRef })
           <div
             key={i}
             ref={(el) => (featureItemsRef.current[i] = el)}
-            className="absolute flex items-center gap-5 -translate-y-1/2 bp-lg:gap-4 bp-md:gap-3"
+            className={`absolute flex items-center gap-5 -translate-y-1/2 bp-lg:gap-4 bp-md:gap-3 ${i==1&&"mt-[-3vh]"}`}
             style={{ left: f.left, top: f.top }}
           >
             <div className="w-[85px] h-[85px] shrink-0 overflow-hidden [clip-path:polygon(22%_0%,78%_3%,100%_20%,97%_78%,80%_100%,18%_97%,0%_80%,3%_22%)] bp-lg:w-[72px] bp-lg:h-[72px] bp-md:w-[58px] bp-md:h-[58px]">
