@@ -3,10 +3,17 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getCategories, getMaterial, getMaterials } from '@/lib/api'
 import { findCategoryBySlug } from '@/lib/slug'
+import { LANG_LABELS } from '@/lib/labels'
+import DownloadButton from '@/components/DownloadButton'
 
 export const revalidate = 60
 
 const FALLBACK_COVER = '/chizmachilik.jpg'
+
+// Lokal demo muqovalari MinIO'da (localhost:9100) turadi. Next 16 rasm
+// optimizatori xususiy IP'ga hal bo'ladigan host'larni bloklaydi, shu bois
+// bunday URL'larni optimizatorsiz to'g'ridan-to'g'ri yuklaymiz.
+const LOCAL_HOST_RE = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])/i
 
 const MATERIAL_TYPE_LABELS = {
   textbook: 'Darslik',
@@ -35,7 +42,7 @@ export default async function MaterialPage({ params }) {
 
   const infoBoxes = [
     { label: 'Tur', value: MATERIAL_TYPE_LABELS[material.materialType] ?? material.materialType },
-    { label: 'Til', value: material.language },
+    { label: 'Til', value: LANG_LABELS[material.language] ?? material.language },
     { label: 'Nashr yili', value: material.publishYear },
     { label: "Bo'lim", value: category?.name },
     { label: 'Davlat', value: material.country },
@@ -88,6 +95,7 @@ export default async function MaterialPage({ params }) {
                     src={item.coverUrl || FALLBACK_COVER}
                     alt={item.title ?? 'Material'}
                     fill
+                    unoptimized={LOCAL_HOST_RE.test(item.coverUrl || FALLBACK_COVER)}
                     className="object-cover"
                     sizes={isActive ? '240px' : '140px'}
                   />
@@ -156,17 +164,7 @@ export default async function MaterialPage({ params }) {
               </p>
             )}
 
-            {material.mediaUrl && (
-              <a
-                href={material.mediaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor-hover=""
-                className="inline-block font-sf text-[16px] bg-primary text-bg px-8 py-3.5 rounded-full hover:opacity-85 transition-opacity bp-sm:text-[15px] bp-sm:px-7 bp-sm:py-3 bp-xs:text-[14px] bp-xs:px-6 bp-xs:py-2.5"
-              >
-                Yuklash
-              </a>
-            )}
+            <DownloadButton href={material.mediaUrl} />
           </div>
         </div>
       </section>
