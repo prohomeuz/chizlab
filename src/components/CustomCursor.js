@@ -1,12 +1,24 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function CustomCursor() {
   const wrapRef = useRef(null)
   const defaultRef = useRef(null)
   const activeRef = useRef(null)
   const hoverRef = useRef(null)
+
+  // The custom cursor only runs on a real desktop: a mouse (fine pointer) AND a wide
+  // viewport. On narrow / mobile-layout widths or touch devices we hide it and let the
+  // normal default OS cursor show (see the matching @media rule in globals.css).
+  const [isDesktop, setIsDesktop] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(pointer: fine) and (min-width: 1000px)')
+    const update = () => setIsDesktop(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   useEffect(() => {
     const wrap = wrapRef.current
@@ -15,70 +27,16 @@ export default function CustomCursor() {
     const hov = hoverRef.current
     if (!wrap || !def || !act || !hov) return
 
-    const mobileQuery = window.matchMedia('(pointer: coarse)')
-
-    if (mobileQuery.matches) {
+    if (!isDesktop) {
+      // Not a desktop viewport — hide the custom cursor; the default cursor is used.
+      wrap.style.display = 'none'
       hov.style.display = 'none'
-      wrap.style.opacity = '0'
-
-      let targetX = 0, targetY = 0
-      let currentX = 0, currentY = 0
-      let isActive = false
-      let hideTimeout = null
-      let rafId = null
-      const LERP = 0.12
-
-      const animate = () => {
-        currentX += (targetX - currentX) * LERP
-        currentY += (targetY - currentY) * LERP
-        wrap.style.transform = `translate(${currentX}px, ${currentY}px)`
-        if (isActive || Math.abs(targetX - currentX) > 0.3 || Math.abs(targetY - currentY) > 0.3) {
-          rafId = requestAnimationFrame(animate)
-        } else {
-          rafId = null
-        }
-      }
-
-      const handleTouchStart = (e) => {
-        const touch = e.touches[0]
-        if (!touch) return
-        currentX = targetX = touch.clientX - 32
-        currentY = targetY = touch.clientY - 32
-        wrap.style.transform = `translate(${currentX}px, ${currentY}px)`
-      }
-
-      const handleTouchMove = (e) => {
-        const touch = e.touches[0]
-        if (!touch) return
-        targetX = touch.clientX - 32
-        targetY = touch.clientY - 32
-        if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null }
-        if (!isActive) {
-          isActive = true
-          wrap.style.opacity = '1'
-        }
-        if (!rafId) rafId = requestAnimationFrame(animate)
-      }
-
-      const handleTouchEnd = () => {
-        isActive = false
-        hideTimeout = setTimeout(() => { wrap.style.opacity = '0' }, 300)
-      }
-
-      window.addEventListener('touchstart', handleTouchStart, { passive: true })
-      window.addEventListener('touchmove', handleTouchMove, { passive: true })
-      window.addEventListener('touchend', handleTouchEnd)
-      window.addEventListener('touchcancel', handleTouchEnd)
-
-      return () => {
-        window.removeEventListener('touchstart', handleTouchStart)
-        window.removeEventListener('touchmove', handleTouchMove)
-        window.removeEventListener('touchend', handleTouchEnd)
-        window.removeEventListener('touchcancel', handleTouchEnd)
-        if (rafId) cancelAnimationFrame(rafId)
-        if (hideTimeout) clearTimeout(hideTimeout)
-      }
+      return
     }
+
+    // Desktop: ensure the cursor elements are visible again (e.g. after resizing wider).
+    wrap.style.display = ''
+    hov.style.display = ''
 
     let x = 0, y = 0, rafId = null
 
@@ -133,7 +91,7 @@ export default function CustomCursor() {
       document.documentElement.removeEventListener('mouseleave', handleLeave)
       if (rafId) cancelAnimationFrame(rafId)
     }
-  }, [])
+  }, [isDesktop])
 
   return (
     <>

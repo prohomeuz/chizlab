@@ -7,6 +7,7 @@
 @custom-variant bp-sm (@media (min-width: 500px) and (max-width: 749px)); /* 500–750 */
 @custom-variant bp-md (@media (min-width: 750px) and (max-width: 999px)); /* 750–1000 */
 @custom-variant bp-lg (@media (min-width: 1000px) and (max-width: 1200px)); /* 1000–1200 */
+@custom-variant bp-4xl (@media (min-width: 2220px)); /* >1200 */
 
 @font-face {
   font-family: 'PPEditorialNew';
@@ -58,17 +59,14 @@
   font-family: var(--inter-font), Arial, Helvetica, sans-serif;
 }
 
-html,
-body,
-* {
-  cursor: none !important;
-}
-
-@media (pointer: coarse) {
+/* Hide the OS cursor (custom cursor replaces it) only on real desktop: a mouse/fine
+   pointer AND a wide viewport. On narrow / mobile-layout widths or touch devices the
+   normal default cursor is used. */
+@media (pointer: fine) and (min-width: 1000px) {
   html,
   body,
   * {
-    cursor: auto !important;
+    cursor: none !important;
   }
 }
 

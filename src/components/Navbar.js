@@ -11,6 +11,9 @@ const NAV_LINKS = {
   Dizayn: `/materiallar/${slugify('Dizayn')}`,
 }
 
+// Mobile menu order (top → bottom) per the design.
+const MOBILE_MENU_ORDER = ['Kirish', 'Chizmachilik', 'Ijodkorlar', 'Dizayn', 'AI', 'Ovoz']
+
 // === BUSINESS LOGIC ===
 function NavItem({ item, isPlaying, onToggleAudio, className, onNavigate }) {
   if (item === 'Ovoz') {
@@ -99,45 +102,71 @@ function Navbar({ isPlaying, onToggleAudio }) {
         <Image src="/naqsh.svg" alt="" width={18} height={18} className="opacity-60 bp-xs:w-[14px] bp-xs:h-[14px]" />
       </div>
 
-      {menuOpen && (
-        <div
-          id="mobile-menu"
-          role="dialog"
-          aria-modal="true"
-          className="hidden bp-md:flex bp-sm:flex bp-xs:flex fixed inset-0 z-[110] bg-bg flex-col"
-        >
-          <div className="flex items-center justify-between p-10 bp-md:py-4 bp-md:px-6 bp-sm:py-3.5 bp-sm:px-5 bp-xs:py-3 bp-xs:px-4">
-            <Image
-              src="/logo.svg"
-              alt="Chizlab"
-              width={210}
-              height={48}
-              className="bp-md:w-[163px] bp-md:h-[37.52px] bp-sm:w-[150px] bp-sm:h-[34.6px] bp-xs:w-[136px] bp-xs:h-[31.4px]"
-            />
-            <button
-              onClick={() => setMenuOpen(false)}
-              aria-label="Yopish"
-              data-cursor-hover=""
-              className="text-primary text-[28px] leading-none bp-xs:text-[24px]"
-            >
-              &times;
-            </button>
-          </div>
+      {/* Mobile menu — fades in/out (kept mounted so opacity can animate). */}
+      <div
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!menuOpen}
+        className={`hidden bp-md:flex bp-sm:flex bp-xs:flex fixed inset-0 z-[110] bg-bg flex-col [transition:opacity_0.45s_ease] ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="flex items-center justify-between p-10 bp-md:py-4 bp-md:px-6 bp-sm:py-3.5 bp-sm:px-5 bp-xs:py-3 bp-xs:px-4">
+          <Image
+            src="/logo.svg"
+            alt="Chizlab"
+            width={210}
+            height={48}
+            className="bp-md:w-[163px] bp-md:h-[37.52px] bp-sm:w-[150px] bp-sm:h-[34.6px] bp-xs:w-[136px] bp-xs:h-[31.4px]"
+          />
+          <button
+            onClick={() => setMenuOpen(false)}
+            aria-label="Yopish"
+            data-cursor-hover=""
+            className="w-11 h-11 rounded-full border border-primary flex items-center justify-center text-primary bp-xs:w-10 bp-xs:h-10"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+              <path d="M2 2l10 10M12 2L2 12" />
+            </svg>
+          </button>
+        </div>
 
-          <div className="flex flex-col items-start gap-6 px-10 py-8 overflow-y-auto bp-md:px-6 bp-sm:px-5 bp-sm:gap-5 bp-xs:px-4 bp-xs:gap-4">
-            {navItems.map((item) => (
+        <div className="px-10 bp-md:px-6 bp-sm:px-5 bp-xs:px-5 py-6">
+          {MOBILE_MENU_ORDER.map((item) => (
+            <div
+              key={item}
+              className="flex justify-center border-t border-accent/50 last:border-b bp-sm:py-7 bp-xs:py-4"
+            >
               <NavItem
-                key={item}
                 item={item}
                 isPlaying={isPlaying}
                 onToggleAudio={onToggleAudio}
                 onNavigate={() => setMenuOpen(false)}
-                className="text-[32px] bp-md:text-[28px] bp-sm:text-[26px] bp-xs:text-[22px]"
+                className="text-[30px] font-[620] text-center px-6 py-1 bp-md:text-[28px] bp-sm:text-[26px] bp-xs:text-[22px]"
               />
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      )}
+
+        {/* Decorative quatrefoil lattice band at the bottom */}
+        <div className="mt-auto px-10 pb-10 pt-6 pointer-events-none select-none bp-md:px-6 bp-sm:px-5 bp-xs:px-4" aria-hidden="true">
+          <svg viewBox="0 0 480 132" className="w-full h-auto text-accent" fill="none">
+            <defs>
+              <pattern id="navbar-quatrefoil" width="48" height="48" patternUnits="userSpaceOnUse">
+                <path
+                  d="M12 12 a12 12 0 0 1 24 0 a12 12 0 0 1 0 24 a12 12 0 0 1 -24 0 a12 12 0 0 1 0 -24 z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.1"
+                  opacity="0.55"
+                />
+              </pattern>
+            </defs>
+            <rect width="480" height="132" fill="url(#navbar-quatrefoil)" />
+          </svg>
+        </div>
+      </div>
     </nav>
   )
 }

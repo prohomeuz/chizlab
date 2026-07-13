@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
+import AskAI from './AskAI'
 
 // === BUSINESS LOGIC ===
 // (none — pure static display)
@@ -36,8 +37,9 @@ function Footer() {
         </div>
       </div>
 
-      <div className="flex justify-end mobile:justify-center bp-xs:justify-center">
-        <div className="flex items-baseline gap-4 bp-sm:gap-3 bp-xs:gap-2.5">
+      <div className="flex items-center justify-between gap-8 bp-xs:flex-col bp-xs:items-start bp-xs:gap-8 mobile:flex-col mobile:items-start mobile:gap-8">
+        <AskAI />
+        <div className="flex items-baseline gap-4 bp-sm:gap-3 bp-xs:gap-2.5 bp-xs:self-center mobile:self-center">
           <Image className="w-[65px] h-[65px] bp-lg:w-[54px] bp-lg:h-[54px] bp-md:w-[46px] bp-md:h-[46px] bp-sm:w-[38px] bp-sm:h-[38px] bp-xs:w-9 bp-xs:h-9 mobile:w-9 mobile:h-9" src="/copyright.svg" alt="©" width={65} height={65} />
           <span className="font-ppe text-[106px] text-bg whitespace-nowrap bp-lg:text-[88px] bp-md:text-[72px] bp-sm:text-[58px] bp-xs:text-[46px] mobile:text-[48px]">
             2025 Chizlab
