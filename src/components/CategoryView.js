@@ -32,6 +32,15 @@ function norm(value) {
   return (value ?? '').toString().toLowerCase()
 }
 
+function SearchIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true" className="shrink-0 opacity-60">
+      <circle cx="9" cy="9" r="6.25" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M13.7 13.7L17 17" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 /**
  * Mockupdagi {Yorliq} ko'rinishidagi filtr chipi. Bosilganda pastida
  * brendga mos ochiladigan ro'yxat chiqadi; qiymat tanlansa chip matni
@@ -118,7 +127,7 @@ function FilterChip({ label, prompt, value, defaultValue = '', options, onSelect
 }
 
 export default function CategoryView({ categoryName, categorySlug, materials }) {
-  const [search] = useState('')
+  const [search, setSearch] = useState('')
   const [type, setType] = useState('')
   // Daraja: materialda hozircha mos maydon yo'q — chip mockupga muvofiq
   // turadi, menyusi "Tez kunda" ko'rsatadi.
@@ -190,9 +199,10 @@ export default function CategoryView({ categoryName, categorySlug, materials }) 
   const safePage = Math.min(page, totalPages - 1)
   const visible = filtered.slice(safePage * PAGE_SIZE, safePage * PAGE_SIZE + PAGE_SIZE)
 
-  const hasActiveFilter = type !== '' || lang !== '' || year !== '' || sort !== 'new'
+  const hasActiveFilter = Boolean(search) || type !== '' || lang !== '' || year !== '' || sort !== 'new'
 
   const clearAll = () => {
+    setSearch('')
     setType('')
     setLang('')
     setYear('')
@@ -233,7 +243,24 @@ export default function CategoryView({ categoryName, categorySlug, materials }) 
           {categoryName}
         </h1>
 
-        {/* {filtr} chiplari — sarlavha ostida, chapga tekislangan */}
+        {/* Qidiruv — filtrlar ustida */}
+        <label
+          className="mb-6 flex w-[320px] max-w-full items-center gap-2.5 rounded-[5px] border border-primary/25 px-3.5 py-2.5 text-primary
+            transition-colors focus-within:border-primary/55 bp-sm:w-full bp-xs:mb-5"
+        >
+          <SearchIcon />
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Qidiramiz"
+            aria-label="Qidiruv"
+            className="w-full bg-transparent font-sf text-[15px] text-primary placeholder:text-primary/45 focus:outline-none
+              [&::-webkit-search-cancel-button]:appearance-none bp-xs:text-[14px]"
+          />
+        </label>
+
+        {/* {filtr} chiplari — qidiruv ostida, chapga tekislangan */}
         <div className="mb-10 flex flex-wrap items-center gap-x-9 gap-y-1 bp-lg:gap-x-7 bp-md:gap-x-6 bp-sm:gap-x-5 bp-xs:gap-x-4 bp-xs:mb-8">
           <FilterChip label="Material turi" prompt="Turini tanlang" value={type} options={typeOptions} onSelect={setType} />
           <FilterChip label="Daraja" prompt="Darajani tanlang" value={daraja} options={[]} onSelect={setDaraja} />
