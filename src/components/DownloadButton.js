@@ -1,57 +1,53 @@
 'use client'
 
-import { useState } from 'react'
+// Muqovadagi teal-yashil rang (cover-empty.jpg fonidan olingan)
+const COVER_GREEN = '#1f6362'
 
-// Downloads the file directly (blob) instead of navigating to the media URL / viewer page.
-export default function DownloadButton({ url, title, className }) {
-  const [busy, setBusy] = useState(false)
+function DownloadIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" className="shrink-0">
+      <path d="M10 3v9m0 0l-3.5-3.5M10 12l3.5-3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 15.5h12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}
 
-  const filename = (() => {
-    const base = (title ?? 'material').replace(/[\\/:*?"<>|]+/g, ' ').trim() || 'material'
-    const ext = (url.split('?')[0].match(/\.([a-z0-9]{2,5})$/i)?.[1] ?? 'pdf').toLowerCase()
-    return `${base}.${ext}`
-  })()
+/**
+ * "Yuklab olish" tugmasi — descriptionning ostida turadi. Fon rangi muqovadagi
+ * yashil (teal) rangga mos. Fayl mavjud bo'lsa to'g'ridan-to'g'ri yuklaydi;
+ * demo materiallarda hali fayl yo'q, shu bois "Tez kunda" xabari chiqadi.
+ */
+export default function DownloadButton({ href }) {
+  const cls =
+    'inline-flex items-center gap-2.5 font-sf text-[16px] text-bg px-8 py-3.5 rounded-full transition-opacity hover:opacity-85 bp-sm:text-[15px] bp-sm:px-7 bp-sm:py-3 bp-xs:text-[14px] bp-xs:px-6 bp-xs:py-2.5'
 
-  const triggerBlob = async () => {
-    setBusy(true)
-    try {
-      const res = await fetch(url)
-      if (!res.ok) throw new Error('fetch failed')
-      const blob = await res.blob()
-      const objectUrl = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = objectUrl
-      a.download = filename
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-      URL.revokeObjectURL(objectUrl)
-    } catch {
-      // Cross-origin / CORS-blocked: fall back to a plain download link (same tab, no viewer).
-      const a = document.createElement('a')
-      a.href = url
-      a.download = filename
-      a.rel = 'noopener'
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-    } finally {
-      setBusy(false)
-    }
+  if (href) {
+    return (
+      <a
+        href={href}
+        download
+        target="_blank"
+        rel="noopener noreferrer"
+        data-cursor-hover=""
+        className={cls}
+        style={{ backgroundColor: COVER_GREEN }}
+      >
+        <DownloadIcon />
+        Yuklab olish
+      </a>
+    )
   }
 
   return (
     <button
       type="button"
-      onClick={triggerBlob}
-      disabled={busy}
+      onClick={() => alert('Fayl tez kunda qo‘shiladi')}
       data-cursor-hover=""
-      className={className}
+      className={cls}
+      style={{ backgroundColor: COVER_GREEN }}
     >
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="inline-block -mt-0.5 mr-2">
-        <path d="M12 3v12M7 10l5 5 5-5M4 21h16" />
-      </svg>
-      {busy ? 'Yuklanmoqda…' : 'Yuklab olish'}
+      <DownloadIcon />
+      Yuklab olish
     </button>
   )
 }

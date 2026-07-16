@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import CatalogShell from '@/components/CatalogShell'
+import CategoryView from '@/components/CategoryView'
 import { getCategories, getMaterials } from '@/lib/api'
 import { findCategoryBySlug } from '@/lib/slug'
 
@@ -24,5 +24,5 @@ export default async function CategoryPage({ params }) {
   const data = await getMaterials({ categoryId: category.id, limit: 60 })
   const materials = data?.items ?? []
 
-  return <CatalogShell materials={materials} categorySlug={slug} />
+  return <CategoryView categoryName={category.name} categorySlug={slug} materials={materials} />
 }

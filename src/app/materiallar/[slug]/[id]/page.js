@@ -6,10 +6,17 @@ import ShareButton from '@/components/ShareButton'
 import DownloadButton from '@/components/DownloadButton'
 import { getCategories, getMaterial, getMaterials } from '@/lib/api'
 import { findCategoryBySlug } from '@/lib/slug'
+import { LANG_LABELS } from '@/lib/labels'
+import DownloadButton from '@/components/DownloadButton'
 
 export const revalidate = 60
 
 const FALLBACK_COVER = '/chizmachilik.jpg'
+
+// Lokal demo muqovalari MinIO'da (localhost:9100) turadi. Next 16 rasm
+// optimizatori xususiy IP'ga hal bo'ladigan host'larni bloklaydi, shu bois
+// bunday URL'larni optimizatorsiz to'g'ridan-to'g'ri yuklaymiz.
+const LOCAL_HOST_RE = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])/i
 
 const MATERIAL_TYPE_LABELS = {
   textbook: 'Darslik',
@@ -38,7 +45,7 @@ export default async function MaterialPage({ params }) {
 
   const infoBoxes = [
     { label: 'Tur', value: MATERIAL_TYPE_LABELS[material.materialType] ?? material.materialType },
-    { label: 'Til', value: material.language },
+    { label: 'Til', value: LANG_LABELS[material.language] ?? material.language },
     { label: 'Nashr yili', value: material.publishYear },
     { label: "Bo'lim", value: category?.name },
     { label: 'Davlat', value: material.country },
@@ -69,40 +76,39 @@ export default async function MaterialPage({ params }) {
           className="grid grid-cols-4 gap-4
             bp-md:grid-cols-3 bp-md:gap-3.5 bp-sm:grid-cols-2 bp-sm:gap-3.5 bp-xs:grid-cols-2 bp-xs:gap-3.5"
         >
-          {strip.slice(0, 4).map((item) => {
-            const isActive = item.id === material.id
-            return (
-              <Link
-                key={item.id}
-                href={`/materiallar/${slug}/${item.id}`}
-                data-cursor-hover=""
-                className={`relative overflow-hidden aspect-[3/4] transition-opacity duration-300 ${
-                  isActive ? '' : 'opacity-35 hover:opacity-70'
-                }`}
-              >
-                <Image
-                  src={item.coverUrl || FALLBACK_COVER}
-                  alt={item.title ?? 'Material'}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 430px) 44vw, (max-width: 1200px) 30vw, 22vw"
-                />
-                {isActive && (
-                  <div className="absolute left-3 bottom-3 flex flex-col gap-1.5">
-                    <div className="flex items-center gap-2">
-                      <span className="bg-white text-[#111] font-sf text-[12px] px-2.5 py-1">{MATERIAL_TYPE_LABELS[material.materialType] ?? 'Maqola'}</span>
-                      <span className="font-sf text-[12px] text-white/90">
-                        {material.authors?.[0]}{material.authors?.[0] && material.publishYear ? '   ' : ''}{material.publishYear}
-                      </span>
-                    </div>
-                    <span className="bg-[#00e05a] text-[#003014] font-sf text-[12px] px-2.5 py-1 w-fit">Yangi</span>
-                  </div>
-                )}
-              </Link>
-            )
-          })}
-        </div>
-      </section>
+          <div className="flex items-end gap-4 overflow-x-auto pb-1 bp-sm:gap-3 bp-xs:gap-2.5">
+            {strip.map((item) => {
+              const isActive = item.id === material.id
+              return (
+                <Link
+                  key={item.id}
+                  href={`/materiallar/${slug}/${item.id}`}
+                  data-cursor-hover=""
+                  className={`relative shrink-0 overflow-hidden transition-all duration-300 aspect-[3/4] ${
+                    isActive
+                      ? 'w-[240px] bp-lg:w-[200px] bp-md:w-[180px] bp-sm:w-[150px] bp-xs:w-[124px]'
+                      : 'w-[140px] opacity-50 hover:opacity-90 bp-lg:w-[120px] bp-md:w-[104px] bp-sm:w-[88px] bp-xs:w-[74px]'
+                  }`}
+                >
+                  <Image
+                    src={item.coverUrl || FALLBACK_COVER}
+                    alt={item.title ?? 'Material'}
+                    fill
+                    unoptimized={LOCAL_HOST_RE.test(item.coverUrl || FALLBACK_COVER)}
+                    className="object-cover"
+                    sizes={isActive ? '240px' : '140px'}
+                  />
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 right-0 bg-primary/80 px-3 py-2 font-sf text-[12px] text-bg bp-sm:px-2 bp-sm:py-1.5 bp-sm:text-[11px] bp-xs:px-1.5 bp-xs:py-1 bp-xs:text-[10px]">
+                      {item.title}
+                    </span>
+                  )}
+                </Link>
+              )
+            })}
+          </div>
+        </section>
+      )}
 
       <section
         className="px-10 pb-24 bp-lg:px-8 bp-lg:pb-20 bp-md:px-6 bp-md:pb-16 bp-sm:px-5 bp-sm:pb-12 bp-xs:px-4 bp-xs:pb-10"
@@ -148,16 +154,7 @@ export default async function MaterialPage({ params }) {
               </p>
             )}
 
-            <div className="flex flex-wrap items-center gap-3">
-              {material.mediaUrl && (
-                <DownloadButton
-                  url={material.mediaUrl}
-                  title={material.title}
-                  className="inline-flex items-center font-sf text-[16px] bg-primary text-bg px-9 py-3.5 hover:opacity-85 transition-opacity disabled:opacity-60 bp-sm:text-[15px] bp-sm:px-7 bp-sm:py-3 bp-xs:text-[14px] bp-xs:px-6 bp-xs:py-2.5"
-                />
-              )}
-              <ShareButton title={material.title} />
-            </div>
+            <DownloadButton href={material.mediaUrl} />
           </div>
         </div>
       </section>
