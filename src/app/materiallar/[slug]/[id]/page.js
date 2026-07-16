@@ -6,8 +6,7 @@ import ShareButton from '@/components/ShareButton'
 import DownloadButton from '@/components/DownloadButton'
 import { getCategories, getMaterial, getMaterials } from '@/lib/api'
 import { findCategoryBySlug } from '@/lib/slug'
-import { LANG_LABELS } from '@/lib/labels'
-import DownloadButton from '@/components/DownloadButton'
+import { TYPE_LABELS, LANG_LABELS } from '@/lib/labels'
 
 export const revalidate = 60
 
@@ -17,15 +16,6 @@ const FALLBACK_COVER = '/chizmachilik.jpg'
 // optimizatori xususiy IP'ga hal bo'ladigan host'larni bloklaydi, shu bois
 // bunday URL'larni optimizatorsiz to'g'ridan-to'g'ri yuklaymiz.
 const LOCAL_HOST_RE = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])/i
-
-const MATERIAL_TYPE_LABELS = {
-  textbook: 'Darslik',
-  textbook_electronic: 'Elektron darslik',
-  thesis: 'Dissertatsiya',
-  article: 'Maqola',
-  monograph: 'Monografiya',
-  presentation: 'Taqdimot',
-}
 
 export async function generateMetadata({ params }) {
   const { id } = await params
@@ -44,7 +34,7 @@ export default async function MaterialPage({ params }) {
   const strip = related?.items ?? []
 
   const infoBoxes = [
-    { label: 'Tur', value: MATERIAL_TYPE_LABELS[material.materialType] ?? material.materialType },
+    { label: 'Tur', value: TYPE_LABELS[material.materialType] ?? material.materialType },
     { label: 'Til', value: LANG_LABELS[material.language] ?? material.language },
     { label: 'Nashr yili', value: material.publishYear },
     { label: "Bo'lim", value: category?.name },
@@ -69,54 +59,51 @@ export default async function MaterialPage({ params }) {
       </div>
 
       {/* Cover strip — active material in full color, the rest dimmed (per design) */}
-      <section
-        className="px-10 pt-6 pb-10 bp-lg:px-8 bp-md:px-6 bp-sm:px-5 bp-xs:px-4"
-      >
-        <div
-          className="grid grid-cols-4 gap-4
-            bp-md:grid-cols-3 bp-md:gap-3.5 bp-sm:grid-cols-2 bp-sm:gap-3.5 bp-xs:grid-cols-2 bp-xs:gap-3.5"
-        >
-          <div className="flex items-end gap-4 overflow-x-auto pb-1 bp-sm:gap-3 bp-xs:gap-2.5">
-            {strip.map((item) => {
-              const isActive = item.id === material.id
-              return (
-                <Link
-                  key={item.id}
-                  href={`/materiallar/${slug}/${item.id}`}
-                  data-cursor-hover=""
-                  className={`relative shrink-0 overflow-hidden transition-all duration-300 aspect-[3/4] ${
-                    isActive
-                      ? 'w-[240px] bp-lg:w-[200px] bp-md:w-[180px] bp-sm:w-[150px] bp-xs:w-[124px]'
-                      : 'w-[140px] opacity-50 hover:opacity-90 bp-lg:w-[120px] bp-md:w-[104px] bp-sm:w-[88px] bp-xs:w-[74px]'
-                  }`}
-                >
-                  <Image
-                    src={item.coverUrl || FALLBACK_COVER}
-                    alt={item.title ?? 'Material'}
-                    fill
-                    unoptimized={LOCAL_HOST_RE.test(item.coverUrl || FALLBACK_COVER)}
-                    className="object-cover"
-                    sizes={isActive ? '240px' : '140px'}
-                  />
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 bg-primary/80 px-3 py-2 font-sf text-[12px] text-bg bp-sm:px-2 bp-sm:py-1.5 bp-sm:text-[11px] bp-xs:px-1.5 bp-xs:py-1 bp-xs:text-[10px]">
-                      {item.title}
-                    </span>
-                  )}
-                </Link>
-              )
-            })}
-          </div>
-        </section>
-      )}
+      <section className="px-10 pt-6 pb-10 bp-lg:px-8 bp-md:px-6 bp-sm:px-5 bp-xs:px-4">
+        <div className="grid grid-cols-4 gap-4 bp-md:grid-cols-3 bp-md:gap-3.5 bp-sm:grid-cols-2 bp-sm:gap-3.5 bp-xs:grid-cols-2 bp-xs:gap-3.5">
+          {strip.slice(0, 4).map((item) => {
+            const isActive = item.id === material.id
+            const cover = item.coverUrl || FALLBACK_COVER
+            return (
+              <Link
+                key={item.id}
+                href={`/materiallar/${slug}/${item.id}`}
+                data-cursor-hover=""
+                className={`relative overflow-hidden aspect-[2480/3508] transition-opacity duration-300 ${
+                  isActive ? '' : 'opacity-35 hover:opacity-70'
+                }`}
+              >
+                <Image
+                  src={cover}
+                  alt={item.title ?? 'Material'}
+                  fill
+                  unoptimized={LOCAL_HOST_RE.test(cover)}
+                  className="object-cover"
+                  sizes="(max-width: 430px) 44vw, (max-width: 1200px) 30vw, 22vw"
+                />
+                {isActive && (
+                  <div className="absolute left-3 bottom-3 flex flex-col gap-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="bg-white text-[#111] font-sf text-[12px] px-2.5 py-1">
+                        {TYPE_LABELS[material.materialType] ?? 'Maqola'}
+                      </span>
+                      <span className="font-sf text-[12px] text-white/90">
+                        {material.authors?.[0]}
+                        {material.authors?.[0] && material.publishYear ? '   ' : ''}
+                        {material.publishYear}
+                      </span>
+                    </div>
+                    <span className="bg-[#00e05a] text-[#003014] font-sf text-[12px] px-2.5 py-1 w-fit">Yangi</span>
+                  </div>
+                )}
+              </Link>
+            )
+          })}
+        </div>
+      </section>
 
-      <section
-        className="px-10 pb-24 bp-lg:px-8 bp-lg:pb-20 bp-md:px-6 bp-md:pb-16 bp-sm:px-5 bp-sm:pb-12 bp-xs:px-4 bp-xs:pb-10"
-      >
-        <div
-          className="grid grid-cols-2 gap-16
-            bp-lg:gap-10 bp-md:gap-8 bp-sm:grid-cols-1 bp-sm:gap-6 bp-xs:grid-cols-1 bp-xs:gap-5"
-        >
+      <section className="px-10 pb-24 bp-lg:px-8 bp-lg:pb-20 bp-md:px-6 bp-md:pb-16 bp-sm:px-5 bp-sm:pb-12 bp-xs:px-4 bp-xs:pb-10">
+        <div className="grid grid-cols-2 gap-16 bp-lg:gap-10 bp-md:gap-8 bp-sm:grid-cols-1 bp-sm:gap-6 bp-xs:grid-cols-1 bp-xs:gap-5">
           <div>
             {material.authors?.length > 0 && (
               <p className="font-ppe text-[30px] leading-[1.2] text-primary mb-7 bp-lg:text-[26px] bp-md:text-[24px] bp-sm:text-[24px] bp-sm:mb-6 bp-xs:text-[21px] bp-xs:mb-5">
@@ -127,7 +114,7 @@ export default async function MaterialPage({ params }) {
 
             {infoBoxes.length > 0 && (
               <div className="grid grid-cols-3 gap-3 bp-xs:gap-2.5">
-                {infoBoxes.map((box, i) => (
+                {infoBoxes.map((box) => (
                   <div
                     key={box.label}
                     className="px-4 py-2.5 border border-primary/25 rounded-md bp-sm:px-3 bp-sm:py-2.5 bp-xs:px-2.5 bp-xs:py-2"
@@ -154,7 +141,10 @@ export default async function MaterialPage({ params }) {
               </p>
             )}
 
-            <DownloadButton href={material.mediaUrl} />
+            <div className="flex flex-wrap items-center gap-3">
+              <DownloadButton href={material.mediaUrl} />
+              <ShareButton title={material.title} />
+            </div>
           </div>
         </div>
       </section>
