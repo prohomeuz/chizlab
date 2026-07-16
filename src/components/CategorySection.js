@@ -10,7 +10,7 @@ import aiImg from '../../public/ai.jpg'
 const CATEGORIES = [
   { title: 'Chizmachilik', img: chizmachilikImg, href: `/materiallar/${slugify('Chizmachilik')}` },
   { title: 'Dizayn', img: dizaynImg, href: `/materiallar/${slugify('Dizayn')}` },
-  { title: 'AI', img: aiImg, href: null },
+  { title: 'AI', img: aiImg, href: null, cta: "Ko'rish" },
 ]
 
 export default function CategorySection() {
@@ -24,29 +24,13 @@ export default function CategorySection() {
         AI yordam beradi.
       </h2>
       <div className="grid grid-cols-3 gap-10 bp-lg:gap-8 bp-md:gap-6 bp-sm:grid-cols-1 bp-sm:gap-8 bp-xs:grid-cols-1 bp-xs:gap-6 mobile:grid-cols-1 mobile:gap-6">
-        {CATEGORIES.map(({ title, img, href }) => (
-          <div key={title}>
-            <h3 className="font-ppe text-[50px] font-normal text-primary leading-[1.2] tracking-[-0.02em] mb-5 bp-lg:text-[42px] bp-md:text-[32px] bp-md:mb-4 bp-sm:text-[38px] bp-sm:mb-4 bp-xs:text-[36px] bp-xs:mb-4 mobile:text-[36px] mobile:mb-4">
-              {title}
-            </h3>
-            <div
-              data-cursor-hover=""
-              className="relative h-[270px] bp-md:h-[190px] bp-sm:h-[230px] bp-xs:h-[200px] mobile:h-[200px] cursor-pointer"
-              onClick={() => (href ? undefined : alert('Tez kunda!'))}
-            >
-              {href ? (
-                <Link href={href} className="relative block w-full h-full" aria-label={title}>
-                  <Image
-                    src={img}
-                    alt={title}
-                    fill
-                    placeholder="blur"
-                    loading="lazy"
-                    className="object-cover"
-                    sizes="(max-width: 749px) 100vw, calc(33vw - 40px)"
-                  />
-                </Link>
-              ) : (
+        {CATEGORIES.map(({ title, img, href, cta }) => {
+          const cover = (
+            <>
+              <h3 className="font-ppe text-[50px] font-normal text-primary leading-[1.2] tracking-[-0.02em] mb-5 bp-lg:text-[42px] bp-md:text-[32px] bp-md:mb-4 bp-sm:text-[38px] bp-sm:mb-4 bp-xs:text-[36px] bp-xs:mb-4 mobile:text-[36px] mobile:mb-4">
+                {title}
+              </h3>
+              <div className="relative h-[270px] bp-md:h-[190px] bp-sm:h-[230px] bp-xs:h-[200px] mobile:h-[200px]">
                 <Image
                   src={img}
                   alt={title}
@@ -56,10 +40,31 @@ export default function CategorySection() {
                   className="object-cover"
                   sizes="(max-width: 749px) 100vw, calc(33vw - 40px)"
                 />
-              )}
-            </div>
-          </div>
-        ))}
+                {cta && (
+                  <span className="absolute right-4 bottom-4 bg-bg text-primary font-sf text-[15px] px-5 py-2.5 rounded-full shadow-md bp-sm:text-[14px] bp-sm:px-4 bp-sm:py-2">
+                    {cta}
+                  </span>
+                )}
+              </div>
+            </>
+          )
+
+          return href ? (
+            <Link key={title} href={href} data-cursor-hover="" className="block group" aria-label={title}>
+              {cover}
+            </Link>
+          ) : (
+            <button
+              key={title}
+              type="button"
+              data-cursor-hover=""
+              onClick={() => alert('Tez kunda!')}
+              className="block text-left w-full group"
+            >
+              {cover}
+            </button>
+          )
+        })}
       </div>
     </section>
   )
