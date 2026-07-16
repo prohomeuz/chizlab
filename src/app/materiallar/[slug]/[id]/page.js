@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import CatalogShell from '@/components/CatalogShell'
+import ShareButton from '@/components/ShareButton'
+import DownloadButton from '@/components/DownloadButton'
 import { getCategories, getMaterial, getMaterials } from '@/lib/api'
 import { findCategoryBySlug } from '@/lib/slug'
 import { LANG_LABELS } from '@/lib/labels'
@@ -50,32 +53,28 @@ export default async function MaterialPage({ params }) {
   ].filter((box) => box.value)
 
   return (
-    <main className="bg-bg min-h-screen">
-      <header
-        className="flex items-center justify-between px-10 py-8
-          bp-lg:px-8 bp-lg:py-6 bp-md:px-6 bp-md:py-5 bp-sm:px-5 bp-sm:py-4 bp-xs:px-4 bp-xs:py-3"
-      >
-        <Link href="/" aria-label="Chizlab">
-          <Image
-            src="/logo.svg"
-            alt="Chizlab"
-            width={160}
-            height={37}
-            priority
-            className="bp-lg:w-[144px] bp-lg:h-auto bp-md:w-[132px] bp-sm:w-[120px] bp-xs:w-[108px]"
-          />
-        </Link>
+    <CatalogShell>
+      {/* Back link + title */}
+      <div className="px-10 pt-6 bp-lg:px-8 bp-md:px-6 bp-sm:px-5 bp-xs:px-4">
         <Link
           href={`/materiallar/${slug}`}
-          className="font-sf text-[16px] text-primary hover:opacity-70 transition-opacity bp-sm:text-[14px] bp-xs:text-[13px]"
+          data-cursor-hover=""
+          className="inline-flex items-center gap-1.5 font-sf text-[16px] text-primary hover:opacity-70 transition-opacity bp-sm:text-[15px] bp-xs:text-[14px]"
         >
-          &larr; Ortga
+          <span aria-hidden="true">&larr;</span> Ortga
         </Link>
-      </header>
+        <h1 className="font-ppe text-[44px] font-normal leading-[1.1] text-primary mt-3 bp-lg:text-[38px] bp-md:text-[32px] bp-sm:text-[27px] bp-xs:text-[23px]">
+          {material.title}
+        </h1>
+      </div>
 
-      {strip.length > 1 && (
-        <section
-          className="px-10 pb-14 bp-lg:px-8 bp-lg:pb-11 bp-md:px-6 bp-md:pb-9 bp-sm:px-5 bp-sm:pb-7 bp-xs:px-4 bp-xs:pb-6"
+      {/* Cover strip — active material in full color, the rest dimmed (per design) */}
+      <section
+        className="px-10 pt-6 pb-10 bp-lg:px-8 bp-md:px-6 bp-sm:px-5 bp-xs:px-4"
+      >
+        <div
+          className="grid grid-cols-4 gap-4
+            bp-md:grid-cols-3 bp-md:gap-3.5 bp-sm:grid-cols-2 bp-sm:gap-3.5 bp-xs:grid-cols-2 bp-xs:gap-3.5"
         >
           <div className="flex items-end gap-4 overflow-x-auto pb-1 bp-sm:gap-3 bp-xs:gap-2.5">
             {strip.map((item) => {
@@ -114,36 +113,27 @@ export default async function MaterialPage({ params }) {
       <section
         className="px-10 pb-24 bp-lg:px-8 bp-lg:pb-20 bp-md:px-6 bp-md:pb-16 bp-sm:px-5 bp-sm:pb-12 bp-xs:px-4 bp-xs:pb-10"
       >
-        <h1
-          className="font-ppe text-[48px] font-normal text-primary leading-[1.1] mb-8
-            bp-lg:text-[40px] bp-lg:mb-7 bp-md:text-[34px] bp-md:mb-6 bp-sm:text-[27px] bp-sm:mb-5 bp-xs:text-[23px] bp-xs:mb-4"
-        >
-          {material.title}
-        </h1>
-
         <div
           className="grid grid-cols-2 gap-16
             bp-lg:gap-10 bp-md:gap-8 bp-sm:grid-cols-1 bp-sm:gap-6 bp-xs:grid-cols-1 bp-xs:gap-5"
         >
           <div>
             {material.authors?.length > 0 && (
-              <p className="font-sf text-[16px] leading-relaxed text-primary mb-6 bp-sm:text-[15px] bp-sm:mb-5 bp-xs:text-[14px] bp-xs:mb-4">
+              <p className="font-ppe text-[30px] leading-[1.2] text-primary mb-7 bp-lg:text-[26px] bp-md:text-[24px] bp-sm:text-[24px] bp-sm:mb-6 bp-xs:text-[21px] bp-xs:mb-5">
                 <span className="text-primary/50">Mualliflar: </span>
                 {material.authors.join(', ')}
               </p>
             )}
 
             {infoBoxes.length > 0 && (
-              <div className="grid grid-cols-3 border border-primary/15">
+              <div className="grid grid-cols-3 gap-3 bp-xs:gap-2.5">
                 {infoBoxes.map((box, i) => (
                   <div
                     key={box.label}
-                    className={`px-4 py-3 border-primary/15 bp-sm:px-3 bp-sm:py-2.5 bp-xs:px-2 bp-xs:py-2 ${(i + 1) % 3 !== 0 ? 'border-r' : ''} ${
-                      i < 3 && infoBoxes.length > 3 ? 'border-b' : ''
-                    }`}
+                    className="px-4 py-2.5 border border-primary/25 rounded-md bp-sm:px-3 bp-sm:py-2.5 bp-xs:px-2.5 bp-xs:py-2"
                   >
-                    <dt className="font-sf text-[12px] text-primary/50 bp-xs:text-[10px]">{box.label}</dt>
-                    <dd className="font-sf text-[15px] text-primary mt-0.5 bp-sm:text-[14px] bp-xs:text-[12px]">{box.value}</dd>
+                    <dt className="font-sf text-[13px] text-primary/45 bp-xs:text-[11px]">{box.label}:</dt>
+                    <dd className="font-sf text-[16px] text-primary mt-0.5 bp-sm:text-[15px] bp-xs:text-[13px]">{box.value}</dd>
                   </div>
                 ))}
               </div>
@@ -168,6 +158,6 @@ export default async function MaterialPage({ params }) {
           </div>
         </div>
       </section>
-    </main>
+    </CatalogShell>
   )
 }

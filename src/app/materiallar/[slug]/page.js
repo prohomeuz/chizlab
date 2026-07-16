@@ -21,7 +21,7 @@ export default async function CategoryPage({ params }) {
 
   if (!category) notFound()
 
-  const data = await getMaterials({ categoryId: category.id, limit: 40 })
+  const data = await getMaterials({ categoryId: category.id, limit: 60 })
   const materials = data?.items ?? []
 
   return <CategoryView categoryName={category.name} categorySlug={slug} materials={materials} />

@@ -49,13 +49,12 @@ export default function Home() {
     setOpenAboutIdx((prev) => (prev === i ? null : i))
   }, [])
 
-  const handleDismissAndPlay = useCallback(() => {
+  // Global click only dismisses the hint — sound is started exclusively via the "Ovoz" nav button.
+  const handleDismissHint = useCallback(() => {
     setHintDismissed(true)
-    initAudio()
-    fadeIn()
-  }, [initAudio, fadeIn])
+  }, [])
 
-  useSoundHint(loaderDone, hintDismissed, soundHintRef, handleDismissAndPlay)
+  useSoundHint(loaderDone, hintDismissed, soundHintRef, handleDismissHint)
   useWaveAnimation(loaderDone, waveSectionRef, lineCTAPathRef, featureItemsRef)
   useMobileWaveAnimation(loaderDone, mobileWaveSectionRef, mobileWavePathRef, mobileFeatureItemsRef)
 

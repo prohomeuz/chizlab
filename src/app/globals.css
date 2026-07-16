@@ -47,6 +47,15 @@
   --animate-marquee: marquee-scroll 28s linear infinite;
 }
 
+/* Catalog dark theme — overrides the semantic color vars for any subtree tagged
+   [data-theme="dark"] so existing bg-bg / text-primary classes flip automatically.
+   Scoped to the catalog shell so the homepage hero keeps its fixed cream look. */
+[data-theme='dark'] {
+  --color-bg: #131313;
+  --color-primary: #f4f4e9;
+  --color-accent: #6f6f66;
+}
+
 @utility font-ppe {
   font-family: 'PPEditorialNew', Georgia, serif;
 }
